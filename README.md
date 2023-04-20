@@ -13,13 +13,7 @@
         <li><a href="#screenshots">Screenshots</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#documentation">Documentation</a>
-      <ul>
-        <li><a href="#dependencies">Dependencies</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#contributors">Contributors</a></li>
   </ol>
 </details>
@@ -33,13 +27,22 @@ HR personnel can effortlessly find suitable job candidates, conduct interviews, 
 The platform is not intended to compete directly with job portals. Instead, its goal is to complement the market with a focus on MegaK students.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Build with
+### Technologies used
 
-List of technologies here!
+![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+
+![image](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+
+![image](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### About this repository
 
-This repository contains the front-end part of the application. The back-end part is located at https://github.com/perlus3/HeadHunterBE 
+This repository contains the front-end part of the application. 
+
+The back-end part is located at https://github.com/perlus3/HeadHunterBE 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Live demo
@@ -53,34 +56,28 @@ Currently, there is no live demo available. We are working to make it available 
 ![image](https://user-images.githubusercontent.com/6266547/233413414-391375d5-c305-4cd4-bd73-df015ff254cc.png)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Documentation
+## Installation
 
-### Dependencies
-
-### How to download the code
-
+1. Clone the repository
 ```
 https://github.com/HessianPL/MegaK_HeadHunter_FE.git
 ```
 
-### How to install dependencies
-
+2. Install dependencies
 ```
 npm install
 ```
 
-### How to run development version
-
+3. For development run
 ```
 npm start
 ```
 
-### How to build production version
-
+4. To build production version run
 ```
 npm run build
 ```
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Contributors
