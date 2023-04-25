@@ -1,0 +1,34 @@
+.reader {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.csvReader {
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    list-style:  none;
+}
+
+.browseFile {
+    width: 30%;
+}
+
+.acceptedFile {
+    border: 1px solid #ccc;
+    height: 45px;
+    line-height: 2.5;
+    padding-left: 10px;
+    width: 70%;
+}
+
+.remove {
+    padding: 0 15px;
+}
+
+.progressBar {
+    background-color: firebrick !important;
+}
+
