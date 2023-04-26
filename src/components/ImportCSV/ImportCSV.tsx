@@ -10,10 +10,13 @@ export default function ImportCSV() {
 
     const filterAndValidateCSV = (fileData: StudentsDataDTO[]) => {
         const filtered: StudentsDataDTO[] = fileData.filter((obj) => (StudentsDataDTO.getRequiredFields()).every(field => obj.hasOwnProperty(field)));
-        return filtered.map(obj => new StudentsDataDTO(obj));
+        return filtered.map(obj => ({... new StudentsDataDTO(obj), isActive: false}));
     }
 
     const sendStudentsDataToAPI = async () => {
+        if (students.length < 1) {
+            return console.log('There are no students to import');
+        }
         // const response = await fetch('http://localhost:3001', {
         //     method: 'POST',
         //     headers: {
@@ -22,8 +25,8 @@ export default function ImportCSV() {
         //     body: JSON.stringify(students)
         // });
         // return response.json();
-        console.log('Students data sent to API:');
-        console.log(students);
+        console.log('Students data sent to API:'); //@TODO: delete in production
+        console.log(students); //@TODO: delete in production
     }
     
     return (
