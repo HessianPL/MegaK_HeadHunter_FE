@@ -30,28 +30,68 @@
     border-color: #172A35;
     background-color: #172A35;
     color: #ffffff;
+    border-radius: 0;
 }
 
-.theme-btn-dark:hover {
+.theme-btn-accent:hover {
     border-color: #172A35;
     background-color: #ffffff;
     color: #172A35;
+    border-radius: 0;
 }
 
 .theme-btn-mainbrand {
     border-color: #E02735;
     background-color: #E02735;
     color: #ffffff;
+    border-radius: 0;
 }
 
 .theme-btn-mainbrand:hover {
-    border-color: #E02735;
-    background-color: #ffffff;
-    color: #E02735;
+    border-color: #68141b;
+    background-color: #68141b;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.theme-btn-dark-2 {
+    border-color: #222224;
+    background-color: #222224;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.theme-btn-dark-2:hover {
+    border-color: #1E1E1F;
+    background-color: #1E1E1F;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.theme-btn-dark-4 {
+    border-color: #0A0A0A;
+    background-color: #0A0A0A;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.theme-btn-dark-4:hover {
+    border-color: #1E1E1F;
+    background-color: #1E1E1F;
+    color: #ffffff;
+    border-radius: 0;
 }
 
 /* Navigation styles */
 
-.navbar {
-    background-color: #222224;
+/*.navbar {*/
+/*    background-color: #222224;*/
+/*}*/
+
+.progressBar {
+    background-color: #E02735 !important;
+}
+
+.acceptedFile {
+    line-height: 2.5;
 }

@@ -3,25 +3,18 @@ import { LogoutButton } from "../common/LogoutButton";
 
 export const AdminMenu = () => {
 	return (
-		<div className="navbar navbar-expand-md sticky-top navbar-dark">
+		<div className="navbar navbar-expand-md sticky-top theme-bg-dark-3">
 			<div className="container-fluid">
 				<a href="/"
 				   className="navbar-brand">
 					<img
 						src="/megak_logo.webp"
-						alt="Logo Termino"
+						alt="Logo MegaK"
 						height="48"
 						className="d-inline-block"
 					/>
 				</a>
-				<div className="collapse navbar-collapse mt-3 mt-lg-0 me-auto"
-					 id="navigation">
-					<ul className="navbar-nav">
-
-					</ul>
-					<LogoutButton/>
-
-				</div>
+				<LogoutButton/>
 			</div>
 		</div>
 	)

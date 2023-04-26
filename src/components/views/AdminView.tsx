@@ -1,10 +1,11 @@
-import { LogoutButton } from "../LogoutButton";
-import ImportCSV from "../ImportCSV/ImportCSV";
+import { LogoutButton } from "../common/LogoutButton";
+import ImportCSV from "../admin/ImportCSV";
+import { AdminMenu } from "../admin/AdminMenu";
 
 export const AdminView = () => {
 	return <>
-		<h1>Widok admina</h1>
+		<AdminMenu/>
+		<h1 className="my-5 ms-5 theme-text-light theme-bg-dark-2">Witaj, Admin!</h1>
 		<ImportCSV />
-		<LogoutButton/>
 	</>
 }
