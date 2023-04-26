@@ -1,5 +1,6 @@
 import { BaseSyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import "../style.css";
 
 export const LogoutButton = () => {
 
@@ -23,7 +24,7 @@ export const LogoutButton = () => {
 
 	return <>
 		<button
-			className="btn btn-dark"
+			className="ms-auto btn border-2 my-4 my-lg-0 fw-bold theme-btn-mainbrand"
 			onClick={logOut}
 		>Wyloguj
 		</button>
