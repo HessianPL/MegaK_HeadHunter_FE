@@ -46,7 +46,7 @@ export default function ImportCSV() {
                       ProgressBar,
                       getRemoveFileProps,
                   }: any) => (
-                    <div className="container ms-0">
+                    <div className="container reader ms-0">
                         <div className="row">
                             <div className="col d-flex p-0 my-2">
                                 <button type='button' {...getRootProps()}

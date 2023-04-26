@@ -88,10 +88,24 @@
 /*    background-color: #222224;*/
 /*}*/
 
+/* AdminView styles */
+
 .progressBar {
     background-color: #E02735 !important;
 }
 
 .acceptedFile {
     line-height: 2.5;
+}
+
+@media (min-width: 992px) {
+    .reader {
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 768px) {
+    .reader {
+        max-width: 600px;
+    }
 }
