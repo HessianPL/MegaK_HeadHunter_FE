@@ -27,6 +27,9 @@ export const AddFormHR = () => {
 
         setLoading(true);
 
+        /** temporary console.log */
+        console.log({...form});
+
         //@TODO set a correct fetch path when it will be ready from BE
     //     try {
     //         const res = await fetch(`${apiUrl}/admin/addHR/save`, {
@@ -34,6 +37,7 @@ export const AddFormHR = () => {
     //             headers: {
     //                 "content-type": "application/json",
     //             },
+    //             credentials: 'include',
     //             body: JSON.stringify({
     //                 ...form,
     //             }),
@@ -60,7 +64,7 @@ export const AddFormHR = () => {
 
     return (<div className={AddFormsSCSS.container}>
             <form onSubmit={saveForm}>
-                <h1>Dodawanie HR</h1>
+                <h1>Dodawanie rekrutera/ki</h1>
                 <hr/>
                 <p>
                     <label>
@@ -112,7 +116,7 @@ export const AddFormHR = () => {
                             onChange={event => updateForm('maxReservedStudents', Number(event.target.value))}/>
                     </label>
                 </p>
-                <button type="submit">SAVE</button>
+                <button type="submit">ZAPISZ</button>
             </form>
         </div>
     )
