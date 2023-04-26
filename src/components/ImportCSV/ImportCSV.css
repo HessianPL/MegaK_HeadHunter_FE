@@ -12,7 +12,7 @@ li {
     list-style:  none;
 }
 
-.browseFile {
+.browseFileBtn {
     width: 30%;
 }
 
@@ -24,11 +24,16 @@ li {
     width: 70%;
 }
 
-.remove {
+.removeBtn {
     padding: 0 15px;
 }
 
 .progressBar {
     background-color: firebrick !important;
+}
+
+.sendBtn {
+    margin-top: 10px;
+    width: 100%;
 }
 

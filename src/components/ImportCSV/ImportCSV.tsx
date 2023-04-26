@@ -13,22 +13,19 @@ export default function ImportCSV() {
         return filtered.map(obj => new StudentsDataDTO(obj));
     }
 
-    useEffect(() => {
-        //@TODO: uncomment below when API is ready
-        // const postStudentsToAPI = async() => {
-        //     const response = await fetch('http://localhost:3001', {
-        //         method: 'POST',
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(users)
-        //     });
-        //     return response.json();
-        // }
-        // postStudentsToAPI();
-        console.log(students); //@TODO: delete in production
-    }, [students])
-
+    const sendStudentsDataToAPI = async () => {
+        // const response = await fetch('http://localhost:3001', {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(students)
+        // });
+        // return response.json();
+        console.log('Students data sent to API:');
+        console.log(students);
+    }
+    
     return (
         <>
             <CSVReader
@@ -45,17 +42,18 @@ export default function ImportCSV() {
                   }: any) => (
                     <div className="reader">
                         <div className="csvReader">
-                            <button type='button' {...getRootProps()} className="browseFile">
+                            <button type='button' {...getRootProps()} className="browseFileBtn">
                                 Wybierz plik
                             </button>
                             <div className="acceptedFile">
                                 {acceptedFile && acceptedFile.name}
                             </div>
-                            <button {...getRemoveFileProps()} className="remove">
+                            <button {...getRemoveFileProps()} className="removeBtn">
                                 Usuń
                             </button>
                         </div>
                         <ProgressBar className="progressBar" />
+                        <button type="button" className="sendBtn" onClick={sendStudentsDataToAPI}>Importuj dane Kursantów</button>
                     </div>
                 )}
             </CSVReader>
