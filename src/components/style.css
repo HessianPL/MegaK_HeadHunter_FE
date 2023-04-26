@@ -1,0 +1,65 @@
+.theme-text-light {
+    color: #ffffff;
+}
+
+.theme-text-dark {
+    color: #222224;
+}
+
+.theme-text-mainbrand {
+    color: #E02735;
+}
+
+.theme-bg-light {
+    background-color: #ffffff;
+}
+
+.theme-bg-dark {
+    background-color: #222224;
+}
+
+.theme-bg-mainbrand {
+    background-color: #E02735;
+}
+
+.theme-border-light {
+    border-color: #F6F6F2 !important;
+}
+
+.theme-border-dark {
+    border-color: #222224 !important;
+}
+
+.theme-border-mainbrand {
+    border-color: #E02735 !important;
+}
+
+.theme-btn-dark {
+    border-color: #222224;
+    background-color: #222224;
+    color: #ffffff;
+}
+
+.theme-btn-dark:hover {
+    border-color: #222224;
+    background-color: #ffffff;
+    color: #222224;
+}
+
+.theme-btn-mainbrand {
+    border-color: #E02735;
+    background-color: #E02735;
+    color: #ffffff;
+}
+
+.theme-btn-mainbrand:hover {
+    border-color: #E02735;
+    background-color: #ffffff;
+    color: #E02735;
+}
+
+/* Navigation styles */
+
+.navbar {
+    background-color: #222224;
+}
