@@ -28,34 +28,34 @@ export const AddFormHR = () => {
         setLoading(true);
 
         //@TODO set a correct fetch path when it will be ready from BE
-        try {
-            const res = await fetch(`${apiUrl}/admin/addHR/save`, {
-                method: 'POST',
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    ...form,
-                }),
-            });
-            const resData = await res.json();
-
-            setId(resData.id);
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    if (loading) {
-        return <Spinner/>
-    }
-
-    if (id) {
-        return <>
-         <h2>HR <strong>{form.name}</strong> dodany do serwisu.</h2>
-            <Link to="/">Dodaj kolejnego</Link>
-        </>
+    //     try {
+    //         const res = await fetch(`${apiUrl}/admin/addHR/save`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 "content-type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 ...form,
+    //             }),
+    //         });
+    //         const resData = await res.json();
+    //
+    //         setId(resData.id);
+    //
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+    //
+    // if (loading) {
+    //     return <Spinner/>
+    // }
+    //
+    // if (id) {
+    //     return <>
+    //      <h2>HR <strong>{form.name}</strong> dodany do serwisu.</h2>
+    //         <Link to="/">Dodaj kolejnego</Link>
+    //     </>
     }
 
     return (<div className={AddFormsSCSS.container}>
