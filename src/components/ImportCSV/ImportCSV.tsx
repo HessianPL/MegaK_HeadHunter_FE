@@ -19,6 +19,7 @@ export default function ImportCSV() {
         }
         // const response = await fetch('http://localhost:3001', {
         //     method: 'POST',
+        //     credentials: 'include',
         //     headers: {
         //         "Content-Type": "application/json",
         //     },
