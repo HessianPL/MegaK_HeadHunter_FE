@@ -27,7 +27,7 @@ export const AddFormHR = () => {
 
         setLoading(true);
 
-        /** temporary console.log */
+        /** temporary console.log for data tests */
         console.log({...form});
 
         //@TODO set a correct fetch path when it will be ready from BE
