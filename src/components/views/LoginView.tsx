@@ -1,5 +1,5 @@
 export const LoginView = () => {
 	return <>
-		<h1>Widok logowania</h1>
+		<h1 className="theme-text-light">Widok logowania</h1>
 	</>
 }

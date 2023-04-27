@@ -1,8 +1,8 @@
-import { LogoutButton } from "../LogoutButton";
+import { LogoutButton } from "../common/LogoutButton";
 
 export const RecruiterView = () => {
 	return <>
-		<h1>Widok rekrutera</h1>
+		<h1 className="theme-text-light">Widok rekrutera</h1>
 		<LogoutButton/>
 	</>
 }
