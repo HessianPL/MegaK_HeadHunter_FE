@@ -10,6 +10,7 @@
     "@types/node": "^16.18.23",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-papaparse": "^4.1.0",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.62.1"
   }
 }

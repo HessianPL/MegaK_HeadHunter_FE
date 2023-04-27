@@ -1,0 +1,50 @@
+.container {
+  min-height: 100vh;
+  background-color: #222224;
+  padding-bottom: 50px;
+  color: #F7F7F7;
+
+  h1 {
+    margin: 0 auto;
+    padding: 15px;
+  }
+
+  form {
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+    justify-content: center;
+    position: relative;
+
+    label {
+      width: 100%;
+      font-size: 1.1em;
+
+      input {
+        color: #F7F7F7;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 7px;
+        padding: 10px;
+        background-color: #292A2B;
+        border: none;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+      padding: 5px 35px;
+      border: 0;
+      border-radius: 6px;
+      color: white;
+      background-color: #E02735;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    button:hover {
+      background-color: #c00513;
+    }
+  }
+}
