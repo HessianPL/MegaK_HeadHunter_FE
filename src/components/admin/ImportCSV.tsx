@@ -9,7 +9,7 @@ export default function ImportCSV() {
 
     const filterAndValidateCSV = (fileData: StudentsDataDTO[]) => {
         const filtered: StudentsDataDTO[] = fileData.filter((obj) => (StudentsDataDTO.getRequiredFields()).every(field => obj.hasOwnProperty(field)));
-        return filtered.map(obj => ({... new StudentsDataDTO(obj), isActive: false}));
+        return filtered.map(obj => ({...new StudentsDataDTO(obj), isActive: false}));
     }
 
     const sendStudentsDataToAPI = async () => {
@@ -60,19 +60,21 @@ export default function ImportCSV() {
                                 </div>
                             </div>
                         </div>
-                        <ProgressBar className="progressBar mt-2 mb-4" />
+
                         <div className="row">
                             <div className="d-flex flex-row-reverse p-0">
                                 <button type="button"
-                                                  className="btn theme-btn-mainbrand"
-                                                  onClick={sendStudentsDataToAPI}>
+                                        className="btn theme-btn-mainbrand"
+                                        onClick={sendStudentsDataToAPI}>
                                     Importuj dane Kursantów
                                 </button>
                                 <button {...getRemoveFileProps()}
-                                                 className="btn theme-btn-dark-2 me-2">
+                                        className="btn theme-btn-dark-2 me-2">
                                 Usuń
-                            </button>
+                                </button>
+                                <ProgressBar className="progressBar me-2 mt-3" />
                             </div>
+
                         </div>
                     </div>
                 )}

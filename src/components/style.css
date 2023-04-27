@@ -92,6 +92,7 @@
 
 .progressBar {
     background-color: #E02735 !important;
+    max-width: 53%;
 }
 
 .acceptedFile {

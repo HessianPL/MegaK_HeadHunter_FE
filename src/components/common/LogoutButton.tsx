@@ -24,7 +24,7 @@ export const LogoutButton = () => {
 
 	return <>
 		<button
-			className="ms-auto btn border-2 my-4 my-lg-0 fw-bold theme-btn-mainbrand"
+			className="ms-auto btn border-2 my-4 my-lg-0 theme-btn-mainbrand"
 			onClick={logOut}
 		>Wyloguj
 		</button>
