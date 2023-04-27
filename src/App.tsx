@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import { LoginView } from "./components/views/LoginView";
-import { AdminView } from "./components/views/AdminView";
-import { StudentView } from "./components/views/StudentView";
-import { RecruiterView } from "./components/views/RecruiterView";
+import { LoginView } from "./views/LoginView";
+import { AdminView } from "./views/AdminView";
+import { StudentView } from "./views/StudentView";
+import { RecruiterView } from "./views/RecruiterView";
 
 function App() {
   return (
