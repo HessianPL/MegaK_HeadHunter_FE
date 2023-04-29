@@ -1,5 +1,12 @@
-export const LoginView = () => {
-	return <>
-		<h1 className="theme-text-light">Widok logowania</h1>
-	</>
+import React from 'react';
+import LoginPage from '../Components/LoginPage/LoginPage';
+
+
+function LoginView() {
+
+  return (
+    <LoginPage/>
+  );
 }
+
+export default LoginView;
