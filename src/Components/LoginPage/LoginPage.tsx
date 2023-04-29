@@ -9,7 +9,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: FormEvent) => {
 
     // DO DODANIA INTERAKCJA Z BACKENDEM ORAZ WERYFIKACJA PRZESYLANYCH DANYCH 
 
