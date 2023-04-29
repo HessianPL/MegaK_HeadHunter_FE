@@ -1,7 +1,6 @@
 import React, {SyntheticEvent, useState} from "react";
 import {apiUrl} from "../../config/api";
-import AddFormsSCSS from "./AddFormHR.module.scss";
-import {Spinner} from "../Spinner/Spinner";
+import {Spinner} from "../common/Spinner/Spinner";
 import {Link} from "react-router-dom";
 
 export const AddFormHR = () => {

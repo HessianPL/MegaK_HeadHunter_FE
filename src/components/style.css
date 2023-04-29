@@ -1,84 +1,97 @@
+:root {
+    --mainbrand-color: #E02735;
+    --mainbrand-dark-color: #68141b;
+    --light-color: #FFFFFF;
+    --medium-color: #666666;
+    --dark-1-color: #292A2B;
+    --dark-2-color: #222224;
+    --dark-3-color: #1E1E1F;
+    --dark-4-color: #0A0A0A;
+    --link-color: #0E81C2;
+    --accent-color: #172A35;
+}
+
 .theme-text-light {
-    color: #ffffff;
+    color: var(--light-color);
 }
 
 .theme-link {
-    color: #0E81C2;
+    color: var(--link-color);
 }
 
 .theme-bg-light {
-    background-color: #ffffff;
+    background-color: var(--light-color);
 }
 
 .theme-bg-dark-1 {
-    background-color: #292A2B;
+    background-color: var(--dark-1-color);
 }
 
 .theme-bg-dark-2 {
-    background-color: #222224;
+    background-color: var(--dark-2-color);
 }
 
 .theme-bg-dark-3 {
-    background-color: #1E1E1F;
+    background-color: var(--dark-3-color);
 }
 
 .theme-bg-dark-4 {
-    background-color: #0A0A0A;
+    background-color: var(--dark-4-color);
 }
 
 .theme-btn-accent {
-    border-color: #172A35;
-    background-color: #172A35;
-    color: #ffffff;
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
 .theme-btn-accent:hover {
-    border-color: #172A35;
-    background-color: #ffffff;
-    color: #172A35;
+    border-color: var(--accent-color);
+    background-color: var(--light-color);
+    color: var(--accent-color);
     border-radius: 0;
 }
 
 .theme-btn-mainbrand {
-    border-color: #E02735;
-    background-color: #E02735;
-    color: #ffffff;
+    border-color: var(--mainbrand-color);
+    background-color: var(--mainbrand-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
 .theme-btn-mainbrand:hover {
-    border-color: #68141b;
-    background-color: #68141b;
-    color: #ffffff;
+    border-color: var(--mainbrand-dark-color);
+    background-color: var(--mainbrand-dark-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
 .theme-btn-dark-2 {
-    border-color: #222224;
-    background-color: #222224;
-    color: #ffffff;
+    border-color: var(--dark-2-color);
+    background-color: var(--dark-2-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
 .theme-btn-dark-2:hover {
-    border-color: #1E1E1F;
-    background-color: #1E1E1F;
-    color: #ffffff;
+    border-color: var(--dark-3-color);
+    background-color: var(--dark-3-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
 .theme-btn-dark-4 {
-    border-color: #0A0A0A;
-    background-color: #0A0A0A;
-    color: #ffffff;
+    border-color: var(--dark-4-color);
+    background-color: var(--dark-4-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
 .theme-btn-dark-4:hover {
-    border-color: #1E1E1F;
-    background-color: #1E1E1F;
-    color: #ffffff;
+    border-color: var(--dark-3-color);
+    background-color: var(--dark-3-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
@@ -88,10 +101,11 @@
 /*    background-color: #222224;*/
 /*}*/
 
-/* AdminView styles */
+
+/* admin/ImportCSV styles */
 
 .progressBar {
-    background-color: #E02735 !important;
+    background-color: var(--mainbrand-color) !important;
     max-width: 53%;
 }
 
@@ -99,14 +113,54 @@
     line-height: 2.5;
 }
 
-@media (min-width: 992px) {
-    .reader {
-        max-width: 400px;
+
+/* Form styles */
+
+@media (min-width: 576px) {
+    .reader, .form {
+        max-width: 75%;
     }
 }
 
 @media (min-width: 768px) {
-    .reader {
-        max-width: 600px;
+    .reader, .form {
+        max-width: 75%;
     }
+}
+
+@media (min-width: 992px) {
+    .reader, .form {
+        max-width: 75%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .reader, .form {
+        max-width: 50%;
+    }
+}
+
+.form-label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    background-color: var(--dark-1-color);
+    color: var(--light-color);
+    border-color: var(--dark-1-color);
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border-color: var(--light-color);
+    background-color: var(--dark-3-color);
+}
+
+.form-control::placeholder {
+    color: var(--medium-color);
+}
+
+.btn-right {
+    float: right;
 }
