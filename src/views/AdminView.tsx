@@ -1,6 +1,6 @@
-import { AdminMenu } from "../Components/admin/AdminMenu";
-import ImportCSV from "../Components/admin/ImportCSV";
-import { AddFormHR } from "../Components/admin/AddFormHR";
+import { AdminMenu } from "../components/admin/AdminMenu";
+import ImportCSV from "../components/admin/ImportCSV";
+import { AddFormHR } from "../components/admin/AddFormHR";
 
 export const AdminView = () => {
 	return <>
