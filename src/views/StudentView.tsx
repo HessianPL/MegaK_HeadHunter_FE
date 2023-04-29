@@ -1,4 +1,4 @@
-import { LogoutButton } from "../components/common/LogoutButton";
+import { LogoutButton } from "../Components/common/LogoutButton";
 
 export const StudentView = () => {
 	return <>

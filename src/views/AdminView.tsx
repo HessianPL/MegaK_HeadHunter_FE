@@ -1,6 +1,5 @@
-import { LogoutButton } from "../components/common/LogoutButton";
-import ImportCSV from "../components/admin/ImportCSV";
-import { AdminMenu } from "../components/admin/AdminMenu";
+import { AdminMenu } from "../Components/admin/AdminMenu";
+import ImportCSV from "../Components/admin/ImportCSV";
 
 export const AdminView = () => {
 	return <>
