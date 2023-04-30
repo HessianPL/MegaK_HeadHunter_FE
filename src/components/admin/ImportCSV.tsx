@@ -32,8 +32,8 @@ export default function ImportCSV() {
     }
     
     return (
-        <div className="ms-5">
-            <h2 className="theme-text-light mb-4">Dodaj kursantów</h2>
+        <div className="mt-5 ms-5">
+            <h2 className="theme-text-light mb-4">Dodawanie kursantów/ek</h2>
             <CSVReader
                 onUploadAccepted={(results: any) => {
                     setStudents(filterAndValidateCSV(results.data));
@@ -66,7 +66,7 @@ export default function ImportCSV() {
                                 <button type="button"
                                         className="btn theme-btn-mainbrand"
                                         onClick={sendStudentsDataToAPI}>
-                                    Importuj dane Kursantów
+                                    Importuj dane
                                 </button>
                                 <button {...getRemoveFileProps()}
                                         className="btn theme-btn-dark-2 me-2">
