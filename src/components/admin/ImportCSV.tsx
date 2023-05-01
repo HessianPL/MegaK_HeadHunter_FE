@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import { useCSVReader } from 'react-papaparse';
 
 import { StudentsDataDTO } from '../../types-fe/StudentsDataDTO';
@@ -6,6 +6,7 @@ import { StudentsDataDTO } from '../../types-fe/StudentsDataDTO';
 export default function ImportCSV() {
     const { CSVReader } = useCSVReader();
     const [students, setStudents] = useState<StudentsDataDTO[] | []>([]);
+    const [ CSVImportResult, setCSVImportResult] = useState<boolean | undefined>();
 
     const filterAndValidateCSV = (fileData: StudentsDataDTO[]) => {
         const filtered: StudentsDataDTO[] = fileData.filter((obj) => (StudentsDataDTO.getRequiredFields()).every(field => obj.hasOwnProperty(field)));
@@ -26,7 +27,9 @@ export default function ImportCSV() {
         //     },
         //     body: JSON.stringify(students)
         // });
-        // return response.json();
+        // const data = await response.json();
+        // setCSVImportResult(data.ok);
+        //
         console.log('Students data sent to API:'); //@TODO: delete in production
         console.log(students); //@TODO: delete in production
     }
@@ -74,7 +77,16 @@ export default function ImportCSV() {
                                 </button>
                                 <ProgressBar className="progressBar me-2 mt-3" />
                             </div>
-
+                        </div>
+                        <div className="row">
+                            <div className="col d-flex p-0 my-2">
+                                <p style={{color: "white"}}>{
+                                    CSVImportResult === undefined ? null :
+                                        CSVImportResult
+                                            ? "Dane Kursantów zostały poprawnie zaimportowane"
+                                            : "Wystąpił błąd podczas importu danych Kursantów. Dane nie zostały zaimportowane."
+                                }</p>
+                            </div>
                         </div>
                     </div>
                 )}
