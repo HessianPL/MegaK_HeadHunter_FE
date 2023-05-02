@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {FormEvent, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import './LoginPage.css';
@@ -39,5 +39,4 @@ function LoginPage() {
     </div>
   );
 }
-
 export default LoginPage;
