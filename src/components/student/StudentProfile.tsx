@@ -31,8 +31,8 @@ export const StudentProfile = () => {
 			bio: "Moje życie smutne było, ale zostanę programistką i będzie świetne.",
 			bonusProjectUrls: ['http://test.pl', 'http://example.com'],
 			canTakeApprenticeship: true,
-			courseCompletion: 3,
-			courseEngagement: 4,
+			courseCompletion: '3',
+			courseEngagement: '4',
 			courses: "MegaKurs, „Projektowanie witryn internetowych”",
 			education: "Wyższa Szkoła Gotowania na Gazie w Jaktorowie",
 			expectedContractType: ExpectedContractType.UoPOnly,
@@ -41,11 +41,11 @@ export const StudentProfile = () => {
 			githubUsername: "JankaProgramistka",
 			monthsOfCommercialExp: 0,
 			portfolioUrls: ['http://test.pl', 'http://example.com'],
-			projectDegree: 1,
+			projectDegree: '1',
 			projectUrls: ['http://test.pl', 'http://example.com'],
 			status: StudentStatus.Available,
 			targetWorkCity: "Warszawa",
-			teamProjectDegree: 3,
+			teamProjectDegree: '3',
 			workExperience: "mnóstwo doświadczeń ciekawych"
 		})
 	}, []);
@@ -91,44 +91,44 @@ export const StudentProfile = () => {
 						<div>Ocena przejścia kursu</div>
 						<div><strong>{student?.courseCompletion}</strong> <span className="theme-text-medium-light">/ 5</span></div>
 						<div>
-							<i className={student.courseCompletion >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseCompletion >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseCompletion >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseCompletion >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseCompletion >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseCompletion) >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseCompletion) >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseCompletion) >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseCompletion) >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseCompletion) >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
 						</div>
 					</div>
 					<div>
 						<div>Ocena aktywności i zaangażowania na kursie</div>
 						<div><strong>{student?.courseEngagement}</strong> <span className="theme-text-medium-light">/ 5</span></div>
 						<div>
-							<i className={student.courseEngagement >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseEngagement >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseEngagement >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseEngagement >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.courseEngagement >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseEngagement) >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseEngagement) >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseEngagement) >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseEngagement) >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.courseEngagement) >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
 						</div>
 					</div>
 					<div>
 						<div>Ocena kodu w projekcie własnym</div>
 						<div><strong>{student?.projectDegree}</strong> <span className="theme-text-medium-light">/ 5</span></div>
 						<div>
-							<i className={student.projectDegree >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.projectDegree >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.projectDegree >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.projectDegree >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.projectDegree >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.projectDegree) >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.projectDegree) >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.projectDegree) >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.projectDegree) >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.projectDegree) >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
 						</div>
 					</div>
 					<div>
 						<div>Ocena pracy w zespole Scrum</div>
 						<div><strong>{student?.teamProjectDegree}</strong> <span className="theme-text-medium-light">/ 5</span></div>
 						<div>
-							<i className={student.teamProjectDegree >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.teamProjectDegree >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.teamProjectDegree >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.teamProjectDegree >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
-							<i className={student.teamProjectDegree >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.teamProjectDegree) >= 1 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.teamProjectDegree) >= 2 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.teamProjectDegree) >= 3 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.teamProjectDegree) >= 4 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
+							<i className={Number(student.teamProjectDegree) >= 5 ? `bi bi-star-fill me-1  theme-text-mainbrand` : `bi bi-star-fill me-1  theme-text-dark-0`}/>
 						</div>
 					</div>
 				</div>

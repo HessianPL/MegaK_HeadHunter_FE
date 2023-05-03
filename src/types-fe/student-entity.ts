@@ -22,10 +22,10 @@ export enum StudentStatus {
 export interface StudentEntity {
 	id: string;
 	email: string;
-	courseCompletion: number;
-	courseEngagement: number;
-	projectDegree: number;
-	teamProjectDegree: number;
+	courseCompletion: string;
+	courseEngagement: string;
+	projectDegree: string;
+	teamProjectDegree: string;
 	bonusProjectUrls: string[];
 	tel?: string;
 	firstName: string;
