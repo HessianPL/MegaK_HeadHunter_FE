@@ -56,11 +56,17 @@ export const StudentProfile = () => {
 
 	return <>
 		<div className="sidebar theme-bg-dark-1">
-			<img src="" alt=""/>
-			<div className="text-center">
-				<p>{student.firstName} {student.lastName}</p>
-				<p><a href={`https://github.com/${student.githubUsername}`}><i className="bi bi-github"/> {student.githubUsername}</a></p>
+			<div className="card">
+				<img
+					src={student.githubUsername ? `https://github.com/${student.githubUsername}.png` : "/defaultAvatar.jpg"}
+					alt="awatar kursanta/ki"
+				/>
+				<div className="text-center">
+					<p>{student.firstName} {student.lastName}</p>
+					<p><a href={`https://github.com/${student.githubUsername}`}><i className="bi bi-github"/> {student.githubUsername}</a></p>
+				</div>
 			</div>
+
 			<div>
 				<div>
 					<div><i className="bi bi-telephone-fill theme-text-dark-0"/></div>
@@ -174,11 +180,11 @@ export const StudentProfile = () => {
 			</div>
 			<div className="theme-bg-dark-2">
 				<div className="theme-bg-dark-1">Projekt grupowy</div>
-				<div>{student?.bonusProjectUrls.map(el => <p><a href={el}>{el}</a></p>)}</div>
+				<div>{student?.bonusProjectUrls.map((el, i) => <p key={i}><a href={el}>{el}</a></p>)}</div>
 			</div>
 			<div className="theme-bg-dark-2">
 				<div className="theme-bg-dark-1">Portfolio</div>
-				<div>{student?.portfolioUrls?.map(el => <p><a href={el}>{el}</a></p>)}</div>
+				<div>{student?.portfolioUrls?.map((el, i) => <p key={i}><a href={el}>{el}</a></p>)}</div>
 			</div>
 		</div>
 	</>
