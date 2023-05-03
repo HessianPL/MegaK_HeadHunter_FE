@@ -109,14 +109,8 @@
     border-radius: 0;
 }
 
-a {
-    color: var(--link-color);
-    text-decoration: none;
-}
-
-a:hover {
-    color: #116295;
-    text-decoration: none;
+.theme-border-dark-1 {
+    border-right: 1px solid var(--dark-1-color);
 }
 
 /* Navigation styles */
@@ -187,4 +181,16 @@ a:hover {
 
 .btn-right {
     float: right;
+}
+
+/* MISC */
+
+a, .theme-link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover, .theme-link:hover {
+    color: #116295;
+    text-decoration: none;
 }
