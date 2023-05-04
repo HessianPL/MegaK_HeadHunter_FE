@@ -1,35 +1,47 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { useCSVReader } from 'react-papaparse';
 
-import { StudentsDataDTO } from '../../types-fe/StudentsDataDTO';
+import { StudentsDataDTO } from "../../types-fe/StudentsDataDTO";
+import { StudentsDataFromFile } from "../../types-fe/StudentsDataFromFile";
 
 export default function ImportCSV() {
     const { CSVReader } = useCSVReader();
     const [students, setStudents] = useState<StudentsDataDTO[] | []>([]);
+    const [ CSVImportResult, setCSVImportResult] = useState<boolean | undefined>();
 
-    const filterAndValidateCSV = (fileData: StudentsDataDTO[]) => {
-        const filtered: StudentsDataDTO[] = fileData.filter((obj) => (StudentsDataDTO.getRequiredFields()).every(field => obj.hasOwnProperty(field)));
-        return filtered.map(obj => ({...new StudentsDataDTO(obj), isActive: false}));
+    const filterAndValidateCSV = (fileData: StudentsDataFromFile[]) => {
+        const filtered: StudentsDataFromFile[] = fileData
+            .filter((obj) => (StudentsDataFromFile.getRequiredFields()).every(field => obj.hasOwnProperty(field)));
+        const mapped = filtered
+            .map((obj) => ({
+                ...obj,
+                isActive: false,
+                bonusProjectUrls: obj.bonusProjectUrls.split(','),}));
+
+        return mapped.map(obj => ({...new StudentsDataDTO(obj)}));
     }
 
     const sendStudentsDataToAPI = async () => {
         if (students.length < 1) {
             return console.log('There are no students to import');
         }
-        // @TODO: complete when API is ready
-        //
-        // const response = await fetch('http://localhost:3001', {
-        //     method: 'POST',
-        //     credentials: 'include',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(students)
-        // });
-        // return response.json();
-        console.log('Students data sent to API:'); //@TODO: delete in production
-        console.log(students); //@TODO: delete in production
+
+        const response = await fetch('http://localhost:3000/register/list', {
+        method: 'POST',
+            credentials: 'include',
+            headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(students)
+    });
+
+    const res = await response.json();
+
+    if (res.message === 'ok') {
+        setCSVImportResult(true);
     }
+    return res;
+}
     
     return (
         <div className="mt-5 ms-5">
@@ -75,6 +87,18 @@ export default function ImportCSV() {
                                 <ProgressBar className="progressBar me-2 mt-3" />
                             </div>
 
+                        </div>
+                        <div className="row">
+                            <div className="col d-flex p-0 my-2">
+                                <p style={{color: "white"}}>{
+                                    CSVImportResult === undefined ? null :
+                                        CSVImportResult
+                                            ? "Dane zostały poprawnie zaimportowane."
+                                            : "Wystąpił błąd podczas importu danych. Dane nie zostały zaimportowane."
+                                    //     @TODO: wiadomość powinna potem zniknąć, plik powinien zniknąć
+                                    // @TODO: dobrze byłoby obsłużyć sytuację próby zaimportowania drugi raz tych samych danych
+                                }</p>
+                            </div>
                         </div>
                     </div>
                 )}
