@@ -7,11 +7,13 @@ export const AddFormHR = () => {
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         email: '',
-        name: '',
+        firstName: '',
+        lastName: '',
         company: '',
         maxReservedStudents: 1,
     });
     const [id, setId] = useState('');
+    const [saveResult, setSaveResult] = useState<boolean | undefined>();
 
     const updateForm = (key: string, value: any) => {
 
@@ -26,40 +28,38 @@ export const AddFormHR = () => {
 
         setLoading(true);
 
-        /** temporary console.log for data tests */
-        console.log({...form});
+        try {
+            const res = await fetch(`${apiUrl}/register/form`, {
+                method: 'POST',
+                headers: {
+                    "content-type": "application/json",
+                },
+                credentials: 'include',
+                body: JSON.stringify(form),
+            });
+            const resData = await res.json();
 
-        //@TODO set a correct fetch path when it will be ready from BE
-    //     try {
-    //         const res = await fetch(`${apiUrl}/admin/addHR/save`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 "content-type": "application/json",
-    //             },
-    //             credentials: 'include',
-    //             body: JSON.stringify({
-    //                 ...form,
-    //             }),
-    //         });
-    //         const resData = await res.json();
-    //
-    //         setId(resData.id);
-    //
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-    //
-    // if (loading) {
-    //     return <Spinner/>
-    // }
-    //
+            if (resData.message === 'ok') {
+                setSaveResult(true);
+            }
+            setId(resData.id);
+
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <Spinner/>
+    }
+
+    // @TODO: ten kod się nie wykonuje
     // if (id) {
     //     return <>
-    //      <h2>HR <strong>{form.name}</strong> dodany do serwisu.</h2>
+    //         <h2>HR <strong>{form.firstName} {form.lastName}</strong> dodany do serwisu.</h2>
     //         <Link to="/">Dodaj kolejnego</Link>
     //     </>
-    }
+    // }
 
     return (
         <div className="mt-5 ms-5">
@@ -82,19 +82,34 @@ export const AddFormHR = () => {
                         />
                 </div>
                 <div>
-                    <label htmlFor="name"
-                           className="form-label theme-text-light">Imię i nazwisko:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            required
-                            placeholder="Full name"
-                            maxLength={99}
-                            value={form.name}
-                            onChange={event => updateForm('name', event.target.value)}
-                            className="form-control"
-                        />
+                    <label htmlFor="firstName"
+                           className="form-label theme-text-light">Imię:</label>
+                    <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        required
+                        placeholder="First name"
+                        maxLength={99}
+                        value={form.firstName}
+                        onChange={event => updateForm('firstName', event.target.value)}
+                        className="form-control"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="lastName"
+                           className="form-label theme-text-light">Nazwisko:</label>
+                    <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        required
+                        placeholder="Last name"
+                        maxLength={99}
+                        value={form.lastName}
+                        onChange={event => updateForm('lastName', event.target.value)}
+                        className="form-control"
+                    />
                 </div>
                 <div>
                     <label htmlFor="company"
@@ -127,6 +142,15 @@ export const AddFormHR = () => {
                 </div>
                     <button type="submit" className="btn btn-right mt-3 mb-5 theme-btn-mainbrand px-4">Zapisz</button>
             </form>
+            <div className="cp-0 my-5 pb-3">
+                <p>{
+                    saveResult === undefined ? null :
+                        saveResult
+                            ? "Dane zostały poprawnie zaimportowane."
+                            : "Wystąpił błąd podczas importu danych. Dane nie zostały zaimportowane."
+                    //     @TODO: wiadomość powinna potem zniknąć, a formularz się wyczyścić
+                }</p>
+            </div>
         </div>
     )
 }
