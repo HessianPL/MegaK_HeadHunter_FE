@@ -4,7 +4,7 @@ export class StudentsDataDTO {
     courseEngagement: number;
     projectDegree: number;
     teamProjectDegree: number;
-    bonusProjectUrls: string[] | string;
+    bonusProjectUrls: string[];
     isActive: boolean;
 
     constructor(newStudentData: StudentsDataDTO) {

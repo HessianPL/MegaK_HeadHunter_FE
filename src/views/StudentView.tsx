@@ -1,10 +1,10 @@
 import { LogoutButton } from "../components/common/LogoutButton";
 import { StudentProfile } from "../components/student/StudentProfile";
+import { StudentMenu } from "../components/student/StudentMenu";
 
 export const StudentView = () => {
 	return <>
-		<h1 className="theme-text-light">Widok kursanta</h1>
-		<LogoutButton/>
+		<StudentMenu/>
 		<StudentProfile/>
 	</>
 }

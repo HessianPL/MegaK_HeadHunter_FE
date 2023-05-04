@@ -7,48 +7,52 @@ export const StudentProfile = () => {
 	const [student, setStudent] = useState<StudentEntity | null>(null);
 	const [showModal, setShowModal] = useState(false);
 
-	const {role} = useContext(UserContext);
+	const {role, id} = useContext(UserContext);
 
 	const navigate = useNavigate();
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		const res = await fetch(``, {
-	// 			credentials: 'include',
-	// 			});
-	// 		setStudent(await res.json());
-	// 	})();
-	// }, []);
-
-	// @TODO: dane na sztywno do testów, do usunięcia po połączeniu z API
 	useEffect(() => {
-		setStudent({
-			id: "12345",
-			email: "janina@testowa.pl",
-			firstName: "Janina",
-			lastName: "Testowa",
-			tel: "123456789",
-			bio: "Moje życie smutne było, ale zostanę programistką i będzie świetne.",
-			bonusProjectUrls: ['http://test.pl', 'http://example.com'],
-			canTakeApprenticeship: true,
-			courseCompletion: '3',
-			courseEngagement: '4',
-			courses: "MegaKurs, „Projektowanie witryn internetowych”",
-			education: "Wyższa Szkoła Gotowania na Gazie w Jaktorowie",
-			expectedContractType: ExpectedContractType.UoPOnly,
-			expectedSalary: 20000,
-			expectedTypeWork: ExpectedWorkType.Hybrid,
-			githubUsername: "WeronikaSzemi",
-			monthsOfCommercialExp: 0,
-			portfolioUrls: ['http://test.pl', 'http://example.com'],
-			projectDegree: '1',
-			projectUrls: ['http://test.pl', 'http://example.com'],
-			status: StudentStatus.Available,
-			targetWorkCity: "Warszawa",
-			teamProjectDegree: '3',
-			workExperience: "mnóstwo doświadczeń ciekawych"
-		})
+		(async () => {
+			const res = await fetch('http://localhost:3000/user/student-profile', {
+				credentials: 'include',
+				});
+			const data = await res.json();
+			const res2 = await fetch (`http://localhost:3000/user/email/${id}`, {
+				credentials: 'include',
+			});
+			const email = (await res2.json()).email;
+
+			setStudent({
+				id: data.id,
+				email: email,
+				firstName: data.firstName,
+				lastName: data.lastName,
+				tel: data.tel,
+				bio: data.bio,
+				bonusProjectUrls: data.bonusProjectUrls,
+				canTakeApprenticeship: data.canTakeApprenticeship,
+				courseCompletion: data.courseCompletion,
+				courseEngagement: data.courseEngagement,
+				courses: data.courses,
+				education: data.education,
+				expectedContractType: data.expectedContractType,
+				expectedSalary: data.expectedSalary,
+				expectedTypeWork: data.expectedTypeWork,
+				githubUsername: data.githubUsername,
+				monthsOfCommercialExp: data.monthsOfCommercialExp,
+				portfolioUrls: data.portfolioUrls,
+				projectDegree: data.projectDegree,
+				projectUrls: data.projectUrls,
+				status: data.status,
+				targetWorkCity: data.targetWorkCity,
+				teamProjectDegree: data.teamProjectDegree,
+				workExperience: data.workExperience,
+			})
+		})();
 	}, []);
+
+	// @TODO: dodać logikę przycisku, kiedy będzie gotowy popup
+
 
 	if (student === null) {
 		return null;
@@ -61,7 +65,7 @@ export const StudentProfile = () => {
 					<img
 						src={student.githubUsername ? `https://github.com/${student.githubUsername}.png` : "/defaultAvatar.jpg"}
 						alt="awatar kursanta/ki"
-						className="img-fluid rounded-circle mx-auto d-block my-5 w-75"
+						className="img-fluid rounded-circle mx-auto d-block my-5 w-50"
 					/>
 					<div className="text-center mb-4">
 						<h1 className="fs-3">{student.firstName} {student.lastName}</h1>

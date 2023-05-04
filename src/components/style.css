@@ -25,6 +25,14 @@
     color: var(--dark-0-color);
 }
 
+.theme-text-dark-1 {
+    color: var(--dark-1-color);
+}
+
+.theme-text-dark-2 {
+    color: var(--dark-2-color);
+}
+
 .theme-text-medium-light {
     color: var(--medium-light-color);
 }
