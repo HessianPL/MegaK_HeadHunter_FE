@@ -109,8 +109,8 @@
     border-radius: 0;
 }
 
-.theme-border-dark-1 {
-    border-right: 1px solid var(--dark-1-color);
+.theme-border-dark-2 {
+    border-right: 1px solid var(--dark-2-color);
 }
 
 /* Navigation styles */
