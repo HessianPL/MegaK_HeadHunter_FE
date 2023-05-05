@@ -1,13 +1,16 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import { useCSVReader } from 'react-papaparse';
 
 import { StudentsDataDTO } from "../../types-fe/StudentsDataDTO";
 import { StudentsDataFromFile } from "../../types-fe/StudentsDataFromFile";
+import { Spinner } from "../common/Spinner/Spinner";
 
 export default function ImportCSV() {
-    const { CSVReader } = useCSVReader();
     const [students, setStudents] = useState<StudentsDataDTO[] | []>([]);
-    const [ CSVImportResult, setCSVImportResult] = useState<boolean | undefined>();
+    const [ message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const { CSVReader } = useCSVReader();
 
     const filterAndValidateCSV = (fileData: StudentsDataFromFile[]) => {
         const filtered: StudentsDataFromFile[] = fileData
@@ -22,26 +25,39 @@ export default function ImportCSV() {
     }
 
     const sendStudentsDataToAPI = async () => {
-        if (students.length < 1) {
-            return console.log('There are no students to import');
+        setLoading(true);
+
+        try {
+            if (students.length < 1) {
+                return console.log('There are no students to import');
+            }
+
+            const response = await fetch('http://localhost:3000/register/list', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(students)
+            });
+
+            const res = await response.json();
+            console.log(res);
+
+            if (res.message === 'ok') {
+                setMessage('Dane zostały poprawnie zaimportowane.');
+            } else {
+                setMessage(res.message);
+            }
+            return res;
+        } finally {
+            setLoading(false);
         }
-
-        const response = await fetch('http://localhost:3000/register/list', {
-        method: 'POST',
-            credentials: 'include',
-            headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(students)
-    });
-
-    const res = await response.json();
-
-    if (res.message === 'ok') {
-        setCSVImportResult(true);
     }
-    return res;
-}
+
+    if (loading) {
+        return <Spinner/>
+    }
     
     return (
         <div className="mt-5 ms-5">
@@ -89,16 +105,10 @@ export default function ImportCSV() {
 
                         </div>
                         <div className="row">
-                            <div className="col d-flex p-0 my-2">
-                                <p style={{color: "white"}}>{
-                                    CSVImportResult === undefined ? null :
-                                        CSVImportResult
-                                            ? "Dane zostały poprawnie zaimportowane."
-                                            : "Wystąpił błąd podczas importu danych. Dane nie zostały zaimportowane."
-                                    //     @TODO: wiadomość powinna potem zniknąć, plik powinien zniknąć
-                                    // @TODO: dobrze byłoby obsłużyć sytuację próby zaimportowania drugi raz tych samych danych
-                                }</p>
+                            <div className="col d-flex p-0 my-3">
+                                {message}
                             </div>
+                            {/*@TODO: wiadomość powinna potem zniknąć*/}
                         </div>
                     </div>
                 )}

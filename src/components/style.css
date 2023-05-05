@@ -173,6 +173,7 @@
 .form-control:focus {
     border-color: var(--light-color);
     background-color: var(--dark-3-color);
+    color: var(--light-color);
 }
 
 .form-control::placeholder {
