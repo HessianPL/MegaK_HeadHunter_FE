@@ -1,13 +1,13 @@
-export class StudentsDataDTO {
+export class StudentsDataFromFile {
     email: string;
     courseCompletion: number;
     courseEngagement: number;
     projectDegree: number;
     teamProjectDegree: number;
-    bonusProjectUrls: string[];
+    bonusProjectUrls: string;
     isActive: boolean;
 
-    constructor(newStudentData: StudentsDataDTO) {
+    constructor(newStudentData: StudentsDataFromFile) {
         this.email = newStudentData.email;
         this.courseCompletion = newStudentData.courseCompletion;
         this.courseEngagement = newStudentData.courseEngagement;

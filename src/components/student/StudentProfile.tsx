@@ -2,53 +2,58 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ExpectedContractType, ExpectedWorkType, StudentEntity, StudentStatus } from "../../types-fe/student-entity";
 import { UserContext } from "../../contexts/user-context";
+import { apiUrl } from "../../config/api";
 
 export const StudentProfile = () => {
 	const [student, setStudent] = useState<StudentEntity | null>(null);
 	const [showModal, setShowModal] = useState(false);
 
-	const {role} = useContext(UserContext);
+	const {role, id} = useContext(UserContext);
 
 	const navigate = useNavigate();
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		const res = await fetch(``, {
-	// 			credentials: 'include',
-	// 			});
-	// 		setStudent(await res.json());
-	// 	})();
-	// }, []);
-
-	// @TODO: dane na sztywno do testów, do usunięcia po połączeniu z API
 	useEffect(() => {
-		setStudent({
-			id: "12345",
-			email: "janina@testowa.pl",
-			firstName: "Janina",
-			lastName: "Testowa",
-			tel: "123456789",
-			bio: "Moje życie smutne było, ale zostanę programistką i będzie świetne.",
-			bonusProjectUrls: ['http://test.pl', 'http://example.com'],
-			canTakeApprenticeship: true,
-			courseCompletion: '3',
-			courseEngagement: '4',
-			courses: "MegaKurs, „Projektowanie witryn internetowych”",
-			education: "Wyższa Szkoła Gotowania na Gazie w Jaktorowie",
-			expectedContractType: ExpectedContractType.UoPOnly,
-			expectedSalary: 20000,
-			expectedTypeWork: ExpectedWorkType.Hybrid,
-			githubUsername: "WeronikaSzemi",
-			monthsOfCommercialExp: 0,
-			portfolioUrls: ['http://test.pl', 'http://example.com'],
-			projectDegree: '1',
-			projectUrls: ['http://test.pl', 'http://example.com'],
-			status: StudentStatus.Available,
-			targetWorkCity: "Warszawa",
-			teamProjectDegree: '3',
-			workExperience: "mnóstwo doświadczeń ciekawych"
-		})
+		(async () => {
+			const res = await fetch(`${apiUrl}/user/student-profile`, {
+				credentials: 'include',
+			});
+			const data = await res.json();
+			const res2 = await fetch (`${apiUrl}/user/email/${id}`, {
+				credentials: 'include',
+			});
+			const email = (await res2.json()).email;
+
+			setStudent({
+				id: data.id,
+				email: email,
+				firstName: data.firstName,
+				lastName: data.lastName,
+				tel: data.tel,
+				bio: data.bio,
+				bonusProjectUrls: data.bonusProjectUrls,
+				canTakeApprenticeship: data.canTakeApprenticeship,
+				courseCompletion: data.courseCompletion,
+				courseEngagement: data.courseEngagement,
+				courses: data.courses,
+				education: data.education,
+				expectedContractType: data.expectedContractType,
+				expectedSalary: data.expectedSalary,
+				expectedTypeWork: data.expectedTypeWork,
+				githubUsername: data.githubUsername,
+				monthsOfCommercialExp: data.monthsOfCommercialExp,
+				portfolioUrls: data.portfolioUrls,
+				projectDegree: data.projectDegree,
+				projectUrls: data.projectUrls,
+				status: data.status,
+				targetWorkCity: data.targetWorkCity,
+				teamProjectDegree: data.teamProjectDegree,
+				workExperience: data.workExperience,
+			})
+		})();
 	}, []);
+
+	// @TODO: dodać logikę przycisku, kiedy będzie gotowy popup
+
 
 	if (student === null) {
 		return null;
@@ -61,7 +66,7 @@ export const StudentProfile = () => {
 					<img
 						src={student.githubUsername ? `https://github.com/${student.githubUsername}.png` : "/defaultAvatar.jpg"}
 						alt="awatar kursanta/ki"
-						className="img-fluid rounded-circle mx-auto d-block my-5 w-75"
+						className="img-fluid rounded-circle mx-auto d-block my-5 w-50"
 					/>
 					<div className="text-center mb-4">
 						<h1 className="fs-3">{student.firstName} {student.lastName}</h1>
@@ -181,42 +186,42 @@ export const StudentProfile = () => {
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Oczekiwania w stosunku do zatrudnienia</h2>
 					<div className="pt-3 px-4 pb-4">
 						<div className="row theme-text-medium-light">
-							<div className="col-2 theme-border-dark-1">
+							<div className="col-2 theme-border-dark-2">
 								Preferowane miejsce pracy
 							</div>
-							<div className="col-2 theme-border-dark-1">
+							<div className="col-2 theme-border-dark-2">
 								Docelowe miasto, w którym chce pracować kandydat
 							</div>
-							<div className="col-2 theme-border-dark-1">
+							<div className="col-2 theme-border-dark-2">
 								Oczekiwany typ umowy
 							</div>
-							<div className="col-2 theme-border-dark-1">
+							<div className="col-2 theme-border-dark-2">
 								Oczekiwane wynagrodzenie miesięczne netto
 							</div>
-							<div className="col-2 theme-border-dark-1">
+							<div className="col-2 theme-border-dark-2">
 								Zgoda na odbycie bezpłatnych praktyk/stażu na początek
 							</div>
-							<div className="col-2 theme-border-dark-1">
+							<div className="col-2">
 								Komercyjne doświadczenie w programowaniu
 							</div>
 						</div>
 						<div className="row fw-bold">
-							<div className="col-2 theme-border-dark-1 pt-3">
+							<div className="col-2 theme-border-dark-2 pt-3">
 								{student?.expectedTypeWork}
 							</div>
-							<div className="col-2 theme-border-dark-1 pt-3">
+							<div className="col-2 theme-border-dark-2 pt-3">
 								{student?.targetWorkCity}
 							</div>
-							<div className="col-2 theme-border-dark-1 pt-3">
+							<div className="col-2 theme-border-dark-2 pt-3">
 								{student?.expectedContractType}
 							</div>
-							<div className="col-2 theme-border-dark-1 pt-3">
+							<div className="col-2 theme-border-dark-2 pt-3">
 								{student?.expectedSalary ? new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN'}).format(student?.expectedSalary) : null}
 							</div>
-							<div className="col-2 theme-border-dark-1 pt-3">
+							<div className="col-2 theme-border-dark-2 pt-3">
 								{student?.canTakeApprenticeship ? 'TAK' : 'NIE'}
 							</div>
-							<div className="col-2 theme-border-dark-1 pt-3">
+							<div className="col-2 pt-3">
 								Liczba miesięcy: {student?.monthsOfCommercialExp}
 							</div>
 						</div>
@@ -261,8 +266,5 @@ export const StudentProfile = () => {
 				</section>
 			</div>
 		</div>
-
-
-
 	</>
 }

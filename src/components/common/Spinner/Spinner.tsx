@@ -2,18 +2,8 @@ import React from "react";
 import './Spinner.css';
 
 export const Spinner = () => {
-    return (<div className="lds-spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>)
+    return <div className="container"
+                style={{padding: '200px'}}>
+        <div className="spinner"/>
+    </div>
 }

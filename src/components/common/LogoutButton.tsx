@@ -9,17 +9,13 @@ export const LogoutButton = () => {
 	const logOut = async (e: BaseSyntheticEvent) => {
 		e.preventDefault();
 
-		navigate('/login');
-
-		// @TODO Do poprawienia po uzupełnieniu endpointu przez BE
-
-		/*const res = await fetch('http://localhost:3001/auth/logout', {
+		const res = await fetch('http://localhost:3000/auth/logout', {
 			credentials: "include",
 		});
 		const result = await res.json();
-		if (result) {
+		if (result.ok) {
 			navigate('/login');
-		}*/
+		}
 	}
 
 	return <>
