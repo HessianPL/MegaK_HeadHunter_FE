@@ -40,10 +40,12 @@ function LoginPage() {
             });
 
             const result = await res.json();
-
+            console.log("po zalogoaniu", result)
             if (result.ok) {
                 setRole(result.role);
                 setId(result.id);
+
+                localStorage.setItem("cookieUser", JSON.stringify({role:result.role,email:result.email } ));
 
                 switch(result.role) {
                     case 'Admin':
