@@ -1,4 +1,3 @@
-import { LogoutButton } from "../components/common/LogoutButton";
 import { StudentProfile } from "../components/student/StudentProfile";
 import { StudentMenu } from "../components/student/StudentMenu";
 
