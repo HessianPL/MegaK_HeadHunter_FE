@@ -8,6 +8,7 @@ import { RecruiterView } from "./views/RecruiterView";
 import LoginView from "./views/LoginView";
 import ForgottenPasswordView from './views/ForgottenPasswordView';
 import { UserContext } from "./contexts/user-context";
+import {RequireAuth} from "./contexts/RequireAuth";
 
 function App() {
     const [id, setId] = useState('');
@@ -19,8 +20,22 @@ function App() {
       <UserContext.Provider value={{id, setId, role, setRole}}>
         <Routes>
           <Route path="/login" element={<LoginView/>}/>
-          <Route path="/admin" element={<AdminView/>}/>
-          <Route path="/student" element={<StudentView/>}/>
+            <Route
+                path="/admin"
+                element={
+                    <RequireAuth accessBy = "Admin">
+                        <AdminView/>
+                    </RequireAuth>
+                }
+            />
+          <Route
+              path="/student"
+              element={
+                  <RequireAuth accessBy="Student">
+                      <StudentView/>
+                  </RequireAuth>
+              }
+          />
           <Route path="/recruiter" element={<RecruiterView/>}/>
         </Routes>
       </UserContext.Provider>
