@@ -1,24 +1,22 @@
-import React, {FormEvent, useEffect, useState} from 'react';
-import {StudentCVData} from "../../types-fe/StudentCVData";
-import {useParams} from "react-router-dom";
-import {apiUrl} from "../../config/api";
-import {Spinner} from "../Spinner/Spinner";
+import React, {FormEvent, useState} from 'react';
+import {ExpectedContractType, ExpectedWorkType, StudentCVData} from "../../types-fe/StudentCVData";
+import {AddUrlData} from "./AddUrlData";
 
 export const AddFormStudent = () => {
     const [form, setForm] = useState<StudentCVData>({
         id: '',
         email: '',
-        tel: 0,
+        tel: '',
         firstName: '',
         lastName: '',
         githubUsername: '',
-        portfolioUrls: [''],
-        projectUrls: [''],
+        portfolioUrls: [],
+        projectUrls: [],
         bio: '',
-        expectedTypeWork: '',
+        expectedTypeWork: ExpectedWorkType.Any,
         targetWorkCity: '',
-        expectedContractTpe: '',
-        expectedSalary: '',
+        expectedContractType: ExpectedContractType.Any,
+        expectedSalary: 0,
         canTakeApprenticeship: false,
         monthsOfCommercialExp: 0,
         education: '',
@@ -27,14 +25,14 @@ export const AddFormStudent = () => {
     })
     const [loading, setLoading] = useState<boolean>(false);
     const [resultInfo, setResultInfo] = useState<string | null>(null);
-    const [selected, setSelected] = useState<string>('');
+    const [workSelected, setWorkSelected] = useState<string>(form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork);
+    const [contractSelected, setContractSelected] = useState<string>(form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType);
     const [isChecked, setIsChecked] = useState<boolean>(false)
-    const {idOfStudent} = useParams();
 
     //@TODO set a correct fetch path when it will be ready from BE
     // useEffect( () => {
     //     (async () => {
-    //         const res = await fetch (`${apiUrl}/student/${idOfStudent}`);
+    //         const res = await fetch (`${apiUrl}/user/student-profile`);
     //         const data = await res.json();
     //         setForm(data);
     //         })();
@@ -60,7 +58,7 @@ export const AddFormStudent = () => {
 
         //@TODO set a correct fetch path when it will be ready from BE
         // try {
-        //     const res = await fetch(`${apiUrl}/student/update/${idOfStudent}`, {
+        //     const res = await fetch(`${apiUrl}/user/update-profile`, {
         //         method: 'PATCH',
         //         headers: {
         //             'Content-Type': 'application/json',
@@ -93,7 +91,7 @@ export const AddFormStudent = () => {
         </div>
         <div>
             <label>Numer telefonu:</label>
-            <input type='number'
+            <input type='text'
                    name='tel'
                    placeholder='Numer telefonu'
                    value={form.tel}
@@ -130,25 +128,10 @@ export const AddFormStudent = () => {
                    onChange={e => updateForm('githubUsername', e.target.value)}
             />
         </div>
-        <div>
-            <label>Portfolio:</label>
-            <input type='url'
-                   name='portfolioUrls'
-                   placeholder='Wstaw link do projektu'
-                   value={form.portfolioUrls}
-                   onChange={e => updateForm('portfolioUrls', e.target.value)}
-            />
-        </div>
-        <div>
-            <label>Projekt zaliczeniowy:</label>
-            <input type='url'
-                   name='projectUrls'
-                // required
-                   placeholder='Wstaw link'
-                   value={form.projectUrls}
-                   onChange={e => updateForm('projectUrls', e.target.value)}
-            />
-        </div>
+        <AddUrlData labelText='Portfolio:' urlsData={form.portfolioUrls} name='portfolioUrls'
+                    updateForm={updateForm}/>
+        <AddUrlData labelText='Projekt zaliczeniowy:' urlsData={form.projectUrls} name='projectUrls'
+                    updateForm={updateForm}/>
         <div>
             <label>Bio:</label>
             <textarea name='bio'
@@ -158,17 +141,19 @@ export const AddFormStudent = () => {
             />
         </div>
         <div>
-            <label>Oczekiwany miejsce zatrudnienia:</label>
-            <select value={selected}
+            <label>Oczekiwana forma zatrudnienia:</label>
+            <select name='expectedWorkType'
+                    value={workSelected}
                     onChange={e => {
-                        setSelected(e.target.value)
+                        setWorkSelected(e.target.value as ExpectedWorkType)
+                        updateForm('expectedWorkType', e.target.value);
                     }
                     }>
-                <option>Bez znaczenia</option>
-                <option>Na miejscu</option>
-                <option>Gotowość do przeprowadzki</option>
-                <option>Wyłacznie zdalnie</option>
-                <option>Hybrydowo</option>
+                <option>{form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork}</option>
+                <option value={ExpectedWorkType.Hybrid}>{ExpectedWorkType.Hybrid}</option>
+                <option value={ExpectedWorkType.CanMoveOut}>{ExpectedWorkType.CanMoveOut}</option>
+                <option value={ExpectedWorkType.Static}>{ExpectedWorkType.Static}</option>
+                <option value={ExpectedWorkType.RemoteOnly}>{ExpectedWorkType.RemoteOnly}</option>
             </select>
         </div>
         <div>
@@ -182,20 +167,22 @@ export const AddFormStudent = () => {
         </div>
         <div>
             <label>Oczekiwany typ zatrudnienia:</label>
-            <select value={selected}
-                    onChange={e => {
-                        setSelected(e.target.value)
+            <select value={contractSelected}
+                    onChange={(e) => {
+                        setContractSelected(e.target.value as ExpectedContractType);
+                        updateForm('expectedContractType', e.target.value);
                     }
                     }>
-                <option>Brak preferencji</option>
-                <option>Tylko UoP</option>
-                <option>Możliwe B2B</option>
-                <option>Możliwe UZ/UoP</option>
+                <option>{form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType}</option>
+                <option value={ExpectedContractType.UoPOnly}>{ExpectedContractType.UoPOnly}</option>
+                <option value={ExpectedContractType.B2B}>{ExpectedContractType.B2B}</option>
+                <option value={ExpectedContractType.UZorUOD}>{ExpectedContractType.UZorUOD}</option>
+                <option value={ExpectedContractType.Any}>{ExpectedContractType.Any}</option>
             </select>
         </div>
         <div>
             <label>Oczekiwane wynagrodzenie:</label>
-            <input type='text'
+            <input type='number'
                    name='expectedSalary'
                    placeholder='Podaj kwotę'
                    value={form.expectedSalary}
@@ -203,7 +190,6 @@ export const AddFormStudent = () => {
             />
         </div>
         <div>
-            <label htmlFor='canTakeApprenticeship'>Wyrażam zgode na odbycie bezpłatnych praktyk/stażu:</label>
             <input type='checkbox'
                    name='canTakeApprenticeship'
                    checked={isChecked}
@@ -212,6 +198,7 @@ export const AddFormStudent = () => {
                        updateForm('canTakeApprenticeship', e.target.value)
                    }}
             />
+            <label htmlFor='canTakeApprenticeship'>Wyrażam zgode na odbycie bezpłatnych praktyk/stażu.</label>
         </div>
         <div>
             <label>Ilość miesięcy doświadczenia komercyjnego:</label>
@@ -226,9 +213,9 @@ export const AddFormStudent = () => {
         <div>
             <label>Wykształcenie:</label>
             <textarea name='education'
-                   placeholder='Napisz o swoim wykształceniu'
-                   value={form.education}
-                   onChange={e => updateForm('education', e.target.value)}
+                      placeholder='Napisz o swoim wykształceniu'
+                      value={form.education}
+                      onChange={e => updateForm('education', e.target.value)}
             />
         </div>
         <div>
@@ -247,9 +234,6 @@ export const AddFormStudent = () => {
                       onChange={e => updateForm('courses', e.target.value)}
             />
         </div>
-
-
         <button type='submit'>Zapisz</button>
-
     </form>
 }
