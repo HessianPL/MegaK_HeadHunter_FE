@@ -8,7 +8,7 @@ import {
 } from "../../types-fe/student-entity";
 import { UserContext } from "../../contexts/user-context";
 import { Spinner } from "../common/Spinner/Spinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StudentForm } from "../../types-fe/student-form";
 
 export const EditStudent = () => {
@@ -128,230 +128,321 @@ export const EditStudent = () => {
 		return <Spinner/>
 	}
 
-	return <>
-		<form className="theme-text-light" onSubmit={sendForm}>
-			<h1>Edycja profilu</h1>
-			<div>
+	return <div className="mt-5 ms-5">
+		<form onSubmit={sendForm}
+			  className="form"
+		>
+			<h1 className="mt-4 mb-4">Edycja profilu</h1>
+			<div className="form-group row">
 				<label
-					htmlFor="email">Adres email:</label>
-				<input type='email'
-					   name='email'
-					   id='email'
-					   required
-					   placeholder='e-mail@mail.com'
-					   value={form.email}
-					   onChange={e => updateForm('email', e.target.value)}
-				/>
+					htmlFor="email"
+					className="col-sm-4 col-form-label"
+				>Adres email:</label>
+				<div className="col-sm-8">
+					<input type='email'
+						   name='email'
+						   id='email'
+						   required
+						   placeholder='e-mail@mail.com'
+						   value={form.email}
+						   onChange={e => updateForm('email', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
+
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="tel"
+					className="col-sm-4 col-form-label"
 				>Numer telefonu:</label>
-				<input type='text'
-					   name='tel'
-					   id='tel'
-					   placeholder='987654321'
-					   value={form.tel}
-					   onChange={e => updateForm('tel', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<input type='text'
+						   name='tel'
+						   id='tel'
+						   placeholder='987654321'
+						   maxLength={9}
+						   minLength={9}
+						   value={form.tel}
+						   onChange={e => updateForm('tel', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
+
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="firstName"
+					className="col-sm-4 col-form-label"
 				>Imię:</label>
-				<input type='text'
-					   name='firstName'
-					   id='firstName'
-					   required
-					   placeholder='Imię'
-					   value={form.firstName}
-					   onChange={e => updateForm('firstName', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<input type='text'
+						   name='firstName'
+						   id='firstName'
+						   required
+						   placeholder='Jan'
+						   value={form.firstName}
+						   onChange={e => updateForm('firstName', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="lastName"
+					className="col-sm-4 col-form-label"
 				>Nazwisko:</label>
-				<input type='text'
-					   name='lastName'
-					   id='lastName'
-					   required
-					   placeholder='Nazwisko'
-					   value={form.lastName}
-					   onChange={e => updateForm('lastName', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<input type='text'
+						   name='lastName'
+						   id='lastName'
+						   required
+						   placeholder='Kowalski'
+						   value={form.lastName}
+						   onChange={e => updateForm('lastName', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="githubUsername"
-				>GitHub Username:</label>
-				<input type='text'
-					   name='githubUsername'
-					   id='githubUsername'
-					   required
-					   placeholder='GitHub Username'
-					   value={form.githubUsername}
-					   onChange={e => updateForm('githubUsername', e.target.value)}
-				/>
+					className="col-sm-4 col-form-label"
+				>Nazwa użytkownika GitHub:</label>
+				<div className="col-sm-8">
+					<input type='text'
+						   name='githubUsername'
+						   id='githubUsername'
+						   required
+						   placeholder='MegaProgramista'
+						   value={form.githubUsername}
+						   onChange={e => updateForm('githubUsername', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="portfolioUrls"
+					className="col-sm-4 col-form-label"
 				>Linki do portfolio:</label>
-				<textarea
-					name="portfolioUrls"
-					id="portfolioUrls"
-					placeholder="https://portfolio1.com"
-					value={form.portfolioUrls}
-					onChange={e => updateForm('portfolioUrls', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<textarea
+						name="portfolioUrls"
+						id="portfolioUrls"
+						placeholder="https://link1.com&#10;https://link2.com"
+						value={form.portfolioUrls}
+						onChange={e => updateForm('portfolioUrls', e.target.value)}
+						className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="projectUrls"
+					className="col-sm-4 col-form-label"
 				>Linki do projektu indywidualnego:</label>
+				<div className="col-sm-8">
 				<textarea
 					name="projectUrls"
 					id="projectUrls"
-					placeholder="https://project1.com"
+					placeholder="https://link3.com&#10;https://link4.com"
 					value={form.projectUrls}
 					onChange={e => updateForm('projectUrls', e.target.value)}
+					className="form-control"
 				/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="bio"
+					className="col-sm-4 col-form-label"
 				>Bio:</label>
+				<div className="col-sm-8">
 				<textarea
 					name='bio'
 					id='bio'
 					placeholder='Napisz coś o sobie'
 					value={form.bio}
 					onChange={e => updateForm('bio', e.target.value)}
+					className="form-control"
 				/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="expectedWorkType"
+					className="col-sm-4 col-form-label"
 				>Oczekiwana forma zatrudnienia:</label>
-				<select
-					name='expectedWorkType'
-					id='expectedWorkType'
-					value={workSelected}
-					onChange={e => {
-						setWorkSelected(e.target.value as ExpectedWorkType)
-						updateForm('expectedWorkType', e.target.value);
-					}
-					}>
-					<option>{form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork}</option>
-					<option value={ExpectedWorkType.Hybrid}>{ExpectedWorkType.Hybrid}</option>
-					<option value={ExpectedWorkType.CanMoveOut}>{ExpectedWorkType.CanMoveOut}</option>
-					<option value={ExpectedWorkType.Static}>{ExpectedWorkType.Static}</option>
-					<option value={ExpectedWorkType.RemoteOnly}>{ExpectedWorkType.RemoteOnly}</option>
-				</select>
+				<div className="col-sm-8">
+					<select
+						name='expectedWorkType'
+						id='expectedWorkType'
+						value={workSelected}
+						className="form-control"
+						onChange={e => {
+							setWorkSelected(e.target.value as ExpectedWorkType)
+							updateForm('expectedWorkType', e.target.value);
+						}}>
+						<option>{form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork}</option>
+						<option value={ExpectedWorkType.Hybrid}>{ExpectedWorkType.Hybrid}</option>
+						<option value={ExpectedWorkType.CanMoveOut}>{ExpectedWorkType.CanMoveOut}</option>
+						<option value={ExpectedWorkType.Static}>{ExpectedWorkType.Static}</option>
+						<option value={ExpectedWorkType.RemoteOnly}>{ExpectedWorkType.RemoteOnly}</option>
+					</select>
+				</div>
 			</div>
-			<div>
-				<label>Preferowane miasto zatrudnienia:</label>
-				<input type='text'
-					   name='targetWorkCity'
-					   placeholder='Miasto'
-					   value={form.targetWorkCity}
-					   onChange={e => updateForm('targetWorkCity', e.target.value)}
-				/>
+			<div className="form-group row">
+				<label
+					htmlFor="targetWorkCity"
+					className="col-sm-4 col-form-label"
+				>Preferowane miasto zatrudnienia:</label>
+				<div className="col-sm-8">
+					<input type='text'
+						   name='targetWorkCity'
+						   id='targetWorkCity'
+						   placeholder='Wólka'
+						   value={form.targetWorkCity}
+						   onChange={e => updateForm('targetWorkCity', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
-				<label>Oczekiwany typ zatrudnienia:</label>
-				<select value={contractSelected}
+			<div className="form-group row">
+				<label
+					htmlFor="expectedContractType"
+					className="col-sm-4 col-form-label"
+				>Oczekiwany typ zatrudnienia:</label>
+				<div className="col-sm-8">
+					<select
+						name='expectedContractType'
+						id='expectedContractType'
+						value={contractSelected}
+						className="form-control"
 						onChange={(e) => {
 							setContractSelected(e.target.value as ExpectedContractType);
 							updateForm('expectedContractType', e.target.value);
-						}
-						}>
-					<option>{form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType}</option>
-					<option value={ExpectedContractType.UoPOnly}>{ExpectedContractType.UoPOnly}</option>
-					<option value={ExpectedContractType.B2B}>{ExpectedContractType.B2B}</option>
-					<option value={ExpectedContractType.UZorUOD}>{ExpectedContractType.UZorUOD}</option>
-					<option value={ExpectedContractType.Any}>{ExpectedContractType.Any}</option>
-				</select>
+						}}
+					>
+						<option>{form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType}</option>
+						<option value={ExpectedContractType.UoPOnly}>{ExpectedContractType.UoPOnly}</option>
+						<option value={ExpectedContractType.B2B}>{ExpectedContractType.B2B}</option>
+						<option value={ExpectedContractType.UZorUOD}>{ExpectedContractType.UZorUOD}</option>
+						<option value={ExpectedContractType.Any}>{ExpectedContractType.Any}</option>
+					</select>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="expectedSalary"
-				>Oczekiwane wynagrodzenie:</label>
-				<input
-					type='number'
-					name='expectedSalary'
-					id='expectedSalary'
-					placeholder='Podaj kwotę'
-					value={form.expectedSalary}
-					onChange={e => updateForm('expectedSalary', e.target.value)}
-				/>
+					className="col-sm-4 col-form-label"
+				>Oczekiwane wynagrodzenie netto:</label>
+				<div className="col-sm-8">
+					<input
+						type='number'
+						name='expectedSalary'
+						id='expectedSalary'
+						placeholder='100000'
+						value={form.expectedSalary}
+						onChange={e => updateForm('expectedSalary', e.target.value)}
+						className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
-				<input type='checkbox'
-					   name='canTakeApprenticeship'
-					   id='canTakeApprenticeship'
-					   checked={isChecked}
-					   onChange={e => {
-						   checkHandler()
-						   updateForm('canTakeApprenticeship', e.target.value)
-					   }}
-				/>
-				<label htmlFor='canTakeApprenticeship'>Mogę odbyć bezpłatne praktyki/staż.</label>
+			<div className="form-group row">
+				<label
+					htmlFor='canTakeApprenticeship'
+					className="form-check-label col-sm-4 col-form-label"
+				>Mogę odbyć bezpłatne praktyki/staż:</label>
+				<div className="col-sm-8">
+					<input type='checkbox'
+						   name='canTakeApprenticeship'
+						   id='canTakeApprenticeship'
+						   checked={isChecked}
+						   onChange={e => {
+							   checkHandler()
+							   updateForm('canTakeApprenticeship', e.target.value)
+						   }}
+						   className="form-check-input mt-3"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="monthsOfCommercialExp"
+					className="col-sm-4 col-form-label"
 				>Liczba miesięcy doświadczenia komercyjnego:</label>
-				<input type='number'
-					   name='monthsOfCommercialExp'
-					   id='monthsOfCommercialExp'
-					   required
-					   placeholder='Podaj liczbę'
-					   value={form.monthsOfCommercialExp}
-					   onChange={e => updateForm('monthsOfCommercialExp', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<input type='number'
+						   name='monthsOfCommercialExp'
+						   id='monthsOfCommercialExp'
+						   required
+						   placeholder='0'
+						   value={form.monthsOfCommercialExp}
+						   onChange={e => updateForm('monthsOfCommercialExp', e.target.value)}
+						   className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="education"
+					className="col-sm-4 col-form-label"
 				>Wykształcenie:</label>
-				<textarea
-					name='education'
-					id='education'
-					placeholder='Napisz o swoim wykształceniu'
-					value={form.education}
-					onChange={e => updateForm('education', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<textarea
+						name='education'
+						id='education'
+						placeholder='2022 mgr inż., Wyższa Szkoła Programowania w Wólce'
+						value={form.education}
+						onChange={e => updateForm('education', e.target.value)}
+						className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="workExperience"
+					className="col-sm-4 col-form-label"
 				>Doświadczenie zawodowe:</label>
-				<textarea
-					name='workExperience'
-					id='workExperience'
-					placeholder='Opisz przebieg swojej kariery zawodowej'
-					value={form.workExperience}
-					onChange={e => updateForm('workExperience', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<textarea
+						name='workExperience'
+						id='workExperience'
+						placeholder='2018–2022 sprzedawca-kasjer, Biedronka, Wólka'
+						value={form.workExperience}
+						onChange={e => updateForm('workExperience', e.target.value)}
+						className="form-control"
+					/>
+				</div>
 			</div>
-			<div>
+			<div className="form-group row">
 				<label
 					htmlFor="courses"
+					className="col-sm-4 col-form-label"
 				>Ukończone kursy:</label>
-				<textarea
-					name='courses'
-					id='courses'
-					placeholder='Pochwal się ukończonymi kursami'
-					value={form.courses}
-					onChange={e => updateForm('courses', e.target.value)}
-				/>
+				<div className="col-sm-8">
+					<textarea
+						name='courses'
+						id='courses'
+						placeholder='2023 MegaKURS JavaScriptu'
+						value={form.courses}
+						onChange={e => updateForm('courses', e.target.value)}
+						className="form-control"
+					/>
+				</div>
 			</div>
-			<button type='submit'>Zapisz</button>
+			<button
+				type='submit'
+				className="btn theme-btn-mainbrand btn-right px-5 my-2"
+			>Zapisz</button>
+			<Link to={'/student'} className="btn theme-btn-dark-4 btn-right px-5 my-2 me-3">
+				Anuluj
+			</Link>
+
 		</form>
-		<div>
+		<div className="cp-0 my-5 pb-3">
 			{message}
 		</div>
-	</>
+	</div>
 }

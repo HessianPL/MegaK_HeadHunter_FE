@@ -158,6 +158,10 @@
     }
 }
 
+.form-group {
+    margin-bottom: 15px;
+}
+
 .form-label {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -178,6 +182,10 @@
 
 .form-control::placeholder {
     color: var(--medium-color);
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: 0;
 }
 
 .btn-right {
