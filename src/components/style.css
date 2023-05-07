@@ -188,6 +188,11 @@
     border-radius: 0;
 }
 
+.form-check-input:checked {
+    background-color: var(--mainbrand-color);
+    border: none;
+}
+
 .btn-right {
     float: right;
 }

@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useEffect, useState } from "react";
+import React, { BaseSyntheticEvent, ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { apiUrl } from "../../config/api";
 import {
 	EditStudentForm,
@@ -38,6 +38,7 @@ export const EditStudent = () => {
 	const [workSelected, setWorkSelected] = useState<string>(form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork);
 	const [contractSelected, setContractSelected] = useState<string>(form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const [selectedOption, setSelectedOption] = useState(false);
 
 	const { id } = useContext(UserContext);
 
@@ -60,17 +61,17 @@ export const EditStudent = () => {
 				firstName: data.firstName,
 				lastName: data.lastName,
 				tel: data.tel,
-				bio: data.bio,
+				bio: displayNewLine(data.bio),
 				canTakeApprenticeship: data.canTakeApprenticeship,
-				courses: data.courses,
+				courses: displayNewLine(data.courses),
 				education: data.education,
 				expectedContractType: data.expectedContractType,
-				expectedSalary: data.expectedSalary,
+				expectedSalary: Number(data.expectedSalary),
 				expectedTypeWork: data.expectedTypeWork,
 				githubUsername: data.githubUsername,
 				monthsOfCommercialExp: data.monthsOfCommercialExp,
-				portfolioUrls: (data.portfolioUrls).toString(),
-				projectUrls: (data.projectUrls).toString(),
+				portfolioUrls: handleUrlsArr(data.portfolioUrls),
+				projectUrls: handleUrlsArr(data.projectUrls),
 				status: data.status,
 				targetWorkCity: data.targetWorkCity,
 				workExperience: data.workExperience,
@@ -86,11 +87,34 @@ export const EditStudent = () => {
 	};
 
 	const checkHandler = () => {
-		setIsChecked(!isChecked)
+		setIsChecked(!isChecked);
+		if (isChecked) {
+			setForm({
+				...form,
+				canTakeApprenticeship: true,
+			})
+		} else {
+			setForm({
+				...form,
+				canTakeApprenticeship: false,
+			})
+		}
 	}
 
-	const handleUrls = (input: string) => {
-		return input.split("\n");
+	const handleUrlsString = (input: string) => {
+		return input.split("\r\n");
+	}
+
+	const handleUrlsArr = (input: string[]) => {
+		return input.join("\n");
+	}
+
+	const displayNewLine = (input: string) => {
+		return input.replaceAll('\r\n', '&#10;')
+	}
+
+	const saveNewLine = (input: string) => {
+		return input.replaceAll('&#10;', '\r\n')
 	}
 
 	const sendForm = async (e: FormEvent) => {
@@ -106,12 +130,23 @@ export const EditStudent = () => {
 		        },
 		        body: JSON.stringify({
 		            ...form,
-					portfolioUrls: handleUrls(form.portfolioUrls),
-					projectUrls: handleUrls(form.projectUrls),
+					courses: saveNewLine(form.courses),
+					portfolioUrls: handleUrlsString(form.portfolioUrls),
+					projectUrls: handleUrlsString(form.projectUrls),
 		        } as EditStudentForm),
 		    });
 
+			console.log(
+				JSON.stringify({
+					...form,
+					courses: saveNewLine(form.courses),
+					portfolioUrls: handleUrlsString(form.portfolioUrls),
+					projectUrls: handleUrlsString(form.projectUrls),
+				} as EditStudentForm),
+			)
+
 		    const response = await res.json();
+			console.log(response);
 
 			if (response.message === 'ok') {
 				navigate('/student');
@@ -351,18 +386,14 @@ export const EditStudent = () => {
 			</div>
 			<div className="form-group row">
 				<label
-					htmlFor='canTakeApprenticeship'
-					className="form-check-label col-sm-4 col-form-label"
+					htmlFor="canTakeApprenticeship"
+					className="col-sm-4 col-form-label"
 				>Mogę odbyć bezpłatne praktyki/staż:</label>
 				<div className="col-sm-8">
 					<input type='checkbox'
 						   name='canTakeApprenticeship'
 						   id='canTakeApprenticeship'
-						   checked={isChecked}
-						   onChange={e => {
-							   checkHandler()
-							   updateForm('canTakeApprenticeship', e.target.value)
-						   }}
+						   onChange={checkHandler}
 						   className="form-check-input mt-3"
 					/>
 				</div>

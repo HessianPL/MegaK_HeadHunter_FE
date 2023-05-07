@@ -42,7 +42,7 @@ export interface StudentEntity {
 	monthsOfCommercialExp: number;
 	education?: string;
 	workExperience?: string;
-	courses?: string;
+	courses: string;
 	status?: StudentStatus;
 }
 
