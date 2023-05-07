@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExpectedContractType, ExpectedWorkType, StudentEntity, StudentStatus } from "../../types-fe/student-entity";
 import { UserContext } from "../../contexts/user-context";
 import { apiUrl } from "../../config/api";
@@ -94,7 +94,7 @@ export const StudentProfile = () => {
 						: null}
 					<button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Zatrudniony</button>
 					{role === 'Student'
-						? <button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Edytuj profil</button>
+						? <Link to={'/student/edit'} className="btn theme-btn-mainbrand w-100 py-2 mb-2">Edytuj profil</Link>
 						: null}
 				</div>
 			</div>

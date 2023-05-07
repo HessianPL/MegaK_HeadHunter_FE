@@ -19,20 +19,15 @@ export enum StudentStatus {
 	Hired = 'Zatrudniony',
 }
 
-export interface StudentEntity {
+export interface StudentForm {
 	id: string;
 	email: string;
-	courseCompletion: string;
-	courseEngagement: string;
-	projectDegree: string;
-	teamProjectDegree: string;
-	bonusProjectUrls: string[];
 	tel?: string;
 	firstName: string;
 	lastName: string;
 	githubUsername: string;
-	portfolioUrls: string[];
-	projectUrls: string[];
+	portfolioUrls: string;
+	projectUrls: string;
 	bio?: string;
 	expectedTypeWork: ExpectedWorkType;
 	targetWorkCity?: string;
@@ -44,7 +39,4 @@ export interface StudentEntity {
 	workExperience?: string;
 	courses?: string;
 	status?: StudentStatus;
-}
-
-export interface EditStudentForm extends Omit<StudentEntity, 'courseCompletion' | 'courseEngagement' | 'projectDegree' | 'teamProjectDegree' | 'bonusProjectUrls'> {
 }

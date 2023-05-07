@@ -8,6 +8,7 @@ import { RecruiterView } from "./views/RecruiterView";
 import LoginView from "./views/LoginView";
 import ForgottenPasswordView from './views/ForgottenPasswordView';
 import { UserContext } from "./contexts/user-context";
+import { EditStudentView } from "./views/EditStudentView";
 
 function App() {
     const [id, setId] = useState('');
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<LoginView/>}/>
           <Route path="/admin" element={<AdminView/>}/>
           <Route path="/student" element={<StudentView/>}/>
+          <Route path="/student/edit" element={<EditStudentView/>}/>
           <Route path="/recruiter" element={<RecruiterView/>}/>
         </Routes>
       </UserContext.Provider>
