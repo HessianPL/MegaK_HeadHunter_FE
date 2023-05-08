@@ -123,6 +123,7 @@ export const EditStudent = () => {
 		        headers: {
 		            'Content-Type': 'application/json',
 		        },
+				credentials: 'include',
 		        body: JSON.stringify({
 		            ...form,
 		        }),
@@ -130,7 +131,7 @@ export const EditStudent = () => {
 
 		    const response = await res.json();
 
-			if (response.message === 'ok') {
+			if (response.affected === 1) {
 				navigate('/student');
 			} else {
 				setMessage(response.message);
