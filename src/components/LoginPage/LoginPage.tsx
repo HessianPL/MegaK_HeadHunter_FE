@@ -45,6 +45,8 @@ function LoginPage() {
                 setRole(result.role);
                 setId(result.id);
 
+                localStorage.setItem("cookieUser", JSON.stringify({role:result.role,email:result.email } ));
+
                 switch(result.role) {
                     case 'Admin':
                         navigate('/admin');
