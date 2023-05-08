@@ -3,16 +3,17 @@ import { apiUrl } from "../../config/api";
 import {
 	EditStudentForm,
 	ExpectedContractType,
-	ExpectedWorkType,
+	ExpectedWorkType, StudentEntity,
 	StudentStatus
 } from "../../types-fe/student-entity";
 import { UserContext } from "../../contexts/user-context";
 import { Spinner } from "../common/Spinner/Spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { StudentForm } from "../../types-fe/student-form";
+import app from "../../App";
 
 export const EditStudent = () => {
-	const [form, setForm] = useState<StudentForm>({
+	const [form, setForm] = useState<EditStudentForm>({
 		id: '',
 		email: '',
 		firstName: '',
@@ -27,8 +28,8 @@ export const EditStudent = () => {
 		expectedTypeWork: ExpectedWorkType.Any,
 		githubUsername: '',
 		monthsOfCommercialExp: 0,
-		portfolioUrls: '',
-		projectUrls: '',
+		portfolioUrls: [],
+		projectUrls: [],
 		status: StudentStatus.Available,
 		targetWorkCity: '',
 		workExperience: '',
@@ -37,8 +38,6 @@ export const EditStudent = () => {
 	const [message, setMessage] = useState('');
 	const [workSelected, setWorkSelected] = useState<string>(form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork);
 	const [contractSelected, setContractSelected] = useState<string>(form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType);
-	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const [selectedOption, setSelectedOption] = useState(false);
 
 	const { id } = useContext(UserContext);
 
@@ -61,17 +60,17 @@ export const EditStudent = () => {
 				firstName: data.firstName,
 				lastName: data.lastName,
 				tel: data.tel,
-				bio: displayNewLine(data.bio),
+				bio: data.bio,
 				canTakeApprenticeship: data.canTakeApprenticeship,
-				courses: displayNewLine(data.courses),
+				courses: data.courses,
 				education: data.education,
 				expectedContractType: data.expectedContractType,
-				expectedSalary: Number(data.expectedSalary),
+				expectedSalary: data.expectedSalary,
 				expectedTypeWork: data.expectedTypeWork,
 				githubUsername: data.githubUsername,
 				monthsOfCommercialExp: data.monthsOfCommercialExp,
-				portfolioUrls: handleUrlsArr(data.portfolioUrls),
-				projectUrls: handleUrlsArr(data.projectUrls),
+				portfolioUrls: data.portfolioUrls,
+				projectUrls: data.projectUrls,
 				status: data.status,
 				targetWorkCity: data.targetWorkCity,
 				workExperience: data.workExperience,
@@ -86,35 +85,31 @@ export const EditStudent = () => {
 		}));
 	};
 
-	const checkHandler = () => {
-		setIsChecked(!isChecked);
-		if (isChecked) {
+	const radioHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.value === "true") {
 			setForm({
 				...form,
 				canTakeApprenticeship: true,
-			})
+			});
 		} else {
 			setForm({
 				...form,
 				canTakeApprenticeship: false,
-			})
+			});
+		}
+
+	}
+
+	const stringToArr = (input: string) => {
+		if (input.includes('\n')) {
+			return input.split("\n");
+		} else if (input.includes('\r')) {
+			return input.split("\r");
 		}
 	}
 
-	const handleUrlsString = (input: string) => {
-		return input.split("\r\n");
-	}
-
-	const handleUrlsArr = (input: string[]) => {
-		return input.join("\n");
-	}
-
-	const displayNewLine = (input: string) => {
-		return input.replaceAll('\r\n', '&#10;')
-	}
-
-	const saveNewLine = (input: string) => {
-		return input.replaceAll('&#10;', '\r\n')
+	const arrToString = (input: string[]) => {
+		return input.join("\r\n");
 	}
 
 	const sendForm = async (e: FormEvent) => {
@@ -130,23 +125,10 @@ export const EditStudent = () => {
 		        },
 		        body: JSON.stringify({
 		            ...form,
-					courses: saveNewLine(form.courses),
-					portfolioUrls: handleUrlsString(form.portfolioUrls),
-					projectUrls: handleUrlsString(form.projectUrls),
-		        } as EditStudentForm),
+		        }),
 		    });
 
-			console.log(
-				JSON.stringify({
-					...form,
-					courses: saveNewLine(form.courses),
-					portfolioUrls: handleUrlsString(form.portfolioUrls),
-					projectUrls: handleUrlsString(form.projectUrls),
-				} as EditStudentForm),
-			)
-
 		    const response = await res.json();
-			console.log(response);
 
 			if (response.message === 'ok') {
 				navigate('/student');
@@ -266,8 +248,8 @@ export const EditStudent = () => {
 						name="portfolioUrls"
 						id="portfolioUrls"
 						placeholder="https://link1.com&#10;https://link2.com"
-						value={form.portfolioUrls}
-						onChange={e => updateForm('portfolioUrls', e.target.value)}
+						value={arrToString(form.portfolioUrls)}
+						onChange={e => updateForm('portfolioUrls', stringToArr(e.target.value))}
 						className="form-control"
 					/>
 				</div>
@@ -282,8 +264,8 @@ export const EditStudent = () => {
 					name="projectUrls"
 					id="projectUrls"
 					placeholder="https://link3.com&#10;https://link4.com"
-					value={form.projectUrls}
-					onChange={e => updateForm('projectUrls', e.target.value)}
+					value={arrToString(form.projectUrls)}
+					onChange={e => updateForm('projectUrls', stringToArr(e.target.value))}
 					className="form-control"
 				/>
 				</div>
@@ -379,25 +361,41 @@ export const EditStudent = () => {
 						id='expectedSalary'
 						placeholder='100000'
 						value={form.expectedSalary}
-						onChange={e => updateForm('expectedSalary', e.target.value)}
+						onChange={e => updateForm('expectedSalary', Number(e.target.value))}
 						className="form-control"
 					/>
 				</div>
 			</div>
 			<div className="form-group row">
-				<label
-					htmlFor="canTakeApprenticeship"
-					className="col-sm-4 col-form-label"
-				>Mogę odbyć bezpłatne praktyki/staż:</label>
+				<legend
+					className="col-form-label col-sm-4"
+				>Mogę odbyć bezpłatne praktyki/staż:</legend>
 				<div className="col-sm-8">
-					<input type='checkbox'
-						   name='canTakeApprenticeship'
-						   id='canTakeApprenticeship'
-						   onChange={checkHandler}
-						   className="form-check-input mt-3"
-					/>
+					<div className="form-check-inline">
+						<input type='radio'
+							   name='canTakeApprenticeship'
+							   id='canTakeApprenticeshipTrue'
+							   value="true"
+							   onChange={radioHandler}
+							   className="form-check-input"
+							   checked={form.canTakeApprenticeship}
+						/>
+						<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">tak</label>
+					</div>
+					<div className="form-check-inline">
+						<input type='radio'
+							   name='canTakeApprenticeship'
+							   id='canTakeApprenticeshipFalse'
+							   value="false"
+							   onChange={radioHandler}
+							   className="form-check-input"
+							   checked={!form.canTakeApprenticeship}
+						/>
+						<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">nie</label>
+					</div>
 				</div>
 			</div>
+
 			<div className="form-group row">
 				<label
 					htmlFor="monthsOfCommercialExp"
