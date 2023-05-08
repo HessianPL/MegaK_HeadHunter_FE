@@ -40,7 +40,7 @@ function LoginPage() {
             });
 
             const result = await res.json();
-            console.log("po zalogoaniu", result)
+
             if (result.ok) {
                 setRole(result.role);
                 setId(result.id);

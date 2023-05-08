@@ -1,7 +1,9 @@
 import React from 'react';
+import LoginView from "./LoginView";
 
 export const NotFoundView = () => (
     <>
-        <h1 className="theme-text-light">Zgubiliśmy się?</h1>
+        <h1 className="theme-text-light">Aby mieć dostęp do tych zaspobów, powinieneś być zalogowany.</h1>
+        <LoginView/>
     </>
 )
