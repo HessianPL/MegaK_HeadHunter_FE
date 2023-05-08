@@ -62,6 +62,7 @@ export default function ImportCSV() {
     return (
         <div className="mt-5 ms-5">
             <h2 className="theme-text-light mb-4">Dodawanie kursantów/ek</h2>
+            <a href="/exampleStudentsFile.csv">Przykładowy plik .csv</a>
             <CSVReader
                 onUploadAccepted={(results: any) => {
                     setStudents(filterAndValidateCSV(results.data));

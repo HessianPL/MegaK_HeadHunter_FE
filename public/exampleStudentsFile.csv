@@ -1,0 +1,4 @@
+﻿id;email;courseCompletion;courseEngagement;projectDegree;teamProjectDegree;bonusProjectUrls
+1;test@testowy.pl;3;3;4;5;https://github.comghusername/projectname, https://github.comghusername/projectname2, https://github.comghusername/projectname3
+2;kontakt@lukaszdragon.pl;5;4;3;5;https://github.comghusername/projectname
+3;jurand@spychowa.pl;2;2;4;5;https://github.comghusername/projectname/,https://github.comghusername/projectname/
