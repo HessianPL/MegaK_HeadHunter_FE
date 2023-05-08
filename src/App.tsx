@@ -9,6 +9,7 @@ import LoginView from "./views/LoginView";
 import { UserContext } from "./contexts/user-context";
 import {NotFoundView} from "./views/NotFoundView";
 import {RequireAuth} from "./contexts/require-auth";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     const [id, setId] = useState('');
@@ -44,9 +45,9 @@ function App() {
           <Route
               path="/recruiter"
               element={
-                  <RequireAuth accessBy="HR">
+                  // <RequireAuth accessBy="HR">
                      <RecruiterView/>
-                  </RequireAuth>
+                  // </RequireAuth>
                       }
           />
         </Routes>
