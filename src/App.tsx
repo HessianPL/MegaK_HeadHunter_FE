@@ -44,9 +44,9 @@ function App() {
           <Route
               path="/recruiter"
               element={
-                  <RequireAuth accessBy="HR">
+               //   <RequireAuth accessBy="HR">
                      <RecruiterView/>
-                  </RequireAuth>
+               //   </RequireAuth>
                       }
           />
         </Routes>

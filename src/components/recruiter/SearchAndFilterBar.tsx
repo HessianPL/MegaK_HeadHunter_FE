@@ -26,7 +26,7 @@ export const SearchAndFilterBar = () => {
                         />
                     </div>
                 </form>
-                <div className='col-lg-2 me-2'>
+                <div className='col-md-1 me-2'>
                     <div className='input-group flex-nowrap'>
                         <i className="bi bi-funnel-fill theme-bg-dark-4 theme-text-medium-light p-2"/>
                         <Link to='/recruiter/filter' className="theme-btn-dark-4 p-2">Filtrowanie</Link>
