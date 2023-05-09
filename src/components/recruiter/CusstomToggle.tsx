@@ -1,5 +1,5 @@
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import React, {EventHandler, ReactElement, ReactNode} from "react";
+import React, {ReactNode, useState} from "react";
 
 interface Props {
     children: ReactNode,
@@ -7,12 +7,16 @@ interface Props {
 }
 export const CustomToggle = ({ children, eventKey }:Props) =>{
     const decoratedOnClick = useAccordionButton(eventKey, () =>
-        console.log('coś robię...ale to za chwilę'),
+        console.log('rozwiń'),
     );
 
     return (
         <button
             type="button"
+            className="accordion-button collapsed"
+            // aria-expanded = "false"
+            aria-expanded="true"
+            // toggle
             onClick={decoratedOnClick}
         >
             {children}
