@@ -1,6 +1,7 @@
 import {ReactElement, useContext} from "react";
 import {UserContext} from "./user-context";
 import LoginView from "../views/LoginView";
+import {NotFoundView} from "../views/NotFoundView";
 
 interface Props {
     children: ReactElement,
@@ -19,7 +20,7 @@ export const RequireAuth = ({children, accessBy} : Props) => {
             ? <>
                 {children}
             </>
-            : <LoginView/>
+            : <NotFoundView/>
     }
 
 }

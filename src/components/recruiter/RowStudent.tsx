@@ -32,10 +32,11 @@ export const RowStudent = (props: Props) => {
                <Card.Header className="theme-bg-dark-1 bg-dark-1 border-0">
                   <div>
                    <Row  className="justify-content-md-center">
-                       <Col xs={9}><h3>{props.student.fullName}</h3></Col>
-                       <Col xs={2}><button className="ms-auto btn  theme-btn-mainbrand">
-                       Zarezerwuj rozmowe
-                    </button>
+                       <Col xs={9}><h2>{props.student.fullName}</h2></Col>
+                       <Col xs={2}>
+                            <button className="ms-auto btn  theme-btn-mainbrand">
+                                Zarezerwuj rozmowe
+                            </button>
                        </Col>
                        <Col xs={1}><CustomToggle eventKey={props.keyOnItem}> </CustomToggle></Col>
                    </Row>
@@ -43,35 +44,70 @@ export const RowStudent = (props: Props) => {
 
                 </Card.Header>
                  <Accordion.Collapse eventKey={props.keyOnItem} className="theme-bg-dark-2 border-0">
-                     <Card.Body>
-                        <div >
-                               <Row  className="justify-content-md-center">
-                                   <Col sm className="ColInStudentRow">Ocena przejścia kursu</Col>
-
-                                   <Col sm>Ocena aktywnoci i zaangaowania na kursie</Col>
-                                   <Col sm>Ocena kodu w projekcie wasnym</Col>
-                                   <Col sm>Ocena pracy w zespole Scrum</Col>
-                                   <Col sm>Preferowane miejsce pracy</Col>
-                                   <Col sm>Docelowe miasto, gdzie chce pracować kandydat</Col>
-                                   <Col sm>Oczekiwany typ kontraktu</Col>
-                                   <Col sm>Oczekiwane wynagrodzenie miesięczne netto</Col>
-                                   <Col sm>Zgoda na odbycie bezpłatnych praktyk/stażu na początek</Col>
-                                   <Col sm>Komercyjne doświaczenie w programowaniu</Col>
-                               </Row>
-                                <Row>
-                                   <Col sm> {props.student.projectDegree}/5</Col>
-                                   <Col sm> {props.student.courseEngagement}/5</Col>
-                                   <Col sm> {props.student.projectDegree}/5</Col>
-                                   <Col sm> {props.student.teamProjectDegree}/5</Col>
-                                   <Col sm>{props.student.expectedTypeWork}</Col>
-                                   <Col sm>{props.student.targetWorkCity}</Col>
-                                   <Col sm>{props.student.expectedContractType}</Col>
-                                   <Col sm>{props.student.expectedSalary}</Col>
-                                   <Col sm>{props.student.canTakeApprenticeship}</Col>
-                                   <Col sm>{props.student.monthsOfCommercialExp} miesięcy</Col>
-                                </Row>
-                               </div>
-                     </Card.Body>
+                     <Container  className="theme-bg-dark-1" fluid="true"  >
+                         <Row lg={10} >
+                             <Col>
+                                   <Container className="w-100 p-3 SmallContainer">
+                                       <Row className="h-75" ><Col sm>Ocena przejścia kursu</Col></Row>
+                                       <Row><Col sm> {props.student?.projectDegree}/5</Col></Row>
+                                   </Container>
+                             </Col>
+                             <Col sm>
+                                 <Container className="w-100 p-3 SmallContainer">
+                                     <Row className="h-75"><Col sm>Ocena aktywnoci i zaangaowania na kursie</Col></Row>
+                                     <Row><Col sm> {props.student?.courseEngagement}/5</Col></Row>
+                                 </Container>
+                             </Col>
+                             <Col sm>
+                                 <Container className="w-100 p-3 SmallContainer">
+                                     <Row className="h-75"><Col sm>Ocena kodu w projekcie własnym</Col></Row>
+                                     <Row> <Col sm> {props.student?.projectDegree}/5</Col></Row>
+                                 </Container>
+                             </Col>
+                             <Col sm>
+                                 <Container className="w-100 p-3 SmallContainer">
+                                     <Row className="h-75"><Col sm>Ocena pracy w zespole Scrum</Col></Row>
+                                     <Row><Col sm> {props.student?.teamProjectDegree}/5</Col></Row>
+                                 </Container>
+                             </Col>
+                             <Col sm>
+                             <Container className="w-100 p-3 SmallContainer">
+                                 <Row className="h-75"><Col sm>Preferowane miejsce pracy</Col></Row>
+                                 <Row>   <Col sm>{props.student?.expectedTypeWork}</Col></Row>
+                             </Container>
+                         </Col>
+                             <Col sm>
+                             <Container className="w-100 p-3 SmallContainer">
+                                 <Row className="h-75"><Col sm>Docelowe miasto, gdzie chce pracować kandydat</Col></Row>
+                                 <Row>  <Col sm>{props.student?.targetWorkCity}</Col></Row>
+                             </Container>
+                         </Col>
+                             <Col sm>
+                             <Container className="w-100 p-3 SmallContainer">
+                                 <Row className="h-75"><Col sm>Oczekiwany typ kontraktu</Col></Row>
+                                 <Row><Col sm>{props.student?.expectedContractType}</Col></Row>
+                             </Container>
+                         </Col>
+                             <Col sm>
+                             <Container className="w-100 p-3 SmallContainer">
+                                 <Row className="h-75"><Col sm>Oczekiwane wynagrodzenie miesięczne netto</Col></Row>
+                                 <Row><Col sm>	{props.student?.expectedSalary ? new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN'}).format(props.student?.expectedSalary) : null}</Col></Row>
+                             </Container>
+                         </Col>
+                             <Col sm>
+                             <Container className="w-100 p-3 SmallContainer">
+                                 <Row className="h-75"><Col sm>Zgoda na odbycie bezpłatnych praktyk/stażu na początek</Col></Row>
+                                 <Row><Col sm>{props.student?.canTakeApprenticeship ? 'TAK' : 'NIE'}</Col></Row>
+                             </Container>
+                         </Col>
+                             <Col sm>
+                             <Container className="w-100 p-3 SmallContainer">
+                                 <Row className="h-75"><Col sm>Komercyjne doświaczenie w programowaniu</Col></Row>
+                                 <Row><Col sm>{props.student?.monthsOfCommercialExp} miesięcy</Col></Row>
+                             </Container>
+                         </Col>
+                         </Row>
+                     </Container>
                 </Accordion.Collapse>
             </Card>
         </>

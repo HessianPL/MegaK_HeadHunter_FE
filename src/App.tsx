@@ -20,9 +20,7 @@ function App() {
       <ToastContainer theme="colored"/>
       <UserContext.Provider value={{id, setId, role, setRole}}>
         <Routes>
-            <Route path="/*" element={<NotFoundView/>}/>
-            <Route path="/login" element={<LoginView/>}/>
-
+            <Route path="/" element={<LoginView/>}/>
             <Route path="/login" element={<LoginView/>}/>
             <Route
                 path="/admin"
@@ -44,11 +42,12 @@ function App() {
           <Route
               path="/recruiter"
               element={
-                  // <RequireAuth accessBy="HR">
+                  <RequireAuth accessBy="HR">
                      <RecruiterView/>
-                  // </RequireAuth>
+                  </RequireAuth>
                       }
           />
+            <Route path="/*" element={<NotFoundView/>}/>
         </Routes>
       </UserContext.Provider>
     </>
