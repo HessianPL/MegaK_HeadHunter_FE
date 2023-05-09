@@ -1,9 +1,10 @@
 import {AvailableStudentData} from "../../types-fe/student-lists";
-import {apiUrl} from "../../config/api";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import {CustomToggle} from "./CusstomToggle";
 import {Col, Container, Row} from "react-bootstrap";
+import { toast } from 'react-toastify';
+import {apiUrl} from "../../config/api";
 
 interface Props {
     keyOnItem: string,
@@ -16,10 +17,17 @@ export const RowStudent = (props: Props) => {
     const reservedTheStudent = async (e: React.MouseEvent<Element, MouseEvent>) => {
         e.preventDefault();
         try {
-            const res = await fetch(`${apiUrl}/user/available`, {
+//nie przetestowane @TODO do sprawdzenia jak działa :D
+            const res = await fetch(`${apiUrl}/user/change-student-status`, {
+                method: 'Patch',
                 credentials: 'include',
+                body:JSON.stringify({
+                    studentId: props.student.id,
+                    status:"W trakcie rozmowy"
+                })
             });
-            const data = await res.json();
+            toast.success(`Student ${props.student.fullName} został dodany do listy.` );
+            // const data = await res.json();
         } finally {
 
         }
@@ -34,7 +42,10 @@ export const RowStudent = (props: Props) => {
                    <Row  className="justify-content-md-center">
                        <Col xs={9}><h2>{props.student.fullName}</h2></Col>
                        <Col xs={2}>
-                            <button className="ms-auto btn  theme-btn-mainbrand">
+                            <button
+                                className="ms-auto btn  theme-btn-mainbrand"
+                                onClick={reservedTheStudent}
+                            >
                                 Zarezerwuj rozmowe
                             </button>
                        </Col>

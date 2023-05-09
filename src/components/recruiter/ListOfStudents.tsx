@@ -3,7 +3,6 @@ import {Spinner} from "../common/Spinner/Spinner";
 import {AvailableStudentData} from "../../types-fe/student-lists";
 import {apiUrl} from "../../config/api";
 import { TableWithStudents } from "./TableWithStudents";
-import {StudentMenu} from "../student/StudentMenu";
 
 export const ListOfStudents = () => {
     const [list, setList] = useState<AvailableStudentData[] | null>(null)
