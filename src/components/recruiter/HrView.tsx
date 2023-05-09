@@ -1,7 +1,8 @@
 import {ListOfStudents} from "./ListOfStudents";
+import "./HrView.css"
 
-export const HrContener = () => (<>
-        <div className="theme-bg-dark-1 border-0">
+export const HrView = () => (<>
+        <div >
             <ListOfStudents/>
         </div>
 

@@ -1,36 +1,22 @@
-import {OneStudentOnList} from "./OneStudentOnList";
 import {useEffect, useState} from "react";
 import {Spinner} from "../common/Spinner/Spinner";
 import {AvailableStudentData} from "../../types-fe/student-lists";
-
-const fakeStudent: AvailableStudentData= {
-
-    fullName: "Jan K.",
-    courseCompletion: "5",
-    courseEngagement: "3",
-    projectDegree: "5",
-    teamProjectDegree: "4",
-    expectedTypeWork: 'Wyłącznie zdalnie',
-    targetWorkCity: "Warszawa",
-    expectedContractType: "Możliwe B2B",
-    expectedSalary:20000,
-    canTakeApprenticeship: true,
-    monthsOfCommercialExp: 2,
-}
-
-const ListOfFakeStudent = [fakeStudent, fakeStudent]
+import {apiUrl} from "../../config/api";
+import { TableWithStudents } from "./TableWithStudents";
+import {StudentMenu} from "../student/StudentMenu";
 
 export const ListOfStudents = () => {
-    const [list, SetList] = useState<AvailableStudentData[] | null>(ListOfFakeStudent)
-
+    const [list, setList] = useState<AvailableStudentData[] | null>(null)
 
     const refreshListOfStudents = async () => {
         try {
-            // SetListOfStudents(null);
+            setList(null);
 
-            //fetch()
-
-
+            const res = await fetch(`${apiUrl}/user/available`, {
+                credentials: 'include',
+            });
+            const data = await res.json();
+            setList(data);
         } finally {
 
         }
@@ -46,8 +32,12 @@ export const ListOfStudents = () => {
 
     return (
         <>
-            <h2>Butony do zmiany widoku </h2>
-            <h2>Wyszukiwanie</h2>
-            <OneStudentOnList list={list} onStudentChange={refreshListOfStudents}/>
+            <div className="col-lg-10 col-12 px-4 theme-bg-dark-1 mx-auto ">
+                <h5> Bedzie tu pasek do zmiany listy </h5>
+                <h5>Będzie tu wyszukiwanie/ filtrowanie</h5>
+                <TableWithStudents list={list} onStudentChange={refreshListOfStudents} />
+                <div> ilość elementów ...</div>
+            </div>
+
         </>)
 }

@@ -1,5 +1,6 @@
 
 export interface AvailableStudentData {
+    id: string;
     fullName: string;
     courseCompletion: string;
     courseEngagement: string;
