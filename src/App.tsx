@@ -9,6 +9,7 @@ import LoginView from "./views/LoginView";
 import { UserContext } from "./contexts/user-context";
 import {NotFoundView} from "./views/NotFoundView";
 import {RequireAuth} from "./contexts/require-auth";
+import SignupView from "./views/SignupView";
 
 function App() {
     const [id, setId] = useState('');
@@ -22,6 +23,7 @@ function App() {
         <Routes>
             <Route path="/*" element={<NotFoundView/>}/>
             <Route path="/login" element={<LoginView/>}/>
+            <Route path="/register/:id/:registerToken" element={<SignupView/>}/>
 
             <Route path="/login" element={<LoginView/>}/>
             <Route
