@@ -6,6 +6,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import { toast } from 'react-toastify';
 import {apiUrl} from "../../config/api";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     kindOfList:string,
@@ -45,6 +46,10 @@ export const RowStudent = (props: Props) => {
         props.onStudentChange();
     };
 
+    const showCV = async ()=> {
+        console.log("cv")
+    }
+
     return (
         <>
             <Card className="rounded-0 card">
@@ -68,8 +73,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <div>
                                       <p>Rezerwacja do:</p>
-                                      <p className="fs-5 my-3">data :)</p>
-                                      {/*<p className="fs-5 my-3">{props.student.}</h2>*/}
+                                      <p className="fs-5 my-3">20-05-2023</p>
                                   </div>
                               </Col>
                               <Col xs={6}>
@@ -86,7 +90,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <button
                                       className="ms-auto btn theme-btn-mainbrand"
-                                      // onClick={reservedTheStudent}
+                                      onClick={showCV}
                                   >
                                       Pokaż CV
                                   </button>
