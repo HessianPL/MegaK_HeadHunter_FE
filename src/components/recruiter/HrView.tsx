@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {AvailableStudentData} from "../../types-fe/student-lists";
 import {apiUrl} from "../../config/api";
 import {Spinner} from "../common/Spinner/Spinner";
-// import {SearchAndFilterBar} from "./SearchAndFilterBar";
+import {SearchAndFilterBar} from "./SearchAndFilterBar";
 
 export const HrView = () => {
     const [list, setList] = useState<AvailableStudentData[] | null>(null);
@@ -52,7 +52,7 @@ export const HrView = () => {
         <div className="col-lg-10 col-12 px-4 theme-bg-dark-1 mx-auto ">
             <button onClick={()=>setKindOfList("ALL")}>Lista All</button>
             <button onClick={()=>setKindOfList("ForThisHR")}>Lista do rozmowy</button>
-            {/*<SearchAndFilterBar/>*/}
+            <SearchAndFilterBar/>
             <ListOfStudents list={list} kindOfList={kindOfList} onStudentChange={refreshListOfStudents} />
         </div>
     </>
