@@ -1,0 +1,223 @@
+:root {
+    --mainbrand-color: #E02735;
+    --mainbrand-dark-color: #68141b;
+    --light-color: #FFFFFF;
+    --medium-color: #666666;
+    --medium-light-color: #848484;
+    --dark-0-color: #4D4D4D;
+    --dark-1-color: #292A2B;
+    --dark-2-color: #222224;
+    --dark-3-color: #1E1E1F;
+    --dark-4-color: #0A0A0A;
+    --link-color: #0B8BD4;
+    --accent-color: #172A35;
+}
+
+.theme-text-light {
+    color: var(--light-color);
+}
+
+.theme-text-mainbrand {
+    color: var(--mainbrand-color);
+}
+
+.theme-text-dark-0 {
+    color: var(--dark-0-color);
+}
+
+.theme-text-medium-light {
+    color: var(--medium-light-color);
+}
+
+.theme-link {
+    color: var(--link-color);
+}
+
+.theme-bg-light {
+    background-color: var(--light-color);
+}
+
+.theme-bg-dark-1 {
+    background-color: var(--dark-1-color);
+}
+
+.theme-bg-dark-2 {
+    background-color: var(--dark-2-color);
+}
+
+.theme-bg-dark-3 {
+    background-color: var(--dark-3-color);
+}
+
+.theme-bg-dark-4 {
+    background-color: var(--dark-4-color);
+}
+
+.theme-btn-accent {
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-btn-accent:hover {
+    border-color: var(--accent-color);
+    background-color: var(--light-color);
+    color: var(--accent-color);
+    border-radius: 0;
+}
+
+.theme-btn-mainbrand {
+    border-color: var(--mainbrand-color);
+    background-color: var(--mainbrand-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-btn-mainbrand:hover {
+    border-color: var(--mainbrand-dark-color);
+    background-color: var(--mainbrand-dark-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-btn-dark-2 {
+    border-color: var(--dark-2-color);
+    background-color: var(--dark-2-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-btn-dark-2:hover {
+    border-color: var(--dark-3-color);
+    background-color: var(--dark-3-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-btn-dark-4 {
+    border-color: var(--dark-4-color);
+    background-color: var(--dark-4-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-btn-dark-4:hover {
+    border-color: var(--dark-3-color);
+    background-color: var(--dark-3-color);
+    color: var(--light-color);
+    border-radius: 0;
+}
+
+.theme-border-dark-2 {
+    border-right: 1px solid var(--dark-2-color);
+}
+
+/* Navigation styles */
+
+/*.navbar {*/
+/*    background-color: #222224;*/
+/*}*/
+
+
+/* admin/ImportCSV styles */
+
+.progressBar {
+    background-color: var(--mainbrand-color) !important;
+    max-width: 53%;
+}
+
+.acceptedFile {
+    line-height: 2.5;
+}
+
+
+/* Form styles */
+
+@media (min-width: 576px) {
+    .reader, .form {
+        max-width: 75%;
+    }
+}
+
+@media (min-width: 768px) {
+    .reader, .form {
+        max-width: 75%;
+    }
+}
+
+@media (min-width: 992px) {
+    .reader, .form {
+        max-width: 75%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .reader, .form {
+        max-width: 50%;
+    }
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    background-color: var(--dark-1-color);
+    color: var(--light-color);
+    border-color: var(--dark-1-color);
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border-color: var(--light-color);
+    background-color: var(--dark-3-color);
+    color: var(--light-color);
+}
+
+.form-control::placeholder {
+    color: var(--medium-color);
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: 0;
+}
+
+.form-check-input:checked {
+    background-color: var(--mainbrand-color);
+    border: none;
+}
+
+pre {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-right {
+    float: right;
+}
+
+/* MISC */
+
+a, .theme-link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover, .theme-link:hover {
+    color: #116295;
+    text-decoration: none;
+}

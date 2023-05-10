@@ -1,0 +1,76 @@
+.LoginPage {
+    width: 100vw;
+    height: 100vh;
+    background-color: #222224;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Catamaran', sans-serif;
+    letter-spacing: 1px;
+}
+
+.LoginPage form {
+    width: 360px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.LoginPage form input{
+    width: 100%;
+    height: 45px;
+    padding-left: 15px;
+    background-color: #292A2B;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box;
+    color: white;
+}
+
+.LoginPage form .Row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    align-items: center;
+}
+
+.LoginPage form .Row button{
+    width: 110px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    background-color: #E02735;
+    border: none;
+    color: white;
+}
+
+.LoginPage img {
+    width:120px;
+    margin-bottom:30px;
+}
+
+.LoginPage .forgotten{
+    color:white;
+    text-decoration:none;
+}
+
+@media (max-width: 380px) {
+    .LoginPage form {
+        width: 90%;
+        height: 220px;
+    }
+    .LoginPage form .Row{
+        flex-direction: column;
+        height:80px;
+    }
+}

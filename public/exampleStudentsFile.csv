@@ -1,0 +1,4 @@
+﻿id;email;courseCompletion;courseEngagement;projectDegree;teamProjectDegree;bonusProjectUrls
+1;test@testowy.pl;3;3;4;5;https://github.com/ghusername/projectname, https://github.com/ghusername/projectname2, https://github.com/ghusername/projectname3
+2;kontakt@domena.pl;5;4;3;5;https://github.com/ghusername/projectname
+3;jan@gmail.com;2;2;4;5;https://github.com/ghusername/projectname, https://github.com/ghusername/projectname
