@@ -84,7 +84,7 @@ function ResetPassword() {
                     onChange={e => setPasswordCheck(e.target.value)}
                 />
                 <div className='Row'>
-                    <button className="btn theme-btn-mainbrand px-4">Zapisz nowe hasło</button>
+                    <button className="btn theme-btn-mainbrand px-4">Zapisz</button>
                 </div>
             </form>
         </div>

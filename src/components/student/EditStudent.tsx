@@ -11,6 +11,7 @@ import { Spinner } from "../common/Spinner/Spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { StudentForm } from "../../types-fe/student-form";
 import app from "../../App";
+import { toast } from "react-toastify";
 
 export const EditStudent = () => {
 	const [form, setForm] = useState<EditStudentForm>({
@@ -35,7 +36,6 @@ export const EditStudent = () => {
 		workExperience: '',
 	});
 	const [loading, setLoading] = useState<boolean>(false);
-	const [message, setMessage] = useState('');
 	const [workSelected, setWorkSelected] = useState<string>(form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork);
 	const [contractSelected, setContractSelected] = useState<string>(form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType);
 
@@ -131,10 +131,11 @@ export const EditStudent = () => {
 
 		    const response = await res.json();
 
-			if (response.affected === 1) {
+			if (response.message === 'OK') {
+				toast.success('Dane zmienione.')
 				navigate('/student');
 			} else {
-				setMessage(response.message);
+				toast.error('Nie udało się zmienić danych.')
 			}
 
 		} finally {
@@ -471,8 +472,5 @@ export const EditStudent = () => {
 			</Link>
 
 		</form>
-		<div className="cp-0 my-5 pb-3">
-			{message}
-		</div>
 	</div>
 }
