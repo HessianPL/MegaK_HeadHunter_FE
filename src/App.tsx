@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer theme="colored"/>
+      <ToastContainer theme="dark"/>
       <UserContext.Provider value={{id, setId, role, setRole}}>
         <Routes>
             <Route path="/*" element={<NotFoundView/>}/>
