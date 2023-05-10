@@ -47,6 +47,14 @@ function App() {
                   </RequireAuth>
                       }
           />
+            <Route
+                path="/recruiter/studentCV/:id"
+                element={
+                    <RequireAuth accessBy="HR">
+                        <StudentView/>
+                    </RequireAuth>
+                }
+            />
             <Route path="/*" element={<NotFoundView/>}/>
         </Routes>
       </UserContext.Provider>

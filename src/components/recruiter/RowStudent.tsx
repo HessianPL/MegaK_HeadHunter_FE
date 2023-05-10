@@ -64,8 +64,14 @@ export const RowStudent = (props: Props) => {
                                   </div>
                               </Col>
                               <Col xs={6}>
-                                  <h4>{props.student.fullName}</h4>
-                                  <h4>będzie Imie i Nazwisko z czasem</h4>
+                                  <img
+                                      // src={props.student.githubUsername ? `https://github.com/${props.student.githubUsername}.png` : "/defaultAvatar.jpg"}
+                                      alt="awatar kursanta/ki"
+                                      className="img-fluid rounded-circle mx-auto d-block my-5 w-50"
+                                  />
+                                  <div className="text-center mb-4">
+                                      {/*<h1 className="fs-3">{props.student.firstName} {props.student.lastName}</h1>*/}
+                                  </div>
                               </Col>
                               <Col xs={1}>
                                   <button
