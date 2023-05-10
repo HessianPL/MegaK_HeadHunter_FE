@@ -11,9 +11,9 @@
 .row {
     --bs-gutter-x: .3rem;
 }
-.SmallContainer .row:nth-child(2)  {
-    font-weight: bold;
-}
+/*.SmallContainer .row:nth-child(2)  {*/
+/*    font-weight: bold;*/
+/*}*/
 
 .accordion-button{
     width: auto;

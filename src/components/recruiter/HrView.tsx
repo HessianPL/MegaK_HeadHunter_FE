@@ -50,7 +50,7 @@ export const HrView = () => {
         <div className="col-lg-10 col-12 px-4 theme-bg-dark-1 mx-auto ">
             <button onClick={()=>setKindOfList("ALL")}>Lista All</button>
             <button onClick={()=>setKindOfList("ForThisHR")}>Lista do rozmowy</button>
-            <h2> Filtrowanie</h2>
+            <h2>Filtrowanie</h2>
             <ListOfStudents list={list} kindOfList={kindOfList} onStudentChange={refreshListOfStudents} />
         </div>
     </>

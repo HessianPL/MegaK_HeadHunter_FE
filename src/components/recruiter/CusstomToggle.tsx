@@ -14,11 +14,13 @@ export const CustomToggle = ({ children, eventKey }:Props) =>{
     return (
         <button
             type="button"
-            className="accordion-button collapsed"
-            aria-expanded = "true"
+            className="btn collapsed border-0 theme-bg-dark-1 mt-3"
+            aria-expanded="true"
             onClick={decoratedOnClick}
         >
             {children}
+            <i className="bi bi-chevron-down theme-text-medium-light fs-4"/>
+            {/*<i className="bi bi-chevron-up theme-text-medium-light fs-4"/>*/}
         </button>
     );
 }
