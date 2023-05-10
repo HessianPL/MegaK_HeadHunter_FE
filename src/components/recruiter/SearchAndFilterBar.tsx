@@ -2,11 +2,12 @@ import React, {SyntheticEvent, useState} from "react";
 import {Link} from "react-router-dom";
 
 export const SearchAndFilterBar = () => {
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('') // to trzeba przenieść do contexts
     const [inputVal, setInputVal] = useState<string>(search);
-    const [filterOption, setFilterOption] = useState('')
+    const [filterOption, setFilterOption] = useState('') // nie wiem czy tego też nie przenieść do contexts
 
-    // const sqlQuery = `SELECT * FROM 'nazwa tabeli' WHERE column_name LIKE `%${search}%` AND filter_column = `${filterOption}``
+    // search i filterOption trzeba dodać do parametrów ścieżki w fetchu
+    // Query dla BE czy jakoś tak = `SELECT * FROM 'nazwa tabeli' WHERE column_name LIKE `%${search}%` AND filter_column = `${filterOption}``
 
     const setSearchFromLocalState = (e: SyntheticEvent) => {
         e.preventDefault();
