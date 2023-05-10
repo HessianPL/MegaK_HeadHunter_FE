@@ -1,0 +1,28 @@
+.card {
+    border:none;
+    border-bottom: 2rem solid rgb(14 14 14)
+}
+
+.SmallContainer {
+    background-color: #222325;
+    height: 100%;
+    margin-bottom:10%;
+}
+.row {
+    --bs-gutter-x: .3rem;
+}
+/*.SmallContainer .row:nth-child(2)  {*/
+/*    font-weight: bold;*/
+/*}*/
+
+.accordion-button{
+    width: auto;
+    background-color: transparent;
+    padding: 0;
+}
+
+.accordion-button:after {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-size: 2.25rem;
+}
