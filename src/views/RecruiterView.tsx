@@ -6,4 +6,5 @@ export const RecruiterView = () => {
 		<StudentMenu/>
     <SearchAndFilterBar/>
 		<HrView/>
+		</>
 }
