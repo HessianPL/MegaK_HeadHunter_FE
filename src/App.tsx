@@ -7,11 +7,11 @@ import { StudentView } from "./views/StudentView";
 import { RecruiterView } from "./views/RecruiterView";
 import LoginView from "./views/LoginView";
 import { UserContext } from "./contexts/user-context";
-import { EditStudentView } from "./views/EditStudentView";
 import {NotFoundView} from "./views/NotFoundView";
 import {RequireAuth} from "./contexts/require-auth";
-import {ForgottenPasswordView} from "./views/ForgottenPasswordView";
 import { ResetPasswordView } from "./views/ResetPasswordView";
+import SignupView from "./views/SignupView";
+import ForgottenPasswordView from "./views/ForgottenPasswordView";
 
 function App() {
     const [id, setId] = useState('');
