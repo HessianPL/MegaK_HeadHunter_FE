@@ -7,8 +7,6 @@ import { UserContext } from "../../../contexts/user-context";
 import { apiUrl } from "../../../config/api";
 
 function LoginPage() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [user, setUser] = useState({
         email: '',
         pwd: '',
@@ -58,7 +56,7 @@ function LoginPage() {
                         navigate('/recruiter');
                         break;
                     default:
-                        return <div>Nieznana rola użytkownika/czki. Proszę skontaktować się z adminem/ką aplikacji.</div>
+                        toast.error('Nieznana rola użytkownika/czki. Proszę skontaktować się z adminem/ką aplikacji.');
                 }
             }
 
