@@ -8,8 +8,8 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
-    // DO DODANIA INTERAKCJA Z BACKENDEM ORAZ WERYFIKACJA PRZESYLANYCH DANYCH 
-  
+    // DO DODANIA INTERAKCJA Z BACKENDEM ORAZ WERYFIKACJA PRZESYLANYCH DANYCH
+
   const handleSubmit = (e:any) => {
 
      e.preventDefault();
@@ -26,7 +26,7 @@ function SignupPage() {
 
   return (
     <div className="SignupPage">
-            <img src={require("../../Assets/Images/megak_logo.webp")} alt="Logo MegaK" />
+            <img src={require("../../../Assets/Images/megak_logo.webp")} alt="Logo MegaK" />
             <form onSubmit={handleSubmit}>
                 <input className="email"type="text" value={"uzytkownik@pietnascie.com"} placeholder='E-mail' readOnly/>
                 <input type="password" value={password} placeholder='Hasło' onChange={e=>setPassword(e.target.value)}/>
