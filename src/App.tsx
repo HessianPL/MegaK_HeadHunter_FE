@@ -27,7 +27,6 @@ function App() {
             <Route path="/forgotten-password" element={<ForgottenPasswordView/>}/>
             <Route path="/new-password/:id/:registerToken" element={<ResetPasswordView/>}/>
 
-            <Route path="/login" element={<LoginView/>}/>
             <Route
                 path="/admin"
                 element={
