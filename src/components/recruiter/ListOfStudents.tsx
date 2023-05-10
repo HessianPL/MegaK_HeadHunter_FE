@@ -11,5 +11,5 @@ export const ListOfStudents = (props:Props) => {
     return <>
                 <TableWithStudents kindOfList={props.kindOfList} list={props.list} onStudentChange={props.onStudentChange} />
                 <div> liczba elementów ...</div>
-            </>
+    </>
 }

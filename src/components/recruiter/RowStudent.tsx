@@ -5,7 +5,8 @@ import {CustomToggle} from "./CusstomToggle";
 import {Col, Container, Row} from "react-bootstrap";
 import { toast } from 'react-toastify';
 import {apiUrl} from "../../config/api";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     kindOfList:string,
@@ -14,27 +15,40 @@ interface Props {
     onStudentChange: () => void;
 }
 
+export enum StudentStatus {
+    Available = 'Dostępny',
+    DuringRecruitment = 'W trakcie rozmowy',
+    Hired = 'Zatrudniony',
+}
 export const RowStudent = (props: Props) => {
-    const [status, setStatus] = useState("W trakcie rozmowy");
 
-    const reservedTheStudent = async (e: React.MouseEvent<Element, MouseEvent>) => {
+    const changeStatusOfTheStudent = async (e: React.MouseEvent<Element, MouseEvent>, status: string) => {
         e.preventDefault();
         try {
-// @TODO do sprawdzenia jak działa
             const res = await fetch(`${apiUrl}/user/change-student-status`, {
-                method: 'Patch',
+                method: 'PATCH',
                 credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body:JSON.stringify({
                     studentId: props.student.id,
                     status: status,
                 })
             });
             toast.success(`Student ${props.student.fullName} został dodany do listy.` );
+
+            const response = await res.json();
+
         } finally {
 
         }
         props.onStudentChange();
     };
+
+    const showCV = async ()=> {
+        console.log("cv")
+    }
 
     return (
         <>
@@ -45,9 +59,9 @@ export const RowStudent = (props: Props) => {
                           <Row className="justify-content-md-center">
                               <Col xs={9}><p className="fs-5 my-3">{props.student.fullName}</p></Col>
                               <Col xs={2}>
-                                  <button
+                                 <button
                                       className="ms-auto btn theme-btn-mainbrand my-3"
-                                      onClick={reservedTheStudent}
+                                      onClick={(e) => changeStatusOfTheStudent(e, StudentStatus.DuringRecruitment)}
                                   >
                                       Zarezerwuj rozmowę
                                   </button>
@@ -59,8 +73,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <div>
                                       <p>Rezerwacja do:</p>
-                                      <p className="fs-5 my-3">data :)</p>
-                                      {/*<p className="fs-5 my-3">{props.student.}</h2>*/}
+                                      <p className="fs-5 my-3">20-05-2023</p>
                                   </div>
                               </Col>
                               <Col xs={6}>
@@ -77,7 +90,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <button
                                       className="ms-auto btn theme-btn-mainbrand"
-                                      onClick={reservedTheStudent}
+                                      onClick={showCV}
                                   >
                                       Pokaż CV
                                   </button>
@@ -85,7 +98,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={2}>
                                   <button
                                       className="ms-auto btn  theme-btn-mainbrand"
-                                      onClick={reservedTheStudent}
+                                      onClick={(e) => changeStatusOfTheStudent(e, StudentStatus.Available)}
                                   >
                                       Brak zainteresowania
                                   </button>
@@ -93,7 +106,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <button
                                       className="ms-auto btn  theme-btn-mainbrand"
-                                      onClick={reservedTheStudent}
+                                      onClick={(e) => changeStatusOfTheStudent(e, StudentStatus.Hired)}
                                   >
                                       Zatrudniony
                                   </button>
