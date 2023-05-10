@@ -25,6 +25,7 @@ function App() {
             <Route path="/*" element={<NotFoundView/>}/>
             <Route path="/login" element={<LoginView/>}/>
             <Route path="/forgotten-password" element={<ForgottenPasswordView/>}/>
+            <Route path="/register/:id/:registerToken" element={<ResetPasswordView/>}/>
             <Route path="/new-password/:id/:registerToken" element={<ResetPasswordView/>}/>
 
             <Route
