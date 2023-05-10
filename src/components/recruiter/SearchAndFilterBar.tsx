@@ -20,16 +20,16 @@ export const SearchAndFilterBar = () => {
                 <div className='col-sm-6 d-flex justify-content-start'>
                     <form onChange={setSearchFromLocalState}>
                         <div className='input-group flex-nowrap'>
-                            <select className='form-control-search'
-                                    value={filterOption}
-                                    onChange={e => setFilterOption(e.target.value)}>
-                                <option value=''>All</option>
-                                <option value='Charakter pracy'>Charakter pracy</option>
-                                <option value='Miasto pracy'>Miasto pracy</option>
-                                <option value='Typ kontraktu'>Typ kontraktu</option>
-                                <option value='Zgoda na bezpłatne praktyki/staż'>Zgoda na bezpłatne praktyki/staż</option>
-                                <option value='Ilość miesięcy doświadczenia'>Ilość miesięcy doświadczenia</option>
-                            </select>
+                            {/*<select className='form-control-search'*/}
+                            {/*        value={filterOption}*/}
+                            {/*        onChange={e => setFilterOption(e.target.value)}>*/}
+                            {/*    <option value=''>All</option>*/}
+                            {/*    <option value='Charakter pracy'>Charakter pracy</option>*/}
+                            {/*    <option value='Miasto pracy'>Miasto pracy</option>*/}
+                            {/*    <option value='Typ kontraktu'>Typ kontraktu</option>*/}
+                            {/*    <option value='Zgoda na bezpłatne praktyki/staż'>Zgoda na bezpłatne praktyki/staż</option>*/}
+                            {/*    <option value='Ilość miesięcy doświadczenia'>Ilość miesięcy doświadczenia</option>*/}
+                            {/*</select>*/}
                             <span className='input-group-text'><i
                             className="bi bi-search"/></span>
                             <input className='form-control-search'
@@ -43,7 +43,7 @@ export const SearchAndFilterBar = () => {
                     </form>
                 </div>
                 <div className='col-sm-6 d-flex justify-content-sm-end justify-content-start my-2'>
-                    <Link to='/recruiter/filter' className="theme-btn-dark-4 p-2">
+                    <Link to='/recruiter/filter' className="theme-btn-dark-4 ps-2 pe-3 py-2">
                         <i className="bi bi-funnel-fill theme-text-medium-light p-2"/>
                         Filtrowanie
                     </Link>

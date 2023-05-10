@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {AvailableStudentData} from "../../types-fe/student-lists";
 import {apiUrl} from "../../config/api";
 import {Spinner} from "../common/Spinner/Spinner";
-import {SearchAndFilterBar} from "./SearchAndFilterBar";
+import { SearchAndFilterBar } from "./SearchAndFilterBar";
 
 export const HrView = () => {
     const [list, setList] = useState<AvailableStudentData[] | null>(null);
@@ -26,14 +26,13 @@ export const HrView = () => {
             }
         }else {
             try {
-                // setList(null);
-                // const res = await fetch(`${apiUrl}/user/reserved-students`, {
-                //     credentials: 'include',
-                // });
-                // const data = await res.json();
-                // console.log(data)
-                // setList(data);
-
+                setList(null);
+                console.log("Nie mam tu jeszcze studentów")
+                const res = await fetch(`${apiUrl}/user/available`, {
+                    credentials: 'include',
+                });
+                const data = await res.json();
+                setList(data);
             } finally {
 
             }
@@ -50,8 +49,12 @@ export const HrView = () => {
 
     return <>
         <div className="col-lg-10 col-12 px-4 theme-bg-dark-1 mx-auto ">
-            <button onClick={()=>setKindOfList("ALL")}>Lista All</button>
-            <button onClick={()=>setKindOfList("ForThisHR")}>Lista do rozmowy</button>
+            <button
+                className="btn tab-btn"
+                onClick={()=>setKindOfList("ALL")}>Dostępni kursanci</button>
+            <button
+                className="btn tab-btn"
+                onClick={()=>setKindOfList("ForThisHR")}>Do rozmowy</button>
             <SearchAndFilterBar/>
             <ListOfStudents list={list} kindOfList={kindOfList} onStudentChange={refreshListOfStudents} />
         </div>

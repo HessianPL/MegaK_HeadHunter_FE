@@ -119,7 +119,7 @@ export const RowStudent = (props: Props) => {
 
                 </Card.Header>
                  <Accordion.Collapse eventKey={props.keyOnItem} className="theme-bg-dark-2 border-0">
-                     <Container  className="theme-bg-dark-1" fluid="true"  >
+                     <Container className="theme-bg-dark-1 mb-2" fluid="true"  >
                          <Row lg={10} >
                              <Col>
                                    <Container className="w-100 p-3 pb-5 SmallContainer">
