@@ -65,6 +65,7 @@ export const RowStudent = (props: Props) => {
                               </Col>
                               <Col xs={6}>
                                   <h4>{props.student.fullName}</h4>
+                                  <h4>będzie Imie i Nazwisko z czasem</h4>
                               </Col>
                               <Col xs={1}>
                                   <button

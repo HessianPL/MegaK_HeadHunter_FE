@@ -6,6 +6,7 @@ interface Props {
     eventKey: string,
 }
 export const CustomToggle = ({ children, eventKey }:Props) =>{
+
     const decoratedOnClick = useAccordionButton(eventKey, () =>
         console.log('rozwiń'),
     );
@@ -14,9 +15,7 @@ export const CustomToggle = ({ children, eventKey }:Props) =>{
         <button
             type="button"
             className="accordion-button collapsed"
-            // aria-expanded = "false"
-            aria-expanded="true"
-            // toggle
+            aria-expanded = "true"
             onClick={decoratedOnClick}
         >
             {children}
