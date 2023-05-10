@@ -11,6 +11,7 @@ import { Spinner } from "../common/Spinner/Spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { StudentForm } from "../../types-fe/student-form";
 import app from "../../App";
+import { toast } from "react-toastify";
 
 export const EditStudent = () => {
 	const [form, setForm] = useState<EditStudentForm>({
@@ -35,7 +36,6 @@ export const EditStudent = () => {
 		workExperience: '',
 	});
 	const [loading, setLoading] = useState<boolean>(false);
-	const [message, setMessage] = useState('');
 	const [workSelected, setWorkSelected] = useState<string>(form.expectedTypeWork === null ? ExpectedWorkType.Any : form.expectedTypeWork);
 	const [contractSelected, setContractSelected] = useState<string>(form.expectedContractType === null ? ExpectedContractType.Any : form.expectedContractType);
 
@@ -97,7 +97,6 @@ export const EditStudent = () => {
 				canTakeApprenticeship: false,
 			});
 		}
-
 	}
 
 	const stringToArr = (input: string) => {
@@ -118,27 +117,29 @@ export const EditStudent = () => {
 		setLoading(true);
 
 		try {
-		    const res = await fetch(`${apiUrl}/user/update-profile`, {
-		        method: 'PATCH',
-		        headers: {
-		            'Content-Type': 'application/json',
-		        },
+			const res = await fetch(`${apiUrl}/user/update-profile`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+				},
 				credentials: 'include',
-		        body: JSON.stringify({
-		            ...form,
-		        }),
-		    });
+				body: JSON.stringify({
+					...form,
+				}),
+			});
 
-		    const response = await res.json();
+			const response = await res.json();
 
-			if (response.affected === 1) {
+			if (response.message === 'OK') {
+				console.log(form.courses, form.education)
+				toast.success('Dane zmienione.')
 				navigate('/student');
 			} else {
-				setMessage(response.message);
+				toast.error('Nie udało się zmienić danych.')
 			}
 
 		} finally {
-		    setLoading(false);
+			setLoading(false);
 		}
 	}
 
@@ -245,14 +246,14 @@ export const EditStudent = () => {
 					className="col-sm-4 col-form-label"
 				>Linki do portfolio:</label>
 				<div className="col-sm-8">
-					<textarea
-						name="portfolioUrls"
-						id="portfolioUrls"
-						placeholder="https://link1.com&#10;https://link2.com"
-						value={arrToString(form.portfolioUrls)}
-						onChange={e => updateForm('portfolioUrls', stringToArr(e.target.value))}
-						className="form-control"
-					/>
+               <textarea
+				   name="portfolioUrls"
+				   id="portfolioUrls"
+				   placeholder="https://link1.com&#10;https://link2.com"
+				   value={arrToString(form.portfolioUrls)}
+				   onChange={e => updateForm('portfolioUrls', stringToArr(e.target.value))}
+				   className="form-control"
+			   />
 				</div>
 			</div>
 			<div className="form-group row">
@@ -261,14 +262,14 @@ export const EditStudent = () => {
 					className="col-sm-4 col-form-label"
 				>Linki do projektu indywidualnego:</label>
 				<div className="col-sm-8">
-				<textarea
-					name="projectUrls"
-					id="projectUrls"
-					placeholder="https://link3.com&#10;https://link4.com"
-					value={arrToString(form.projectUrls)}
-					onChange={e => updateForm('projectUrls', stringToArr(e.target.value))}
-					className="form-control"
-				/>
+            <textarea
+				name="projectUrls"
+				id="projectUrls"
+				placeholder="https://link3.com&#10;https://link4.com"
+				value={arrToString(form.projectUrls)}
+				onChange={e => updateForm('projectUrls', stringToArr(e.target.value))}
+				className="form-control"
+			/>
 				</div>
 			</div>
 			<div className="form-group row">
@@ -277,14 +278,14 @@ export const EditStudent = () => {
 					className="col-sm-4 col-form-label"
 				>Bio:</label>
 				<div className="col-sm-8">
-				<textarea
-					name='bio'
-					id='bio'
-					placeholder='Napisz coś o sobie'
-					value={form.bio}
-					onChange={e => updateForm('bio', e.target.value)}
-					className="form-control"
-				/>
+            <textarea
+				name='bio'
+				id='bio'
+				placeholder='Napisz coś o sobie'
+				value={form.bio}
+				onChange={e => updateForm('bio', e.target.value)}
+				className="form-control"
+			/>
 				</div>
 			</div>
 			<div className="form-group row">
@@ -420,14 +421,14 @@ export const EditStudent = () => {
 					className="col-sm-4 col-form-label"
 				>Wykształcenie:</label>
 				<div className="col-sm-8">
-					<textarea
-						name='education'
-						id='education'
-						placeholder='2022 mgr inż., Wyższa Szkoła Programowania w Wólce'
-						value={form.education}
-						onChange={e => updateForm('education', e.target.value)}
-						className="form-control"
-					/>
+               <textarea
+				   name='education'
+				   id='education'
+				   placeholder='2022 mgr inż., Wyższa Szkoła Programowania w Wólce'
+				   value={form.education}
+				   onChange={e => updateForm('education', e.target.value)}
+				   className="form-control"
+			   />
 				</div>
 			</div>
 			<div className="form-group row">
@@ -436,14 +437,14 @@ export const EditStudent = () => {
 					className="col-sm-4 col-form-label"
 				>Doświadczenie zawodowe:</label>
 				<div className="col-sm-8">
-					<textarea
-						name='workExperience'
-						id='workExperience'
-						placeholder='2018–2022 sprzedawca-kasjer, Biedronka, Wólka'
-						value={form.workExperience}
-						onChange={e => updateForm('workExperience', e.target.value)}
-						className="form-control"
-					/>
+               <textarea
+				   name='workExperience'
+				   id='workExperience'
+				   placeholder='2018–2022 sprzedawca-kasjer, Biedronka, Wólka'
+				   value={form.workExperience}
+				   onChange={e => updateForm('workExperience', e.target.value)}
+				   className="form-control"
+			   />
 				</div>
 			</div>
 			<div className="form-group row">
@@ -452,14 +453,14 @@ export const EditStudent = () => {
 					className="col-sm-4 col-form-label"
 				>Ukończone kursy:</label>
 				<div className="col-sm-8">
-					<textarea
-						name='courses'
-						id='courses'
-						placeholder='2023 MegaKURS JavaScriptu'
-						value={form.courses}
-						onChange={e => updateForm('courses', e.target.value)}
-						className="form-control"
-					/>
+               <textarea
+				   name='courses'
+				   id='courses'
+				   placeholder='2023 MegaKURS JavaScriptu'
+				   value={form.courses}
+				   onChange={e => updateForm('courses', e.target.value)}
+				   className="form-control"
+			   />
 				</div>
 			</div>
 			<button
@@ -469,10 +470,6 @@ export const EditStudent = () => {
 			<Link to={'/student'} className="btn theme-btn-dark-4 btn-right px-5 my-2 me-3">
 				Anuluj
 			</Link>
-
 		</form>
-		<div className="cp-0 my-5 pb-3">
-			{message}
-		</div>
 	</div>
 }
