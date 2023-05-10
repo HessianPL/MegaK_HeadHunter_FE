@@ -4,10 +4,10 @@ import { useCSVReader } from 'react-papaparse';
 import { StudentsDataDTO } from "../../types-fe/StudentsDataDTO";
 import { StudentsDataFromFile } from "../../types-fe/StudentsDataFromFile";
 import { Spinner } from "../common/Spinner/Spinner";
+import { toast } from "react-toastify";
 
 export default function ImportCSV() {
     const [students, setStudents] = useState<StudentsDataDTO[] | []>([]);
-    const [ message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
     const { CSVReader } = useCSVReader();
@@ -42,12 +42,11 @@ export default function ImportCSV() {
             });
 
             const res = await response.json();
-            console.log(res);
 
             if (res.message === 'ok') {
-                setMessage('Dane zostały poprawnie zaimportowane.');
+                toast.success('Dane zostały poprawnie zaimportowane.');
             } else {
-                setMessage(res.message);
+                toast.error('Nie udało się zaimportować danych. Sprawdź ich poprawność i kompletność.');
             }
             return res;
         } finally {
@@ -89,7 +88,6 @@ export default function ImportCSV() {
                                 </div>
                             </div>
                         </div>
-
                         <div className="row">
                             <div className="d-flex flex-row-reverse p-0">
                                 <button type="button"
@@ -103,13 +101,6 @@ export default function ImportCSV() {
                                 </button>
                                 <ProgressBar className="progressBar me-2 mt-3" />
                             </div>
-
-                        </div>
-                        <div className="row">
-                            <div className="col d-flex p-0 my-3">
-                                {message}
-                            </div>
-                            {/*@TODO: wiadomość powinna potem zniknąć*/}
                         </div>
                     </div>
                 )}

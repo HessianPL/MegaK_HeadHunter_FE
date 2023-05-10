@@ -20,14 +20,14 @@ function App() {
 
   return (
     <>
-      <ToastContainer theme="colored"/>
+      <ToastContainer theme="dark"/>
       <UserContext.Provider value={{id, setId, role, setRole}}>
         <Routes>
-          
-          <Route path="/*" element={<NotFoundView/>}/>
-          <Route path="/login" element={<LoginView/>}/>
-          <Route path="/forgotten-password" element={<ForgottenPasswordView/>}/>
-          <Route path="/new-password/:id/:registerToken" element={<ResetPasswordView/>}/>
+            <Route path="/*" element={<NotFoundView/>}/>
+            <Route path="/login" element={<LoginView/>}/>
+            <Route path="/forgotten-password" element={<ForgottenPasswordView/>}/>
+            <Route path="/register/:id/:registerToken" element={<SignupView/>}/>
+            <Route path="/new-password/:id/:registerToken" element={<ResetPasswordView/>}/>
 
             <Route
                 path="/admin"

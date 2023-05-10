@@ -2,6 +2,7 @@ import React, {SyntheticEvent, useState} from "react";
 import {apiUrl} from "../../config/api";
 import {Spinner} from "../common/Spinner/Spinner";
 import {Link} from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const AddFormHR = () => {
     const [loading, setLoading] = useState(false);
@@ -13,7 +14,6 @@ export const AddFormHR = () => {
         maxReservedStudents: 1,
     });
     const [id, setId] = useState('');
-    const [saveResult, setSaveResult] = useState<boolean | undefined>();
 
     const updateForm = (key: string, value: any) => {
 
@@ -40,9 +40,18 @@ export const AddFormHR = () => {
             const resData = await res.json();
 
             if (resData.message === 'ok') {
-                setSaveResult(true);
+                setId(resData.id);
+                toast.success('Dane zostały poprawnie zaimportowane.');
+                setForm({
+                    email: '',
+                    firstName: '',
+                    lastName: '',
+                    company: '',
+                    maxReservedStudents: 1,
+                })
+            } else {
+                toast.error('Wystąpił błąd podczas importu danych. Dane nie zostały zaimportowane.');
             }
-            setId(resData.id);
 
         } finally {
             setLoading(false);
@@ -52,14 +61,6 @@ export const AddFormHR = () => {
     if (loading) {
         return <Spinner/>
     }
-
-    // @TODO: ten kod się nie wykonuje
-    // if (id) {
-    //     return <>
-    //         <h2>HR <strong>{form.firstName} {form.lastName}</strong> dodany do serwisu.</h2>
-    //         <Link to="/">Dodaj kolejnego</Link>
-    //     </>
-    // }
 
     return (
         <div className="mt-5 ms-5">
@@ -142,15 +143,6 @@ export const AddFormHR = () => {
                 </div>
                     <button type="submit" className="btn btn-right mt-3 mb-5 theme-btn-mainbrand px-4">Zapisz</button>
             </form>
-            <div className="cp-0 my-5 pb-3">
-                <p>{
-                    saveResult === undefined ? null :
-                        saveResult
-                            ? "Dane zostały poprawnie zaimportowane."
-                            : "Wystąpił błąd podczas importu danych. Dane nie zostały zaimportowane."
-                    //     @TODO: wiadomość powinna potem zniknąć, a formularz się wyczyścić
-                }</p>
-            </div>
         </div>
     )
 }
