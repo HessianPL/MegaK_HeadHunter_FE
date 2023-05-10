@@ -1,8 +1,9 @@
-import { LogoutButton } from "../components/common/LogoutButton";
+import {StudentMenu} from "../components/student/StudentMenu";
+import {HrView} from "../components/recruiter/HrView";
 
 export const RecruiterView = () => {
 	return <>
-		<h1 className="theme-text-light">Widok rekrutera</h1>
-		<LogoutButton/>
+		<StudentMenu/>
+		<HrView/>
 	</>
 }
