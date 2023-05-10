@@ -5,29 +5,31 @@ import {CustomToggle} from "./CusstomToggle";
 import {Col, Container, Row} from "react-bootstrap";
 import { toast } from 'react-toastify';
 import {apiUrl} from "../../config/api";
+import {useState} from "react";
 
 interface Props {
+    kindOfList:string,
     keyOnItem: string,
     student: AvailableStudentData,
     onStudentChange: () => void;
 }
 
 export const RowStudent = (props: Props) => {
+    const [status, setStatus] = useState("W trakcie rozmowy");
 
     const reservedTheStudent = async (e: React.MouseEvent<Element, MouseEvent>) => {
         e.preventDefault();
         try {
-//nie przetestowane @TODO do sprawdzenia jak działa :D
+// @TODO do sprawdzenia jak działa
             const res = await fetch(`${apiUrl}/user/change-student-status`, {
                 method: 'Patch',
                 credentials: 'include',
                 body:JSON.stringify({
                     studentId: props.student.id,
-                    status:"W trakcie rozmowy"
+                    status: status,
                 })
             });
             toast.success(`Student ${props.student.fullName} został dodany do listy.` );
-            // const data = await res.json();
         } finally {
 
         }
@@ -39,18 +41,59 @@ export const RowStudent = (props: Props) => {
             <Card>
                <Card.Header className="theme-bg-dark-1 bg-dark-1 border-0">
                   <div>
-                   <Row  className="justify-content-md-center">
-                       <Col xs={9}><h2>{props.student.fullName}</h2></Col>
-                       <Col xs={2}>
-                            <button
-                                className="ms-auto btn  theme-btn-mainbrand"
-                                onClick={reservedTheStudent}
-                            >
-                                Zarezerwuj rozmowe
-                            </button>
-                       </Col>
-                       <Col xs={1}><CustomToggle eventKey={props.keyOnItem}> </CustomToggle></Col>
-                   </Row>
+                      {(props.kindOfList === "ALL") ? (
+                          <Row className="justify-content-md-center">
+                              <Col xs={9}><h4>{props.student.fullName}</h4></Col>
+                              <Col xs={2}>
+                                  <button
+                                      className="ms-auto btn  theme-btn-mainbrand"
+                                      onClick={reservedTheStudent}
+                                  >
+                                      Zarezerwuj rozmowe
+                                  </button>
+                              </Col>
+                              <Col xs={1}><CustomToggle eventKey={props.keyOnItem}> </CustomToggle></Col>
+                          </Row>
+                      ) : (
+                          <Row className="justify-content-md-center">
+                              <Col xs={1}>
+                                  <div>
+                                      <p>Rezerwacja do:</p>
+                                      <h4>data :)</h4>
+                                      {/*<h4>{props.student.}</h4>*/}
+                                  </div>
+                              </Col>
+                              <Col xs={6}>
+                                  <h4>{props.student.fullName}</h4>
+                              </Col>
+                              <Col xs={1}>
+                                  <button
+                                      className="ms-auto btn  theme-btn-mainbrand"
+                                      onClick={reservedTheStudent}
+                                  >
+                                      Pokaż CV
+                                  </button>
+                              </Col>
+                              <Col xs={2}>
+                                  <button
+                                      className="ms-auto btn  theme-btn-mainbrand"
+                                      onClick={reservedTheStudent}
+                                  >
+                                      Brak zainteresowania
+                                  </button>
+                              </Col>
+                              <Col xs={1}>
+                                  <button
+                                      className="ms-auto btn  theme-btn-mainbrand"
+                                      onClick={reservedTheStudent}
+                                  >
+                                      Zatrudniony
+                                  </button>
+                              </Col>
+                              <Col xs={1}><CustomToggle eventKey={props.keyOnItem}> </CustomToggle></Col>
+                          </Row>
+                      )
+                      }
                   </div>
 
                 </Card.Header>
