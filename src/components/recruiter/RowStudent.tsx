@@ -73,7 +73,7 @@ export const RowStudent = (props: Props) => {
                                       <p className="fs-5 my-3">{props.student.expiresAt}</p>
                                   </div>
                               </Col>
-                              <Col xs={6}>
+                              <Col xs={5}>
                                   <img
                                       className="img-fluid rounded-circle mx-auto m-0 float-sm-start"
                                       src={props.student.githubUsername ? `https://github.com/${props.student.githubUsername}.png` : "/defaultAvatar.jpg"}
