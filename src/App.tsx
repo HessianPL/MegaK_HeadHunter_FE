@@ -10,6 +10,10 @@ import { UserContext } from "./contexts/user-context";
 import {NotFoundView} from "./views/NotFoundView";
 import {RequireAuth} from "./contexts/require-auth";
 import {StudentProfileForHR} from "./components/recruiter/StudentProfileForHR";
+import { ResetPasswordView } from "./views/ResetPasswordView";
+import SignupView from "./views/SignupView";
+import ForgottenPasswordView from "./views/ForgottenPasswordView";
+import { EditStudentView } from "./views/EditStudentView";
 
 function App() {
     const [id, setId] = useState('');
@@ -18,11 +22,15 @@ function App() {
 
   return (
     <>
-      <ToastContainer theme="colored"/>
+      <ToastContainer theme="dark"/>
       <UserContext.Provider value={{id, setId, role, setRole}}>
         <Routes>
             <Route path="/" element={<LoginView/>}/>
             <Route path="/login" element={<LoginView/>}/>
+            <Route path="/forgotten-password" element={<ForgottenPasswordView/>}/>
+            <Route path="/register/:id/:registerToken" element={<SignupView/>}/>
+            <Route path="/new-password/:id/:registerToken" element={<ResetPasswordView/>}/>
+
             <Route
                 path="/admin"
                 element={
@@ -36,6 +44,14 @@ function App() {
                 element={
                     <RequireAuth accessBy="Student">
                         <StudentView/>
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/student/edit"
+                element={
+                    <RequireAuth accessBy="Student">
+                        <EditStudentView/>
                     </RequireAuth>
                 }
             />
