@@ -55,6 +55,12 @@ export const StudentProfile = () => {
 	// @TODO: dodać logikę przycisku, kiedy będzie gotowy popup
 
 
+	const preserveNewLine = (input: string | undefined) => {
+		if (typeof input === 'string') {
+			return input.replaceAll('\r', '&#10;');
+		}
+	}
+
 	if (student === null) {
 		return null;
 	}
@@ -231,17 +237,17 @@ export const StudentProfile = () => {
 				{/*edu*/}
 				<section className="mb-4">
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Edukacja</h2>
-					<div className="pt-3 px-4 pb-4">{student?.education}</div>
+					<div className="pt-3 px-4 pb-4"><pre>{student?.education}</pre></div>
 				</section>
 				{/*kursy*/}
 				<section className="mb-4">
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Kursy</h2>
-					<div className="pt-3 px-4 pb-4">{student?.courses}</div>
+					<div className="pt-3 px-4 pb-4"><pre>{student?.courses}</pre></div>
 				</section>
 				{/*doświadczenie*/}
 				<section className="mb-4">
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Doświadczenie zawodowe</h2>
-					<div className="pt-3 px-4 pb-4">{student?.workExperience}</div>
+					<div className="pt-3 px-4 pb-4"><pre>{student?.workExperience}</pre></div>
 				</section>
 				{/*portfolio*/}
 				<section className="mb-4">
