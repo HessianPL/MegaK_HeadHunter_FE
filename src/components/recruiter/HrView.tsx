@@ -27,12 +27,13 @@ export const HrView = () => {
         }else {
             try {
                 setList(null);
-                console.log("Nie mam tu jeszcze studentów")
-                const res = await fetch(`${apiUrl}/user/available`, {
+
+                const res = await fetch(`${apiUrl}/user/reserved-students`, {
                     credentials: 'include',
                 });
                 const data = await res.json();
                 setList(data);
+                console.log(data)
             } finally {
 
             }

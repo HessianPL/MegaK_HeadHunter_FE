@@ -21,6 +21,7 @@ export enum StudentStatus {
     Hired = 'Zatrudniony',
 }
 export const RowStudent = (props: Props) => {
+    const navigate = useNavigate();
 
     const changeStatusOfTheStudent = async (e: React.MouseEvent<Element, MouseEvent>, status: string) => {
         e.preventDefault();
@@ -46,10 +47,6 @@ export const RowStudent = (props: Props) => {
         props.onStudentChange();
     };
 
-    const showCV = async ()=> {
-        console.log("cv")
-    }
-
     return (
         <>
             <Card className="rounded-0 card">
@@ -70,27 +67,26 @@ export const RowStudent = (props: Props) => {
                           </Row>
                       ) : (
                           <Row className="justify-content-md-center">
-                              <Col xs={1}>
+                              <Col xs={2}>
                                   <div>
                                       <p>Rezerwacja do:</p>
-                                      <p className="fs-5 my-3">20-05-2023</p>
+                                      <p className="fs-5 my-3">{props.student.expiresAt}</p>
                                   </div>
                               </Col>
                               <Col xs={6}>
                                   <img
-                                      // src={props.student.githubUsername ? `https://github.com/${props.student.githubUsername}.png` : "/defaultAvatar.jpg"}
+                                      className="img-fluid rounded-circle mx-auto m-0 float-sm-start"
+                                      src={props.student.githubUsername ? `https://github.com/${props.student.githubUsername}.png` : "/defaultAvatar.jpg"}
                                       alt="awatar kursanta/ki"
-                                      className="img-fluid rounded-circle mx-auto d-block my-5 w-50"
                                   />
                                   <div className="text-center mb-4">
-                                      {/*<p className="fs-5 my-3">{props.student.firstName}
-                                       {props.student.lastName}</h1>*/}
+                                      <div className="fs-5 my-3"><p>{props.student.firstName}  {props.student.lastName}</p></div>
                                   </div>
                               </Col>
                               <Col xs={1}>
                                   <button
                                       className="ms-auto btn theme-btn-mainbrand"
-                                      onClick={showCV}
+                                      onClick={ ()=>navigate(`/recruiter/studentCV/:${props.student.id}`)}
                                   >
                                       Pokaż CV
                                   </button>

@@ -9,6 +9,7 @@ import LoginView from "./views/LoginView";
 import { UserContext } from "./contexts/user-context";
 import {NotFoundView} from "./views/NotFoundView";
 import {RequireAuth} from "./contexts/require-auth";
+import {StudentProfileForHR} from "./components/recruiter/StudentProfileForHR";
 
 function App() {
     const [id, setId] = useState('');
@@ -42,16 +43,16 @@ function App() {
           <Route
               path="/recruiter"
               element={
-               //   <RequireAuth accessBy="HR">
+                 <RequireAuth accessBy="HR">
                      <RecruiterView/>
-               //   </RequireAuth>
+                 </RequireAuth>
                       }
           />
             <Route
-                path="/recruiter/studentCV/:id"
+                path="/recruiter/studentCV/:idStudent"
                 element={
                     <RequireAuth accessBy="HR">
-                        <StudentView/>
+                        <StudentProfileForHR/>
                     </RequireAuth>
                 }
             />
