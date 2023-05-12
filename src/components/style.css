@@ -214,3 +214,34 @@ a:hover, .theme-link:hover {
     color: #116295;
     text-decoration: none;
 }
+/* Search and filter bar */
+.input-group-text {
+    border: none;
+    background-color: var(--dark-4-color);
+    color: var(--medium-light-color);
+}
+.form-control-search {
+    background-color: var(--dark-4-color);
+    color: var(--light-color);
+    border: none;
+}
+
+/* Widok HR */
+
+.card {
+    border-bottom: 1rem solid var(--dark-4-color) !important;
+}
+
+.tab-btn {
+    background-color: var(--dark-1-color);
+    color: var(--light-color);
+    padding: 1rem 1.75rem 1rem 1rem;
+}
+
+.tab-btn:hover {
+    color: var(--medium-light-color);
+}
+
+.tab-btn:active {
+    border-bottom: 0.25rem solid var(--mainbrand-color);
+}
