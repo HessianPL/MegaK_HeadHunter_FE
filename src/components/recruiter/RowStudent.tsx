@@ -5,7 +5,6 @@ import {CustomToggle} from "./CusstomToggle";
 import {Col, Container, Row} from "react-bootstrap";
 import { toast } from 'react-toastify';
 import {apiUrl} from "../../config/api";
-import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 interface Props {
@@ -22,7 +21,6 @@ export enum StudentStatus {
 }
 export const RowStudent = (props: Props) => {
     const navigate = useNavigate();
-
     const changeStatusOfTheStudent = async (e: React.MouseEvent<Element, MouseEvent>, status: string) => {
         e.preventDefault();
         try {
@@ -86,7 +84,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <button
                                       className="ms-auto btn theme-btn-mainbrand"
-                                      onClick={ ()=>navigate(`/recruiter/studentCV/:${props.student.id}`)}
+                                      onClick={ ()=>navigate(`/recruiter/studentCV/${props.student.id}`)}
                                   >
                                       Pokaż CV
                                   </button>
