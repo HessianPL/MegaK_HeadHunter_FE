@@ -11,6 +11,7 @@
     --dark-4-color: #0A0A0A;
     --link-color: #0B8BD4;
     --accent-color: #172A35;
+    --accent-light-color: #244354;
 }
 
 .theme-text-light {
@@ -62,8 +63,8 @@
 
 .theme-btn-accent:hover {
     border-color: var(--accent-color);
-    background-color: var(--light-color);
-    color: var(--accent-color);
+    background-color: var(--accent-light-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
@@ -177,8 +178,9 @@
     color: var(--medium-color);
 }
 
-.form-check-input[type=checkbox] {
-    border-radius: 0;
+.form-check-input[type=radio] {
+    background-color: var(--dark-4-color);
+    border-color: var(--dark-1-color);
 }
 
 .form-check-input:checked {
@@ -244,4 +246,29 @@ a:hover, .theme-link:hover {
 
 .tab-btn:active {
     border-bottom: 0.25rem solid var(--mainbrand-color);
+}
+
+/* FilterModal */
+
+.modal-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 3;
+}
+
+.modal-div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
 }
