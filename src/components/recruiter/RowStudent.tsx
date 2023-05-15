@@ -21,6 +21,7 @@ export enum StudentStatus {
 }
 export const RowStudent = (props: Props) => {
     const navigate = useNavigate();
+
     const changeStatusOfTheStudent = async (e: React.MouseEvent<Element, MouseEvent>, status: string) => {
         e.preventDefault();
         try {
@@ -35,7 +36,7 @@ export const RowStudent = (props: Props) => {
                     status: status,
                 })
             });
-            toast.success(`Student ${props.student.fullName} został dodany do listy.` );
+            toast.success(`Student ${props.student.fullName? props.student.fullName:props.student.lastName} zmienił status na:"${status}"` );
 
             const response = await res.json();
 
