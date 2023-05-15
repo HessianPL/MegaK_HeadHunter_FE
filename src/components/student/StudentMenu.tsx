@@ -3,7 +3,7 @@ import { LogoutButton } from "../common/LogoutButton";
 
 export const StudentMenu = () => {
 	return (
-		<div className="navbar navbar-expand-md sticky-top theme-bg-dark-3">
+		<div className="navbar navbar-expand-md theme-bg-dark-3">
 			<div className="container-fluid">
 				<a href="/"
 				   className="navbar-brand">

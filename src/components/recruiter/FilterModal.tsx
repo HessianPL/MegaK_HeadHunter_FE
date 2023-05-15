@@ -42,7 +42,7 @@ export const FilterModal = (props: Props) => {
 							<h2 className="fs-4">Filtrowanie</h2>
 						</div>
 						<div className="col-6">
-							<button className="btn btn-sm theme-btn-accent">
+							<button className="btn btn-sm theme-btn-accent btn-right">
 								Wyczyść wszystkie
 							</button>
 						</div>
@@ -73,7 +73,7 @@ export const FilterModal = (props: Props) => {
 									   id='courseEngagement'
 									   max={5}
 									   min={1}
-									   value={form.courseCompletion}
+									   value={form.courseEngagement}
 									   onChange={e => updateForm('courseEngagement', e.target.value)}
 									   className="form-control w-25"
 								/>
@@ -88,7 +88,7 @@ export const FilterModal = (props: Props) => {
 									   id='projectDegree'
 									   max={5}
 									   min={1}
-									   value={form.courseCompletion}
+									   value={form.projectDegree}
 									   onChange={e => updateForm('projectDegree', e.target.value)}
 									   className="form-control w-25"
 								/>
@@ -103,7 +103,7 @@ export const FilterModal = (props: Props) => {
 									   id='teamProjectDegree'
 									   max={5}
 									   min={1}
-									   value={form.courseCompletion}
+									   value={form.teamProjectDegree}
 									   onChange={e => updateForm('teamProjectDegree', e.target.value)}
 									   className="form-control w-25"
 								/>
@@ -113,42 +113,110 @@ export const FilterModal = (props: Props) => {
 								htmlFor="expectedTypeWork"
 								className="form-label"
 							>Preferowane miejsce pracy:</label>
-							<input type='number'
-								   name='expectedTypeWork'
-								   id='expectedTypeWork'
-								   max={5}
-								   min={1}
-								   value={form.courseCompletion}
-								   onChange={e => updateForm('expectedTypeWork', e.target.value)}
-								   className="form-control w-25"
-							/>
+							<div>
+								<div className="btn-group" data-toggle="buttons">
+										<div className="btn-group-toggle btn btn-sm">
+											<input
+												type="radio"
+												name="expectedTypeWork"
+												id="Static"
+												value={ExpectedWorkType.Static}
+												onChange={e => updateForm('expectedTypeWork', e.target.value)}
+											/>
+											<label
+												htmlFor="Static"
+												className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedWorkType.Static}
+											</label>
+										</div>
+										<div className="btn-group-toggle btn btn-sm">
+											<input
+												type="radio"
+												name="expectedTypeWork"
+												id="Hybrid"
+												value={ExpectedWorkType.Hybrid}
+												onChange={e => updateForm('expectedTypeWork', e.target.value)}
+											/>
+											<label
+												htmlFor="Hybrid"
+												className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedWorkType.Hybrid}
+											</label>
+										</div>
+										<div className="btn-group-toggle btn btn-sm">
+											<input
+												type="radio"
+												name="expectedTypeWork"
+												id="RemoteOnly"
+												value={ExpectedWorkType.RemoteOnly}
+												onChange={e => updateForm('expectedTypeWork', e.target.value)}
+											/>
+											<label
+												htmlFor="RemoteOnly"
+												className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedWorkType.RemoteOnly}
+											</label>
+										</div>
+										<div className="btn-group-toggle btn btn-sm">
+											<input
+												type="radio"
+												name="expectedTypeWork"
+												id="CanMoveOut"
+												value={ExpectedWorkType.CanMoveOut}
+												onChange={e => updateForm('expectedTypeWork', e.target.value)}
+											/>
+											<label
+												htmlFor="CanMoveOut"
+												className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedWorkType.CanMoveOut}
+											</label>
+										</div>
+								</div>
+							</div>
 						</div>
 						<div className="form-group mb-1">
 							<label
 								htmlFor="expectedContractType"
 								className="form-label"
 							>Oczekiwany typ kontraktu:</label>
-							<div id="expectedContractType">
-								<input
-									type="button"
-									value={ExpectedContractType.UoPOnly}
-									className="btn btn-sm theme-btn-dark-2 me-2"
-								/>
-								<input
-									type="button"
-									value={ExpectedContractType.B2B}
-									className="btn btn-sm theme-btn-dark-2 me-2"
-								/>
-								<input
-									type="button"
-									value={ExpectedContractType.UZorUOD}
-									className="btn btn-sm theme-btn-dark-2 me-2"
-								/>
-								<input
-									type="button"
-									value={ExpectedContractType.B2B}
-									className="btn btn-sm theme-btn-dark-2 me-2"
-								/>
+							<div>
+								<div className="btn-group " data-toggle="buttons">
+									<div className="btn-group-toggle btn btn-sm">
+										<input
+											type="radio"
+											name="expectedContractType"
+											id="UoP"
+											value={ExpectedContractType.UoPOnly}
+											onChange={e => updateForm('expectedContractType', e.target.value)}
+										/>
+										<label
+											htmlFor="UoP"
+											className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedContractType.UoPOnly}
+										</label>
+									</div>
+									<div className="btn-group-toggle btn btn-sm">
+										<input
+											type="radio"
+											name="expectedContractType"
+											id="B2B"
+											value={ExpectedContractType.B2B}
+											onChange={e => updateForm('expectedContractType', e.target.value)}
+										/>
+										<label
+											htmlFor="B2B"
+											className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedContractType.B2B}
+										</label>
+									</div>
+									<div className="btn-group-toggle btn btn-sm">
+										<input
+											type="radio"
+											name="expectedContractType"
+											id="UZorUOD"
+											value={ExpectedContractType.UZorUOD}
+											onChange={e => updateForm('expectedContractType', e.target.value)}
+										/>
+										<label
+											htmlFor="UZorUOD"
+											className="btn btn-sm theme-btn-dark-2 me-2">{ExpectedContractType.UZorUOD}
+										</label>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className="form-group mb-1">
@@ -193,7 +261,7 @@ export const FilterModal = (props: Props) => {
 										   value="true"
 										   // onChange={radioHandler}
 										   className="form-check-input"
-										   checked={form.canTakeApprenticeship}
+										   // checked={form.canTakeApprenticeship}
 									/>
 									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">tak</label>
 								</div>
@@ -204,7 +272,7 @@ export const FilterModal = (props: Props) => {
 										   value="false"
 										   // onChange={radioHandler}
 										   className="form-check-input"
-										   checked={!form.canTakeApprenticeship}
+										   // checked={!form.canTakeApprenticeship}
 									/>
 									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">nie</label>
 								</div>

@@ -114,6 +114,10 @@
     border-right: 1px solid var(--dark-2-color);
 }
 
+.theme-border-mainbrand {
+    border: 1px solid var(--mainbrand-color);
+}
+
 /* admin/ImportCSV styles */
 
 .progressBar {
@@ -270,5 +274,35 @@ a:hover, .theme-link:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
+    z-index: 5;
+}
+.btn-group-toggle {
+    float: left;
+    margin: 0 5px 0 0;
+    width: 150px;
+    height: 35px;
+    position: relative;
+}
+
+.btn-group-toggle label,
+.btn-group-toggle input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.btn-group-toggle input[type="radio"]:checked + label {
+    border-color: var(--mainbrand-color);
+}
+
+.btn-group-toggle label {
+    cursor: pointer;
+    z-index: 90;
+}
+
+.btn-row {
+    display: block;
 }
