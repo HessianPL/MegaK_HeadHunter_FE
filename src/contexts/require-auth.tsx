@@ -10,14 +10,8 @@ interface Props {
 
 export const RequireAuth = ({children, accessBy} : Props) => {
     const auth = useContext(UserContext);
-    const authFromCookie = JSON.parse(localStorage.getItem("cookieUser") || "[{}]");
-    let role = auth.role;
-    if (typeof role === "undefined")
-         role = authFromCookie.role;
-         if ( !role)
-            return <NotFoundView/>
 
-    if (auth.role === "Admin" )
+    if (auth.role === "Admin")
         return <>
             {children}
         </>
@@ -28,4 +22,5 @@ export const RequireAuth = ({children, accessBy} : Props) => {
             </>
             : <NotFoundView/>
     }
+
 }

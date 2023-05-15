@@ -10,7 +10,7 @@ interface Props {
 
 export const TableWithStudents = (props: Props)=> {
     return (
-        <Accordion defaultActiveKey={['-1']} alwaysOpen>
+        <Accordion defaultActiveKey={['0']} alwaysOpen>
             {
                 props.list.map((el, index) => (
                             <RowStudent
