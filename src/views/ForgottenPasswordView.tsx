@@ -1,5 +1,5 @@
 import React from 'react';
-import ForgottenPasswordPage from '../components/ForgottenPasswordPage/ForgottenPasswordPage';
+import ForgottenPasswordPage from '../components/common/ForgottenPasswordPage/ForgottenPasswordPage';
 
 function ForgottenPasswordView() {
 

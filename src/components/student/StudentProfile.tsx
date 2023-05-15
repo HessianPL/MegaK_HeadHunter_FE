@@ -9,7 +9,7 @@ export const StudentProfile = () => {
 	const [student, setStudent] = useState<StudentEntity | null>(null);
 	const [showModal, setShowModal] = useState(false);
 
-	const {role, id} = useContext(UserContext);
+	const { id } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
