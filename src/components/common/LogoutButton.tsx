@@ -12,6 +12,8 @@ export const LogoutButton = () => {
 		const res = await fetch('http://localhost:3000/auth/logout', {
 			credentials: "include",
 		});
+
+		localStorage.removeItem("cookieUser")
 		const result = await res.json();
 		if (result.ok) {
 			navigate('/login');

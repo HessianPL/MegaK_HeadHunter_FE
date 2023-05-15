@@ -5,7 +5,6 @@ import {CustomToggle} from "./CusstomToggle";
 import {Col, Container, Row} from "react-bootstrap";
 import { toast } from 'react-toastify';
 import {apiUrl} from "../../config/api";
-import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 interface Props {
@@ -37,7 +36,7 @@ export const RowStudent = (props: Props) => {
                     status: status,
                 })
             });
-            toast.success(`Student ${props.student.fullName} został dodany do listy.` );
+            toast.success(`Student ${props.student.fullName? props.student.fullName:props.student.lastName} zmienił status na:"${status}"` );
 
             const response = await res.json();
 
@@ -86,7 +85,7 @@ export const RowStudent = (props: Props) => {
                               <Col xs={1}>
                                   <button
                                       className="ms-auto btn theme-btn-mainbrand"
-                                      onClick={ ()=>navigate(`/recruiter/studentCV/:${props.student.id}`)}
+                                      onClick={ ()=>navigate(`/recruiter/studentCV/${props.student.id}`)}
                                   >
                                       Pokaż CV
                                   </button>
