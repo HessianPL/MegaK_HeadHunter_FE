@@ -55,7 +55,6 @@ export const StudentProfile = () => {
 
 	// @TODO: dodać logikę przycisku, kiedy będzie gotowy popup
 
-
 	if (student === null) {
 		return null;
 	}

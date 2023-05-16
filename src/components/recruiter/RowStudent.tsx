@@ -1,11 +1,11 @@
-import {AvailableStudentData} from "../../types-fe/student-lists";
+import {AvailableStudentData, StudentStatus} from "../../types-fe/student-lists";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import {CustomToggle} from "./CusstomToggle";
 import {Col, Container, Row} from "react-bootstrap";
 import { toast } from 'react-toastify';
 import {apiUrl} from "../../config/api";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 interface Props {
     kindOfList:string,
@@ -14,11 +14,6 @@ interface Props {
     onStudentChange: () => void;
 }
 
-export enum StudentStatus {
-    Available = 'Dostępny',
-    DuringRecruitment = 'W trakcie rozmowy',
-    Hired = 'Zatrudniony',
-}
 export const RowStudent = (props: Props) => {
     const navigate = useNavigate();
 
@@ -39,6 +34,7 @@ export const RowStudent = (props: Props) => {
             toast.success(`Student ${props.student.fullName? props.student.fullName:props.student.lastName} zmienił status na:"${status}"` );
 
             const response = await res.json();
+            console.log(response)
 
         } finally {
 

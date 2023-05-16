@@ -5,6 +5,7 @@ import {AvailableStudentData} from "../../types-fe/student-lists";
 import {apiUrl} from "../../config/api";
 import {Spinner} from "../common/Spinner/Spinner";
 import { SearchAndFilterBar } from "./SearchAndFilterBar";
+import {useLocation} from "react-router-dom";
 
 export const HrView = () => {
     const [list, setList] = useState<AvailableStudentData[] | null>(null);

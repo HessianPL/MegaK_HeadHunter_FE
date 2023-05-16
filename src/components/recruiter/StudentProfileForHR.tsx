@@ -7,7 +7,6 @@ import {Simulate} from "react-dom/test-utils";
 import {StudentMenu} from "../student/StudentMenu";
 import {ShowStudentProfile} from "../student/ShowStudentProfile";
 
-
 export const StudentProfileForHR = () => {
 	const {idStudent} = useParams();
 	const [student, setStudent] = useState<StudentEntity | null>(null);

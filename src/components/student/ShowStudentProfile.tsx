@@ -1,7 +1,10 @@
-import {StudentCvResponse} from "../../types-fe/student-lists";
+import {StudentCvResponse, StudentStatus} from "../../types-fe/student-lists";
 import {StudentEntity} from "../../types-fe/student-entity";
 import {useContext} from "react";
 import {UserContext} from "../../contexts/user-context";
+import {Link} from "react-router-dom";
+import {apiUrl} from "../../config/api";
+import {toast} from "react-toastify";
 
 interface Props {
     student:StudentEntity
@@ -10,6 +13,31 @@ interface Props {
 export const ShowStudentProfile= (props:Props) => {
     const {student} = props;
     const {role, id} = useContext(UserContext);
+
+    const changeStatusOfTheStudent = async (e: React.MouseEvent<Element, MouseEvent>, status: string) => {
+        e.preventDefault();
+        try {
+            console.log(status, props.student.id)
+            const res = await fetch(`${apiUrl}/user/change-student-status`, {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify({
+                    studentId: props.student.id,
+                    status: status,
+                })
+            });
+            toast.success(`Student zmienił status na:"${status}"` );
+
+            // const response = await res.json();
+            // console.log(response)
+
+        } finally {
+
+        }
+    };
 
     return <>
         <div className="row m-3">
@@ -42,11 +70,19 @@ export const ShowStudentProfile= (props:Props) => {
                 </div>
                 <div>
                     {role === 'HR'
-                        ? <button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Brak zainteresowania</button>
+                        ?<button
+                            className="btn theme-btn-mainbrand w-100 py-2 mb-2"
+                            onClick={e=>changeStatusOfTheStudent(e, StudentStatus.Available)}
+                         >
+                            Brak zainteresowania
+                        </button>
                         : null}
-                    <button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Zatrudniony</button>
+                    <button
+                        className="btn theme-btn-mainbrand w-100 py-2 mb-2"
+                        onClick={e=>changeStatusOfTheStudent(e, StudentStatus.Hired)}
+                    >Zatrudniony</button>
                     {role === 'Student'
-                        ? <button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Edytuj profil</button>
+                        ? <Link to={'/student/edit'} className="btn theme-btn-mainbrand w-100 py-2 mb-2">Edytuj profil</Link>
                         : null}
                 </div>
             </div>
@@ -183,17 +219,17 @@ export const ShowStudentProfile= (props:Props) => {
                 {/*edu*/}
                 <section className="mb-4">
                     <h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Edukacja</h2>
-                    <div className="pt-3 px-4 pb-4">{student?.education}</div>
+                    <div className="pt-3 px-4 pb-4"><pre>{student?.education}</pre></div>
                 </section>
                 {/*kursy*/}
                 <section className="mb-4">
                     <h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Kursy</h2>
-                    <div className="pt-3 px-4 pb-4">{student?.courses}</div>
+                    <div className="pt-3 px-4 pb-4"><pre>{student?.courses}</pre></div>
                 </section>
                 {/*doświadczenie*/}
                 <section className="mb-4">
                     <h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Doświadczenie zawodowe</h2>
-                    <div className="pt-3 px-4 pb-4">{student?.workExperience}</div>
+                    <div className="pt-3 px-4 pb-4"><pre>{student?.workExperience}</pre></div>
                 </section>
                 {/*portfolio*/}
                 <section className="mb-4">

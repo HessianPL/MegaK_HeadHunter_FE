@@ -53,3 +53,10 @@ export enum ExpectedContractType {
     UZorUOD = 'Możliwe UZ/UOD',
     Any = 'Brak preferencji',
 }
+
+
+export enum StudentStatus {
+    Available = 'Dostępny',
+    DuringRecruitment = 'W trakcie rozmowy',
+    Hired = 'Zatrudniony',
+}
