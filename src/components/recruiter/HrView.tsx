@@ -56,7 +56,7 @@ export const HrView = () => {
             <button
                 className="btn tab-btn"
                 onClick={()=>setKindOfList("ForThisHR")}>Do rozmowy</button>
-            <SearchAndFilterBar/>
+            <SearchAndFilterBar list={kindOfList}/>
             <ListOfStudents list={list} kindOfList={kindOfList} onStudentChange={refreshListOfStudents} />
         </div>
     </>

@@ -97,7 +97,6 @@ export const EditStudent = () => {
 				canTakeApprenticeship: false,
 			});
 		}
-
 	}
 
 	const stringToArr = (input: string) => {

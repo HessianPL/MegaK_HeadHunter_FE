@@ -1,10 +1,14 @@
 import ReactDOM from "react-dom";
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { FilterForm } from "../../types-fe/filter-form";
 import { ExpectedContractType, ExpectedWorkType } from "../../types-fe/student-entity";
+import { Spinner } from "../common/Spinner/Spinner";
+import { toast } from "react-toastify";
+import { apiUrl } from "../../config/api";
 
 interface Props {
 	showModal: boolean;
+	list: string;
 	onSend: () => void;
 	onClose: () => void;
 }
@@ -15,22 +19,94 @@ export const FilterModal = (props: Props) => {
 		courseCompletion: "",
 		courseEngagement: "",
 		expectedContractType: ExpectedContractType.Any,
-		expectedSalary: 0,
+		minExpectedSalary: 0,
+		maxExpectedSalary: 0,
 		expectedTypeWork: ExpectedWorkType.Any,
 		monthsOfCommercialExp: 0,
 		projectDegree: "",
 		teamProjectDegree: ""
-
 	});
+
+	const [loading, setLoading] = useState<boolean>(false);
+	const [list, setList] = useState('');
+
+	useEffect(() => {
+		if (props.list === 'ALL') {
+			setList('available')
+		} else {
+			setList('reserved-students');
+		}
+	}, []);
 
 	const updateForm = (key: string, value: any) => {
 		setForm(form => ({
 			...form,
 			[key]: value,
 		}));
+		if (form.minExpectedSalary > form.maxExpectedSalary) {
+			toast.error('Kwota minimalnego wynagrodzenia nie może być niższa od kwoty wynagrodzenia maksymalnego.');
+		}
 	};
 
+	const radioHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.value === "true") {
+			setForm({
+				...form,
+				canTakeApprenticeship: true,
+			});
+		} else {
+			setForm({
+				...form,
+				canTakeApprenticeship: false,
+			});
+		}
+	}
+
+	const sendQuery = async (e: FormEvent) => {
+		e.preventDefault();
+
+		setLoading(true);
+
+		let queryData: Object;
+
+		for (const key in form) {
+			if (form[key]) {
+				queryData = {
+					...queryData,
+					[key]: form[key],
+				}
+			}
+		}
+
+		let prelimQueryString = '';
+
+		for (const key in queryData) {
+			console.log(key, queryData[key]);
+			prelimQueryString += `?${key}=${queryData[key]}`
+		}
+
+		const queryString = prelimQueryString.replaceAll(' ', '%20').replaceAll('true', '1').replaceAll('false', '0');
+
+		try {
+			const res = await fetch(`${apiUrl}/user/${list}${queryString}`, {
+				credentials: 'include',
+			});
+			console.log(`${apiUrl}/user/${list}${queryString}`);
+
+			const response = await res.json();
+			console.log(response);
+
+		} finally {
+			setLoading(false);
+		}
+	}
+
 	if (!props.showModal) return null;
+
+	if (loading) {
+		props.onClose();
+		return <Spinner/>
+	}
 
 	return ReactDOM.createPortal(
 		<>
@@ -42,7 +118,21 @@ export const FilterModal = (props: Props) => {
 							<h2 className="fs-4">Filtrowanie</h2>
 						</div>
 						<div className="col-6">
-							<button className="btn btn-sm theme-btn-accent btn-right">
+							<button
+								className="btn btn-sm theme-btn-accent btn-right"
+								onClick={() => setForm({
+									canTakeApprenticeship: false,
+									courseCompletion: "",
+									courseEngagement: "",
+									expectedContractType: ExpectedContractType.Any,
+									minExpectedSalary: 0,
+									maxExpectedSalary: 0,
+									expectedTypeWork: ExpectedWorkType.Any,
+									monthsOfCommercialExp: 0,
+									projectDegree: "",
+									teamProjectDegree: ""
+								})}
+							>
 								Wyczyść wszystkie
 							</button>
 						</div>
@@ -232,19 +322,25 @@ export const FilterModal = (props: Props) => {
 									<input
 										type="number"
 										placeholder="np. 1000 zł"
+										name="minExpectedSalary"
+										id="minExpectedSalary"
 										className="form-control"
+										onChange={e => updateForm('minExpectedSalary', Number(e.target.value))}
 									/>
 								</div>
 								<div className="col-1">
-									<label htmlFor="" className="col-form-label">
+									<label htmlFor="maxExpectedSalary" className="col-form-label">
 										Do
 									</label>
 								</div>
 								<div className="col-4">
 									<input
 										type="number"
+										name="maxExpectedSalary"
+										id="maxExpectedSalary"
 										placeholder="np. 10 000 zł"
 										className="form-control"
+										onChange={e => updateForm('maxExpectedSalary', Number(e.target.value))}
 									/>
 								</div>
 							</div>
@@ -259,9 +355,9 @@ export const FilterModal = (props: Props) => {
 										   name='canTakeApprenticeship'
 										   id='canTakeApprenticeshipTrue'
 										   value="true"
-										   // onChange={radioHandler}
+										   onChange={radioHandler}
 										   className="form-check-input"
-										   // checked={form.canTakeApprenticeship}
+										   checked={form.canTakeApprenticeship}
 									/>
 									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">tak</label>
 								</div>
@@ -270,9 +366,9 @@ export const FilterModal = (props: Props) => {
 										   name='canTakeApprenticeship'
 										   id='canTakeApprenticeshipFalse'
 										   value="false"
-										   // onChange={radioHandler}
+										   onChange={radioHandler}
 										   className="form-check-input"
-										   // checked={!form.canTakeApprenticeship}
+										   checked={!form.canTakeApprenticeship}
 									/>
 									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">nie</label>
 								</div>
@@ -289,6 +385,7 @@ export const FilterModal = (props: Props) => {
 										placeholder="0 miesięcy"
 										value={form.monthsOfCommercialExp}
 										className="form-control w-25"
+										onChange={e => updateForm('monthsOfCommercialExp', Number(e.target.value))}
 									/>
 							</div>
 						</div>
@@ -296,7 +393,8 @@ export const FilterModal = (props: Props) => {
 							<button
 								type='submit'
 								className="btn theme-btn-mainbrand btn-right px-3 my-2"
-								onClick={props.onSend}
+								// onClick={props.onSend}
+								onClick={sendQuery}
 							>Pokaż wyniki</button>
 							<button
 								className="btn theme-btn-dark-4 btn-right px-3 my-2 me-3"
