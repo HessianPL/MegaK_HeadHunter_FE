@@ -6,10 +6,10 @@ interface Props {
     eventKey: string,
 }
 export const CustomToggle = ({ children, eventKey }:Props) =>{
-const [transision, setTransision] = useState(false)
-    const decoratedOnClick = useAccordionButton(eventKey, () => {
-        transision? setTransision(false): setTransision(true);
-        });
+
+    const decoratedOnClick = useAccordionButton(eventKey, () =>
+        console.log('rozwiń'),
+    );
 
     return (
         <button
@@ -19,9 +19,8 @@ const [transision, setTransision] = useState(false)
             onClick={decoratedOnClick}
         >
             {children}
-            {transision
-            ? <i className="bi bi-chevron-up theme-text-medium-light fs-4"/>
-            : <i className="bi bi-chevron-down theme-text-medium-light fs-4"/> }
+            <i className="bi bi-chevron-down theme-text-medium-light fs-4"/>
+            {/*<i className="bi bi-chevron-up theme-text-medium-light fs-4"/>*/}
         </button>
     );
 }
