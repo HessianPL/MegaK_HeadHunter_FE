@@ -101,4 +101,7 @@ Lena K https://github.com/LeneczKa
 Bartłomiej Michałowski https://github.com/BartGiit
 
 Łukasz Dragon https://github.com/HessianPL
+
+Małgorzata Jurczak https://github.com/MalgorzataJu
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
