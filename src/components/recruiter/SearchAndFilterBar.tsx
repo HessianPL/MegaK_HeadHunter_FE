@@ -1,9 +1,11 @@
 import React, {SyntheticEvent, useState} from "react";
 import {Link} from "react-router-dom";
 import { FilterModal } from "./FilterModal";
+import { AvailableStudentData } from "../../types-fe/student-lists";
 
 interface Props {
     list: string;
+    onFilter: (data: AvailableStudentData[]) => void;
 }
 
 export const SearchAndFilterBar = (props: Props) => {
@@ -50,7 +52,7 @@ export const SearchAndFilterBar = (props: Props) => {
                         <i className="bi bi-funnel-fill theme-text-medium-light p-2"/>
                         Filtrowanie
                     </button>
-                    <FilterModal showModal={showModal} onSend={filter} onClose={() => setShowModal(false)} list={props.list}/>
+                    <FilterModal showModal={showModal} onFilter={props.onFilter} onClose={() => setShowModal(false)} list={props.list}/>
                 </div>
             </div>
         </div>

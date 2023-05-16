@@ -5,11 +5,12 @@ import { ExpectedContractType, ExpectedWorkType } from "../../types-fe/student-e
 import { Spinner } from "../common/Spinner/Spinner";
 import { toast } from "react-toastify";
 import { apiUrl } from "../../config/api";
+import { AvailableStudentData } from "../../types-fe/student-lists";
 
 interface Props {
 	showModal: boolean;
 	list: string;
-	onSend: () => void;
+	onFilter: (data: AvailableStudentData[]) => void;
 	onClose: () => void;
 }
 
@@ -91,10 +92,9 @@ export const FilterModal = (props: Props) => {
 			const res = await fetch(`${apiUrl}/user/${list}${queryString}`, {
 				credentials: 'include',
 			});
-			console.log(`${apiUrl}/user/${list}${queryString}`);
 
-			const response = await res.json();
-			console.log(response);
+			const data = await res.json();
+			props.onFilter(data);
 
 		} finally {
 			setLoading(false);
