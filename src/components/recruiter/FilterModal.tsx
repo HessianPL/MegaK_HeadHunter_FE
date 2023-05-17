@@ -16,16 +16,16 @@ interface Props {
 
 export const FilterModal = (props: Props) => {
 	const [form, setForm] = useState<FilterForm>({
-		canTakeApprenticeship: false,
-		courseCompletion: "",
-		courseEngagement: "",
-		expectedContractType: ExpectedContractType.Any,
-		minExpectedSalary: 0,
-		maxExpectedSalary: 0,
-		expectedTypeWork: ExpectedWorkType.Any,
-		monthsOfCommercialExp: 0,
-		projectDegree: "",
-		teamProjectDegree: ""
+		canTakeApprenticeship: undefined,
+		courseCompletion: undefined,
+		courseEngagement: undefined,
+		expectedContractType: undefined,
+		minExpectedSalary: undefined,
+		maxExpectedSalary: undefined,
+		expectedTypeWork: undefined,
+		monthsOfCommercialExp: undefined,
+		projectDegree: undefined,
+		teamProjectDegree: undefined,
 	});
 
 	const [loading, setLoading] = useState<boolean>(false);
@@ -44,8 +44,10 @@ export const FilterModal = (props: Props) => {
 			...form,
 			[key]: value,
 		}));
-		if (form.minExpectedSalary > form.maxExpectedSalary) {
-			toast.error('Kwota minimalnego wynagrodzenia nie może być niższa od kwoty wynagrodzenia maksymalnego.');
+		if (form.minExpectedSalary && form.maxExpectedSalary) {
+			if (form.minExpectedSalary > form.maxExpectedSalary) {
+				toast.error('Kwota minimalnego wynagrodzenia nie może być niższa od kwoty wynagrodzenia maksymalnego.');
+			}
 		}
 	};
 
@@ -71,7 +73,10 @@ export const FilterModal = (props: Props) => {
 		let queryData: Object;
 
 		for (const key in form) {
+			// @ts-ignore
 			if (form[key]) {
+				// @ts-ignore
+				// @ts-ignore
 				queryData = {
 					...queryData,
 					[key]: form[key],
@@ -81,19 +86,21 @@ export const FilterModal = (props: Props) => {
 
 		let prelimQueryString = '';
 
+		// @ts-ignore
 		for (const key in queryData) {
-			console.log(key, queryData[key]);
 			prelimQueryString += `?${key}=${queryData[key]}`
 		}
 
-		const queryString = prelimQueryString.replaceAll(' ', '%20').replaceAll('true', '1').replaceAll('false', '0');
+		const queryString = encodeURI(prelimQueryString);
 
 		try {
 			const res = await fetch(`${apiUrl}/user/${list}${queryString}`, {
 				credentials: 'include',
 			});
-
+			console.log(`${apiUrl}/user/${list}${queryString}`);
 			const data = await res.json();
+			console.log(res);
+			console.log(data);
 			props.onFilter(data);
 
 		} finally {
@@ -121,16 +128,16 @@ export const FilterModal = (props: Props) => {
 							<button
 								className="btn btn-sm theme-btn-accent btn-right"
 								onClick={() => setForm({
-									canTakeApprenticeship: false,
-									courseCompletion: "",
-									courseEngagement: "",
-									expectedContractType: ExpectedContractType.Any,
-									minExpectedSalary: 0,
-									maxExpectedSalary: 0,
-									expectedTypeWork: ExpectedWorkType.Any,
-									monthsOfCommercialExp: 0,
-									projectDegree: "",
-									teamProjectDegree: ""
+									canTakeApprenticeship: undefined,
+									courseCompletion: undefined,
+									courseEngagement: undefined,
+									expectedContractType: undefined,
+									minExpectedSalary: undefined,
+									maxExpectedSalary: undefined,
+									expectedTypeWork: undefined,
+									monthsOfCommercialExp: undefined,
+									projectDegree: undefined,
+									teamProjectDegree: undefined,
 								})}
 							>
 								Wyczyść wszystkie

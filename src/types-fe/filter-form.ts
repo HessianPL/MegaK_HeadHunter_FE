@@ -1,6 +1,15 @@
-import { StudentEntity } from "./student-entity";
+import { ExpectedContractType, ExpectedWorkType, StudentEntity } from "./student-entity";
 
-export interface FilterForm extends Omit<StudentEntity, 'id' | 'email' | 'bonusProjectUrls' | 'tel' | 'firstName' | 'lastName' | 'githubUsername' | 'portfolioUrls' | 'projectUrls' | 'bio' | 'targetWorkCity' | 'education' | 'workExperience' | 'courses' | 'status' | 'expectedSalary'> {
-	minExpectedSalary: number;
-	maxExpectedSalary: number;
+export interface FilterForm {
+	canTakeApprenticeship: boolean | undefined,
+	courseCompletion: string | undefined,
+	courseEngagement: string | undefined,
+	expectedContractType: ExpectedContractType | undefined,
+	expectedTypeWork: ExpectedWorkType | undefined,
+	monthsOfCommercialExp: number | undefined,
+	projectDegree: string | undefined,
+	teamProjectDegree: string | undefined;
+	minExpectedSalary: number | undefined;
+	maxExpectedSalary: number | undefined;
 }
+
