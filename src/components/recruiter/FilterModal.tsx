@@ -3,7 +3,6 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { FilterForm } from "../../types-fe/filter-form";
 import { ExpectedContractType, ExpectedWorkType } from "../../types-fe/student-entity";
 import { Spinner } from "../common/Spinner/Spinner";
-import { toast } from "react-toastify";
 import { apiUrl } from "../../config/api";
 import { AvailableStudentData } from "../../types-fe/student-lists";
 
@@ -44,26 +43,7 @@ export const FilterModal = (props: Props) => {
 			...form,
 			[key]: value,
 		}));
-		if (form.minExpectedSalary && form.maxExpectedSalary) {
-			if (form.minExpectedSalary > form.maxExpectedSalary) {
-				toast.error('Kwota minimalnego wynagrodzenia nie może być niższa od kwoty wynagrodzenia maksymalnego.');
-			}
-		}
 	};
-
-	const radioHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.value === "true") {
-			setForm({
-				...form,
-				canTakeApprenticeship: true,
-			});
-		} else {
-			setForm({
-				...form,
-				canTakeApprenticeship: false,
-			});
-		}
-	}
 
 	const sendQuery = async (e: FormEvent) => {
 		e.preventDefault();
@@ -73,34 +53,31 @@ export const FilterModal = (props: Props) => {
 		let queryData: Object;
 
 		for (const key in form) {
-			// @ts-ignore
-			if (form[key]) {
-				// @ts-ignore
-				// @ts-ignore
+			if (Object(form)[key]) {
 				queryData = {
 					...queryData,
-					[key]: form[key],
+					[key]: Object(form)[key],
 				}
 			}
 		}
 
 		let prelimQueryString = '';
 
-		// @ts-ignore
 		for (const key in queryData) {
-			prelimQueryString += `?${key}=${queryData[key]}`
+			prelimQueryString += `${key}=${Object(queryData)[key]}&`
 		}
+
+		prelimQueryString = prelimQueryString.slice(0, prelimQueryString.length - 1);
 
 		const queryString = encodeURI(prelimQueryString);
 
 		try {
-			const res = await fetch(`${apiUrl}/user/${list}${queryString}`, {
+			const res = await fetch(`${apiUrl}/user/${list}?${queryString}`, {
 				credentials: 'include',
 			});
-			console.log(`${apiUrl}/user/${list}${queryString}`);
+			console.log(`${apiUrl}/user/${list}?${queryString}`);
 			const data = await res.json();
-			console.log(res);
-			console.log(data);
+			console.log(res)
 			props.onFilter(data);
 
 		} finally {
@@ -361,10 +338,9 @@ export const FilterModal = (props: Props) => {
 									<input type='radio'
 										   name='canTakeApprenticeship'
 										   id='canTakeApprenticeshipTrue'
-										   value="true"
-										   onChange={radioHandler}
+										   value="1"
+										   onChange={e => updateForm('canTakeApprenticeship', e.target.value)}
 										   className="form-check-input"
-										   checked={form.canTakeApprenticeship}
 									/>
 									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">tak</label>
 								</div>
@@ -372,12 +348,10 @@ export const FilterModal = (props: Props) => {
 									<input type='radio'
 										   name='canTakeApprenticeship'
 										   id='canTakeApprenticeshipFalse'
-										   value="false"
-										   onChange={radioHandler}
-										   className="form-check-input"
-										   checked={!form.canTakeApprenticeship}
+										   value="0"
+										   onChange={e => updateForm('canTakeApprenticeship', e.target.value)}										   className="form-check-input"
 									/>
-									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipTrue">nie</label>
+									<label className="form-check-label ms-2" htmlFor="canTakeApprenticeshipFalse">nie</label>
 								</div>
 							</div>
 						</div>

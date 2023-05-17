@@ -1,7 +1,7 @@
 import { ExpectedContractType, ExpectedWorkType, StudentEntity } from "./student-entity";
 
 export interface FilterForm {
-	canTakeApprenticeship: boolean | undefined,
+	canTakeApprenticeship: string | undefined,
 	courseCompletion: string | undefined,
 	courseEngagement: string | undefined,
 	expectedContractType: ExpectedContractType | undefined,
