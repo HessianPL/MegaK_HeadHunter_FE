@@ -75,9 +75,7 @@ export const FilterModal = (props: Props) => {
 			const res = await fetch(`${apiUrl}/user/${list}?${queryString}`, {
 				credentials: 'include',
 			});
-			console.log(`${apiUrl}/user/${list}?${queryString}`);
 			const data = await res.json();
-			console.log(res)
 			props.onFilter(data);
 
 		} finally {
