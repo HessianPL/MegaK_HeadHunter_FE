@@ -241,15 +241,19 @@ a:hover, .theme-link:hover {
 .tab-btn {
     background-color: var(--dark-1-color);
     color: var(--light-color);
-    padding: 1rem 1.75rem 1rem 1rem;
+    padding: 1rem 1.75rem 1rem 1.75rem;
 }
 
 .tab-btn:hover {
-    color: var(--medium-light-color);
+    color: var(--light-color);
 }
 
-.tab-btn:active {
+.tab-btn-active {
     border-bottom: 0.25rem solid var(--mainbrand-color);
+}
+
+.tab-btn-inactive {
+    color: var(--medium-light-color);
 }
 
 /* FilterModal */
