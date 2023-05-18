@@ -13,6 +13,7 @@ export const HrView = () => {
     const refreshListOfStudents = async () => {
 
         if (kindOfList ==="ALL") {
+
             try {
                 setList(null);
 
@@ -40,6 +41,10 @@ export const HrView = () => {
         }
     };
 
+    const refreshFilteredList = (data: AvailableStudentData[]) => {
+        setList(data);
+    }
+
     useEffect(() => {
         refreshListOfStudents();
     }, [kindOfList]);
@@ -51,12 +56,12 @@ export const HrView = () => {
     return <>
         <div className="col-lg-10 col-12 px-4 theme-bg-dark-1 mx-auto ">
             <button
-                className="btn tab-btn"
+                className={kindOfList === 'ALL' ? 'btn tab-btn tab-btn-active' : 'btn tab-btn tab-btn-inactive'}
                 onClick={()=>setKindOfList("ALL")}>Dostępni kursanci</button>
             <button
-                className="btn tab-btn"
+                className={kindOfList === 'ForThisHR' ? 'btn tab-btn tab-btn-active' : 'btn tab-btn tab-btn-inactive'}
                 onClick={()=>setKindOfList("ForThisHR")}>Do rozmowy</button>
-            <SearchAndFilterBar/>
+            <SearchAndFilterBar list={kindOfList} onFilter={refreshFilteredList}/>
             <ListOfStudents list={list} kindOfList={kindOfList} onStudentChange={refreshListOfStudents} />
         </div>
     </>
