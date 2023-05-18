@@ -50,7 +50,7 @@ export const FilterModal = (props: Props) => {
 
 		setLoading(true);
 
-		let queryData: Object;
+		let queryData: Object ={};
 
 		for (const key in form) {
 			if (Object(form)[key]) {
