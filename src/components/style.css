@@ -11,6 +11,7 @@
     --dark-4-color: #0A0A0A;
     --link-color: #0B8BD4;
     --accent-color: #172A35;
+    --accent-light-color: #244354;
 }
 
 .theme-text-light {
@@ -62,8 +63,8 @@
 
 .theme-btn-accent:hover {
     border-color: var(--accent-color);
-    background-color: var(--light-color);
-    color: var(--accent-color);
+    background-color: var(--accent-light-color);
+    color: var(--light-color);
     border-radius: 0;
 }
 
@@ -113,12 +114,9 @@
     border-right: 1px solid var(--dark-2-color);
 }
 
-/* Navigation styles */
-
-/*.navbar {*/
-/*    background-color: #222224;*/
-/*}*/
-
+.theme-border-mainbrand {
+    border: 1px solid var(--mainbrand-color);
+}
 
 /* admin/ImportCSV styles */
 
@@ -184,8 +182,9 @@
     color: var(--medium-color);
 }
 
-.form-check-input[type=checkbox] {
-    border-radius: 0;
+.form-check-input[type=radio] {
+    background-color: var(--dark-4-color);
+    border-color: var(--dark-1-color);
 }
 
 .form-check-input:checked {
@@ -220,4 +219,94 @@ a, .theme-link {
 a:hover, .theme-link:hover {
     color: #116295;
     text-decoration: none;
+}
+/* Search and filter bar */
+.input-group-text {
+    border: none;
+    background-color: var(--dark-4-color);
+    color: var(--medium-light-color);
+}
+.form-control-search {
+    background-color: var(--dark-4-color);
+    color: var(--light-color);
+    border: none;
+}
+
+/* Widok HR */
+
+.card {
+    border-bottom: 1rem solid var(--dark-4-color) !important;
+}
+
+.tab-btn {
+    background-color: var(--dark-1-color);
+    color: var(--light-color);
+    padding: 1rem 1.75rem 1rem 1.75rem;
+}
+
+.tab-btn:hover {
+    color: var(--light-color);
+}
+
+.tab-btn-active {
+    border-bottom: 0.25rem solid var(--mainbrand-color);
+}
+
+.tab-btn-inactive {
+    color: var(--medium-light-color);
+}
+
+/* FilterModal */
+
+.modal-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 3;
+}
+
+.modal-div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+.btn-group-toggle {
+    float: left;
+    margin: 0 5px 0 0;
+    width: 150px;
+    height: 35px;
+    position: relative;
+}
+
+.btn-group-toggle label,
+.btn-group-toggle input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.btn-group-toggle input[type="radio"]:checked + label {
+    border-color: var(--mainbrand-color);
+}
+
+.btn-group-toggle label {
+    cursor: pointer;
+    z-index: 90;
+}
+
+.btn-row {
+    display: block;
 }

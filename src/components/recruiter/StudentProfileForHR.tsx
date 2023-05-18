@@ -1,10 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ExpectedContractType, ExpectedWorkType, StudentEntity, StudentStatus } from "../../types-fe/student-entity";
 import { UserContext } from "../../contexts/user-context";
 import { apiUrl } from "../../config/api";
 
-export const StudentProfile = () => {
+
+// @TODO należy przerobić to na wspólny komponent ze Student Profile, żeby kożystali z jednego ale to w następnym kroku
+
+export const StudentProfileForHR = () => {
+
+	const {idStudent} = useParams();
 	const [student, setStudent] = useState<StudentEntity | null>(null);
 	const [showModal, setShowModal] = useState(false);
 
@@ -12,54 +17,52 @@ export const StudentProfile = () => {
 
 	const navigate = useNavigate();
 
+	console.log("idStudent",idStudent)
 	useEffect(() => {
 		(async () => {
-			const res = await fetch(`${apiUrl}/user/student-profile`, {
+			const res = await fetch(`${apiUrl}/user/student-cv/:${idStudent}`, {
 				credentials: 'include',
 			});
-			const data = await res.json();
-			const res2 = await fetch (`${apiUrl}/user/email/${id}`, {
-				credentials: 'include',
-			});
-			const email = (await res2.json()).email;
 
-			setStudent({
-				id: data.id,
-				email: email,
-				firstName: data.firstName,
-				lastName: data.lastName,
-				tel: data.tel,
-				bio: data.bio,
-				bonusProjectUrls: data.bonusProjectUrls,
-				canTakeApprenticeship: data.canTakeApprenticeship,
-				courseCompletion: data.courseCompletion,
-				courseEngagement: data.courseEngagement,
-				courses: data.courses,
-				education: data.education,
-				expectedContractType: data.expectedContractType,
-				expectedSalary: data.expectedSalary,
-				expectedTypeWork: data.expectedTypeWork,
-				githubUsername: data.githubUsername,
-				monthsOfCommercialExp: data.monthsOfCommercialExp,
-				portfolioUrls: data.portfolioUrls,
-				projectDegree: data.projectDegree,
-				projectUrls: data.projectUrls,
-				status: data.status,
-				targetWorkCity: data.targetWorkCity,
-				teamProjectDegree: data.teamProjectDegree,
-				workExperience: data.workExperience,
-			})
+			const data = await res.json();
+			console.log(id)
+			console.log(data)
+			// const res2 = await fetch (`${apiUrl}/user/email/${id}`, {
+			// 	credentials: 'include',
+			// });
+			// const email = (await res2.json()).email;
+
+			// setStudent({
+			// 	id: data.id,
+			// 	email: email,
+			// 	firstName: data.firstName,
+			// 	lastName: data.lastName,
+			// 	tel: data.tel,
+			// 	bio: data.bio,
+			// 	bonusProjectUrls: data.bonusProjectUrls,
+			// 	canTakeApprenticeship: data.canTakeApprenticeship,
+			// 	courseCompletion: data.courseCompletion,
+			// 	courseEngagement: data.courseEngagement,
+			// 	courses: data.courses,
+			// 	education: data.education,
+			// 	expectedContractType: data.expectedContractType,
+			// 	expectedSalary: data.expectedSalary,
+			// 	expectedTypeWork: data.expectedTypeWork,
+			// 	githubUsername: data.githubUsername,
+			// 	monthsOfCommercialExp: data.monthsOfCommercialExp,
+			// 	portfolioUrls: data.portfolioUrls,
+			// 	projectDegree: data.projectDegree,
+			// 	projectUrls: data.projectUrls,
+			// 	status: data.status,
+			// 	targetWorkCity: data.targetWorkCity,
+			// 	teamProjectDegree: data.teamProjectDegree,
+			// 	workExperience: data.workExperience,
+			// })
 		})();
 	}, []);
 
 	// @TODO: dodać logikę przycisku, kiedy będzie gotowy popup
 
-
-	const preserveNewLine = (input: string | undefined) => {
-		if (typeof input === 'string') {
-			return input.replaceAll('\r', '&#10;');
-		}
-	}
 
 	if (student === null) {
 		return null;
@@ -100,7 +103,7 @@ export const StudentProfile = () => {
 						: null}
 					<button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Zatrudniony</button>
 					{role === 'Student'
-						? <Link to={'/student/edit'} className="btn theme-btn-mainbrand w-100 py-2 mb-2">Edytuj profil</Link>
+						? <button className="btn theme-btn-mainbrand w-100 py-2 mb-2">Edytuj profil</button>
 						: null}
 				</div>
 			</div>
@@ -237,17 +240,17 @@ export const StudentProfile = () => {
 				{/*edu*/}
 				<section className="mb-4">
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Edukacja</h2>
-					<div className="pt-3 px-4 pb-4"><pre>{student?.education}</pre></div>
+					<div className="pt-3 px-4 pb-4">{student?.education}</div>
 				</section>
 				{/*kursy*/}
 				<section className="mb-4">
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Kursy</h2>
-					<div className="pt-3 px-4 pb-4"><pre>{student?.courses}</pre></div>
+					<div className="pt-3 px-4 pb-4">{student?.courses}</div>
 				</section>
 				{/*doświadczenie*/}
 				<section className="mb-4">
 					<h2 className="theme-bg-dark-1 fs-4 py-3 ps-4">Doświadczenie zawodowe</h2>
-					<div className="pt-3 px-4 pb-4"><pre>{student?.workExperience}</pre></div>
+					<div className="pt-3 px-4 pb-4">{student?.workExperience}</div>
 				</section>
 				{/*portfolio*/}
 				<section className="mb-4">

@@ -131,7 +131,6 @@ export const EditStudent = () => {
 			const response = await res.json();
 
 			if (response.message === 'OK') {
-				console.log(form.courses, form.education)
 				toast.success('Dane zmienione.')
 				navigate('/student');
 			} else {
