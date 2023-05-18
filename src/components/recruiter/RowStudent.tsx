@@ -1,4 +1,4 @@
-import {AvailableStudentData} from "../../types-fe/student-lists";
+import {AvailableStudentData, StudentStatus} from "../../types-fe/student-lists";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import {CustomToggle} from "./CusstomToggle";
@@ -15,11 +15,6 @@ interface Props {
     onStudentChange: () => void;
 }
 
-export enum StudentStatus {
-    Available = 'Dostępny',
-    DuringRecruitment = 'W trakcie rozmowy',
-    Hired = 'Zatrudniony',
-}
 export const RowStudent = (props: Props) => {
     const navigate = useNavigate();
 
@@ -37,9 +32,10 @@ export const RowStudent = (props: Props) => {
                     status: status,
                 })
             });
-            toast.success(`Student ${props.student.fullName} został dodany do listy.` );
+            toast.success(`Student ${props.student.fullName? props.student.fullName:props.student.lastName} zmienił status na:"${status}"` );
 
             const response = await res.json();
+            console.log(response)
 
         } finally {
 
